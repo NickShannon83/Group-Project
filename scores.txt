@@ -1,20 +1,20 @@
 Stan Lee
-99
+10
 Jim Morrison
-60
+9
 Robert Smith
-70
+7
 Matt Damon
-30
+8
 Tony Stark
-46
+6
 Wade Wilson
-69
+4
 Bruce Banner
-40
+5
 Jason Bourne
-20
+2
 Stephen Colbert
-72
+1
 Thor Odinson
-89
+10

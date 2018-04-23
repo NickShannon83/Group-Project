@@ -12,8 +12,14 @@
  */
 
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -26,11 +32,14 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -40,17 +49,46 @@ import javafx.stage.Stage;
 
 public class Dice extends Application
 {
+	public static java.io.File inFile;
 
 	public static void main( String[ ] args ) throws IOException
 	{
-
+		highScores();
 		launch ( args );
 
 	}
 
 	
+
+	
+	
+	
 	//work in progress for the highscores output
-	public void highscore( String name ) throws IOException
+	
+	public static void highScores() throws FileNotFoundException
+	{
+		java.io.File inFile;
+		inFile = new java.io.File ( "scores.txt" );
+		Scanner input = new Scanner(inFile);
+		ArrayList<HighScores> leaderBoard = new ArrayList<HighScores>();
+		
+		while(input.hasNext ( ))
+		{
+			String name = input.nextLine ( );
+			int score = input.nextInt ( );
+			String junk = input.nextLine ( );
+			System.out.println ( name );		
+			System.out.println ( score );
+			leaderBoard.add ( new HighScores (name, score));
+		}
+		leaderBoard.toString ( );
+		Collections.sort(leaderBoard, new SortByScore());
+		System.out.println ( "AFTER SORT" );
+		leaderBoard.toString ( );
+	
+		//Scanner inputFile = new Scanner (  );
+	}
+	public void playerName( String name ) throws IOException
 	{
 
 		BufferedWriter writer = new BufferedWriter ( new FileWriter ( "scores.txt" ) );
@@ -66,7 +104,6 @@ public class Dice extends Application
 	public static String getDieRolls( )
 	{
 		int die1 = 0;
-		// int dierolls = 6;
 		String dieString = "No Dice";
 		for ( int i = 0; i < 1; i++ )
 		{
@@ -161,7 +198,7 @@ public class Dice extends Application
 		} );
 
 	}
-
+	int  rollCount = 3;
 	/*****************
 	 * sets the stage
 	 * 
@@ -170,6 +207,13 @@ public class Dice extends Application
 	@Override
 	public void start( Stage primaryStage ) throws IOException
 	{
+		
+		inFile = new java.io.File ( "scores.txt" );
+		Scanner input = new Scanner(inFile);
+		
+			
+		
+		
 
 		Die die1 = new Die ( );
 		Die die2 = new Die ( );
@@ -178,7 +222,9 @@ public class Dice extends Application
 		Die die5 = new Die ( );
 		Die die6 = new Die ( );
 		primaryStage.setTitle ( "Roll Dice!" );
-
+		
+		
+		
 		// initialize the buttons
 		Button rollButton = new Button ( );
 		Button die1Button = new Button ( );
@@ -194,12 +240,12 @@ public class Dice extends Application
 		CheckBox d5Check = new CheckBox ( "Hold" );
 		CheckBox d6Check = new CheckBox ( "Hold" );
 		Button commit = new Button ( );
-		TextField textField = new TextField ( );
+		Text count = new Text ( "Rolls left " + rollCount );
 
 		// d1Check.setText ( "Hold" );
 		rollButton.setText ( "'Roll Dice'" );
 		commit.setText ( "Keep Dice" );
-
+		
 		String[ ] finalDice = new String[6];
 
 		GridPane grid = new GridPane ( );
@@ -220,7 +266,8 @@ public class Dice extends Application
 		grid.add ( d5Check, 5, 2 );
 		grid.add ( d6Check, 6, 2 );
 		grid.add ( commit, 3, 5 );
-		grid.add ( textField, 5, 5 );
+		grid.add ( count, 0, 1 );
+		
 
 		// runs through to check for saved dice
 		checkClicked ( d1Check, die1Button );
@@ -231,24 +278,29 @@ public class Dice extends Application
 		checkClicked ( d6Check, die6Button );
 
 		// gets the button rolls sets icons and names
-		int rollCount = 3;
-		Text count = new Text ( "Rolls left " + rollCount );
+		
+		
 		Text highScores = new Text ( );
 		grid.add ( highScores, 6, 6 );
-		highScores.setTextAlignment ( TextAlignment.RIGHT );
-		highScores.setText ( "This is the High Score test \n Name \t Score " );
-		highscore ( textField.getText ( ) );
+		
+		
+		
+		
 
-		grid.add ( count, 0, 1 );
+		
 		// commit.setDisable ( true );
 
 		rollButton.setOnAction ( new EventHandler<ActionEvent> ( )
 		{
-
+			
 			@Override
 			public void handle( ActionEvent event )
 			{
-
+				count.setText (  "Rolls left " + ( --rollCount) );	
+				if(rollCount == 0)
+				{
+					rollButton.setDisable ( true );
+				}
 				if ( die1Button.isDisable ( ) )
 				{
 
@@ -257,8 +309,9 @@ public class Dice extends Application
 				else
 				{
 					die1.setDieString ( getDieRolls ( ) );
-
+					die1Button.setContentDisplay ( ContentDisplay.TOP );
 					die1Button.setText ( die1.getDieString ( ) );
+					
 					getImage ( die1Button );
 
 					// die1Button.setGraphic ( getImage(die1, die1Button));
@@ -272,6 +325,7 @@ public class Dice extends Application
 				{
 
 					die2.setDieString ( getDieRolls ( ) );
+					die2Button.setContentDisplay ( ContentDisplay.TOP );
 					die2Button.setText ( die2.getDieString ( ) );
 					getImage ( die2Button );
 				}
@@ -283,6 +337,7 @@ public class Dice extends Application
 				else
 				{
 					die3.setDieString ( getDieRolls ( ) );
+					die3Button.setContentDisplay ( ContentDisplay.TOP );
 					die3Button.setText ( die3.getDieString ( ) );
 					getImage ( die3Button );
 				}
@@ -294,6 +349,7 @@ public class Dice extends Application
 				else
 				{
 					die4.setDieString ( getDieRolls ( ) );
+					die4Button.setContentDisplay ( ContentDisplay.TOP );
 					die4Button.setText ( die4.getDieString ( ) );
 					getImage ( die4Button );
 				}
@@ -305,6 +361,7 @@ public class Dice extends Application
 				else
 				{
 					die5.setDieString ( getDieRolls ( ) );
+					die5Button.setContentDisplay ( ContentDisplay.TOP );
 					die5Button.setText ( die5.getDieString ( ) );
 					getImage ( die5Button );
 				}
@@ -316,6 +373,7 @@ public class Dice extends Application
 				else
 				{
 					die6.setDieString ( getDieRolls ( ) );
+					die6Button.setContentDisplay ( ContentDisplay.TOP );
 					die6Button.setText ( die6.getDieString ( ) );
 					getImage ( die6Button );
 				}
@@ -367,8 +425,18 @@ public class Dice extends Application
 
 		} );
 
+
 		primaryStage.setMaximized ( true );
 		primaryStage.setScene ( new Scene ( grid, 900, 900 ) );
 		primaryStage.show ( );
 	}
+}
+class SortByScore implements Comparator<HighScores>
+{
+    // Used for sorting in ascending order of
+    // roll number
+    public int compare(HighScores a, HighScores b)
+    {
+        return b.getScore ( ) - a.getScore();
+    }
 }
