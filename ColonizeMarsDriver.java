@@ -227,6 +227,12 @@ public class ColonizeMarsDriver
 		{
 			System.out.println("No purchases available.\nBetter luck next turn.");
 		}
+		//reset all of player's dice to 0
+		player.getTurn().setOre(0);
+		player.getTurn().setOx(0);
+		player.getTurn().setSil(0);
+		player.getTurn().setSol(0);
+		player.getTurn().setWat(0);
 	}
 
 	/**********************************************************************************
