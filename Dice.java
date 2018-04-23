@@ -56,9 +56,9 @@ public class Dice extends Application
 	public static void main( String[ ] args ) throws IOException
 	{
 		
-		highScores(0);
-		System.out.println ( highScores(0) );
-		//playerName();
+		highScores(1);
+		System.out.println ( highScores(8) );
+		playerName("Mae Jemison", 16);
 		//launch ( args );
 
 	}
@@ -82,23 +82,13 @@ public class Dice extends Application
 			String name = input.nextLine ( );
 			int score = input.nextInt ( );
 			String junk = input.nextLine ( );
-			//System.out.println ( name );		
-			//System.out.println ( score );
 			leaderBoard.add ( new HighScores (name, score));
 		}
-		//leaderBoard.toString ( );
 		Collections.sort(leaderBoard, new SortByScore());
-		//System.out.println ( "AFTER SORT" );
 		String names = leaderBoard.get ( loc ).getPlayerName();
-		//System.out.println ( names );
 		String score = Integer.toString ( leaderBoard.get ( loc ).getScore ( ) );
-		//System.out.println ( score );
 		String topScore = ( names + "\t\t" + score);
-		return topScore;
-		
-		//leaderBoard.toString ( );
-		
-		
+		return topScore;	
 	}
 	
 	
@@ -106,18 +96,15 @@ public class Dice extends Application
 	
 	
 	
-	public static void playerName( ) throws IOException
+	public static void playerName( String name, int score) throws IOException
 	{
 
-		PrintWriter writer = new PrintWriter (  "scores.txt" );
-		String name = "Sally Ride";
-		CharSequence score = "18";
-		writer.write ( name +"\n");
-		writer.write ( score+ "\n" );
-				
+		PrintWriter writer = new PrintWriter ( new FileWriter( "scores.txt", true) );
 		
-		
-		
+		//String name = "Sally Ride";
+		//int score = 18;
+		writer.println ( name );
+		writer.println ( score );
 		writer.close();
 
 	}
@@ -457,10 +444,11 @@ public class Dice extends Application
 		primaryStage.show ( );
 	}
 }
+
 class SortByScore implements Comparator<HighScores>
 {
-    // Used for sorting in ascending order of
-    // roll number
+    // Used for sorting in ascending order of score number
+     
     public int compare(HighScores a, HighScores b)
     {
         return b.getScore ( ) - a.getScore();
