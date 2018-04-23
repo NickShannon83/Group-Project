@@ -24,6 +24,7 @@ public class ColonizeMarsDriver
 
 	/*********************************************************************
 	 * Method to purchase a resource
+	 * @author Luke Johnson
 	 * 
 	 * @param player:
 	 *           player who is purchasing a resource
@@ -195,7 +196,7 @@ public class ColonizeMarsDriver
 
 	/**********************************************************************************
 	 * Method to initialize a player
-	 * 
+	 * @author Luke Johnson
 	 * @param player:
 	 *           player whose board is being initialized
 	 */
