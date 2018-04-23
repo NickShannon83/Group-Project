@@ -65,12 +65,12 @@ public class Node
 	/**********************************************************************************************
 	 * GETTERS AND SETTERS
 	 */
-	public Resource getresearch()
+	public Resource getResearch()
 	{
 		return research;
 	}
 
-	public void setresearch(Resource research)
+	public void setResearch(Resource research)
 	{
 		this.research = research;
 	}
