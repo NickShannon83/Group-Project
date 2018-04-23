@@ -58,8 +58,8 @@ public class Dice extends Application
 		
 		highScores(1);
 		System.out.println ( highScores(8) );
-		playerName("Mae Jemison", 16);
-		//launch ( args );
+		playerName("Matt Smitg", 40);
+		launch ( args );
 
 	}
 
@@ -100,9 +100,7 @@ public class Dice extends Application
 	{
 
 		PrintWriter writer = new PrintWriter ( new FileWriter( "scores.txt", true) );
-		
-		//String name = "Sally Ride";
-		//int score = 18;
+
 		writer.println ( name );
 		writer.println ( score );
 		writer.close();
@@ -313,6 +311,47 @@ public class Dice extends Application
 				if(rollCount == 0)
 				{
 					rollButton.setDisable ( true );
+					Turn turn = new Turn ( );
+					finalDice[0] = die1.getDieString ( );
+					finalDice[1] = die2.getDieString ( );
+					finalDice[2] = die3.getDieString ( );
+					finalDice[3] = die4.getDieString ( );
+					finalDice[4] = die5.getDieString ( );
+					finalDice[5] = die6.getDieString ( );
+					for ( int i = 0; i < finalDice.length; i++ )
+					{
+						System.out.println ( finalDice[i] );
+					}
+					for ( int i = 0; i < finalDice.length; i++ )
+					{
+						switch ( finalDice[i] )
+						{
+							case "Dihydrogen Monoxide":
+								turn.setWat ( turn.getWat ( ) + 1 );
+								break;
+							case "Silicon Dioxide":
+								turn.setSil ( turn.getSil ( ) + 1 );
+								break;
+							case "Iron Ore":
+								turn.setOre ( turn.getOre ( ) + 1 );
+								break;
+							case "Oxygen":
+								turn.setOx ( turn.getOx ( ) + 1 );
+								break;
+							case "Solar Batteries":
+								turn.setSol ( turn.getSol ( ) + 1 );
+								break;
+
+						}
+					}
+					turn.toString ( );	
+					d1Check.setSelected ( true );
+					d2Check.setSelected ( true );
+					d3Check.setSelected ( true );
+					d4Check.setSelected ( true );
+					d5Check.setSelected ( true );
+					d6Check.setSelected ( true );
+					commit.setDisable ( true );
 				}
 				if ( die1Button.isDisable ( ) )
 				{
