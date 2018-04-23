@@ -15,6 +15,8 @@ import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -53,8 +55,11 @@ public class Dice extends Application
 
 	public static void main( String[ ] args ) throws IOException
 	{
-		highScores();
-		launch ( args );
+		
+		highScores(0);
+		System.out.println ( highScores(0) );
+		//playerName();
+		//launch ( args );
 
 	}
 
@@ -65,7 +70,7 @@ public class Dice extends Application
 	
 	//work in progress for the highscores output
 	
-	public static void highScores() throws FileNotFoundException
+	public static String highScores(int loc) throws FileNotFoundException
 	{
 		java.io.File inFile;
 		inFile = new java.io.File ( "scores.txt" );
@@ -77,23 +82,43 @@ public class Dice extends Application
 			String name = input.nextLine ( );
 			int score = input.nextInt ( );
 			String junk = input.nextLine ( );
-			System.out.println ( name );		
-			System.out.println ( score );
+			//System.out.println ( name );		
+			//System.out.println ( score );
 			leaderBoard.add ( new HighScores (name, score));
 		}
-		leaderBoard.toString ( );
+		//leaderBoard.toString ( );
 		Collections.sort(leaderBoard, new SortByScore());
-		System.out.println ( "AFTER SORT" );
-		leaderBoard.toString ( );
-	
-		//Scanner inputFile = new Scanner (  );
+		//System.out.println ( "AFTER SORT" );
+		String names = leaderBoard.get ( loc ).getPlayerName();
+		//System.out.println ( names );
+		String score = Integer.toString ( leaderBoard.get ( loc ).getScore ( ) );
+		//System.out.println ( score );
+		String topScore = ( names + "\t\t" + score);
+		return topScore;
+		
+		//leaderBoard.toString ( );
+		
+		
 	}
-	public void playerName( String name ) throws IOException
+	
+	
+	
+	
+	
+	
+	public static void playerName( ) throws IOException
 	{
 
-		BufferedWriter writer = new BufferedWriter ( new FileWriter ( "scores.txt" ) );
-		writer.write ( name );
-		// writer.close();
+		PrintWriter writer = new PrintWriter (  "scores.txt" );
+		String name = "Sally Ride";
+		CharSequence score = "18";
+		writer.write ( name +"\n");
+		writer.write ( score+ "\n" );
+				
+		
+		
+		
+		writer.close();
 
 	}
 
@@ -279,6 +304,7 @@ public class Dice extends Application
 
 		// gets the button rolls sets icons and names
 		
+
 		
 		Text highScores = new Text ( );
 		grid.add ( highScores, 6, 6 );
