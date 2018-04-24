@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 import javafx.application.Application;
@@ -13,7 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
+//import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -40,13 +41,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class GUI extends Application
-{	
+{
 	public static void main( String[ ] args ) throws FileNotFoundException
 	{
 		Application.launch ( args );
 
 	}
-	
+
 	@Override // Override the start method in the Application class
 	public void start( Stage primaryStage ) throws FileNotFoundException
 	{
@@ -78,7 +79,6 @@ public class GUI extends Application
 		// The name text field
 		TextField name = new TextField ( );
 		name.setMaxWidth ( 150 );
-		// name.getText();
 		name.setTranslateX ( 55 );
 		name.setTranslateY ( -150 );
 
@@ -103,7 +103,8 @@ public class GUI extends Application
 				else
 				{
 					String playerName = name.getText ( );
-					SecondStage playerWindow = new SecondStage ( playerName );
+					Player player1 = new Player ( playerName );
+					SecondStage playerWindow = new SecondStage ( player1 );
 					playerWindow.start ( playerWindow );
 					primaryStage.close ( );
 				}
@@ -111,13 +112,13 @@ public class GUI extends Application
 		} );
 		start.setTranslateX ( 180 );
 		start.setTranslateY ( -150 );
-		
-		Text highScores = new Text();
+
+		Text highScores = new Text ( );
 		highScores.setText ( "High Scores" );
 		highScores.setFill ( Color.YELLOW );
 		highScores.setTranslateY ( -50 );
 		highScores.setFont ( Font.font ( null, FontWeight.BOLD, 40 ) );
-		
+
 		Text score1 = new Text ( );
 		score1.setFill ( Color.YELLOW );
 		score1.setText ( highScores ( 0 ) );
@@ -140,7 +141,7 @@ public class GUI extends Application
 		Text score5 = new Text ( );
 		score5.setFill ( Color.YELLOW );
 		score5.setTranslateY ( 200 );
-		score5.setText ( highScores ( 4 ));
+		score5.setText ( highScores ( 4 ) );
 		score5.setFont ( Font.font ( null, 35 ) );
 		Text score6 = new Text ( );
 		score6.setFill ( Color.YELLOW );
@@ -193,27 +194,64 @@ public class GUI extends Application
 
 	}
 
-	//work in progress for the highscores output
-	
-		public static String highScores(int loc) throws FileNotFoundException
+	// work in progress for the highscores output
+
+	public static String highScores( int loc ) throws FileNotFoundException
+	{
+		java.io.File inFile;
+		inFile = new java.io.File ( "scores.txt" );
+		Scanner input = new Scanner ( inFile );
+		ArrayList<HighScores> leaderBoard = new ArrayList<HighScores> ( );
+
+		while ( input.hasNext ( ) )
 		{
-			java.io.File inFile;
-			inFile = new java.io.File ( "scores.txt" );
-			Scanner input = new Scanner(inFile);
-			ArrayList<HighScores> leaderBoard = new ArrayList<HighScores>();
-			
-			while(input.hasNext ( ))
-			{
-				String name = input.nextLine ( );
-				int score = input.nextInt ( );
-				String junk = input.nextLine ( );
-				leaderBoard.add ( new HighScores (name, score));
-			}
-			Collections.sort(leaderBoard, new SortByScore());
-			String names = leaderBoard.get ( loc ).getPlayerName();
-			String score = Integer.toString ( leaderBoard.get ( loc ).getScore ( ) );
-			String topScore = ( names + "\t" + score);
-			return topScore;	
+			String name = input.nextLine ( );
+			int score = input.nextInt ( );
+			String junk = input.nextLine ( );
+			leaderBoard.add ( new HighScores ( name, score ) );
+		}
+		Collections.sort ( leaderBoard, new SortByScore ( ) );
+		String names = leaderBoard.get ( loc ).getPlayerName ( );
+		String score = Integer.toString ( leaderBoard.get ( loc ).getScore ( ) );
+		String topScore = ( names + "\t" + score );
+		return topScore;
 	}
 
+	/**********************************************************************************
+	 * Method to initialize a player
+	 * 
+	 * @author Luke Johnson
+	 * @param player:
+	 *           player whose board is being initialized
+	 */
+	public static void initializePlayer( Player player )
+	{
+		Node head = player.getGameBoard ( ).getHead ( );
+		Node current = head;
+
+		// create all of the tiles on the board
+		for ( int i = 0; i < 5; i++ )
+		{
+			Node newNode = new Node ( ( i + 2 ), current.getResearch ( ).getValue ( ),
+					current.getAstronaut ( ).getValue ( ), current.getBioDome ( ).getValue ( ) );
+			player.getGameBoard ( ).addToTail ( newNode );
+			current.setLink ( newNode );
+			current = newNode;
+			player.getGameBoard ( ).setNumTiles ( player.getGameBoard ( ).getNumTiles ( ) + 1 );
+
+		}
+		// unlock main road and astronaut on first tile
+		player.getGameBoard ( ).getHead ( ).getMainRoad ( ).setUnlocked ( true );
+		player.getGameBoard ( ).getHead ( ).getAstronaut ( ).setUnlocked ( true );
+	}
+}
+
+class SortByScore implements Comparator<HighScores>
+{
+	// Used for sorting in ascending order of
+	// roll number
+	public int compare( HighScores a, HighScores b )
+	{
+		return b.getScore ( ) - a.getScore ( );
+	}
 }

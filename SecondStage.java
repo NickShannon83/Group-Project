@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -32,12 +34,15 @@ public class SecondStage extends Stage
 	int turnNum = 1; // Turn number
 	int score = 0; // The players score
 	int rollCount = 3; // The number of die rolls per turn
+	Player secondStagePlayer;
+	//Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 1 );
 
 	// The SecondStage constructor
-	public SecondStage(String playerName)
+	public SecondStage(Player player)
 	{
 		super ( );
-		this.playerName = playerName;
+		this.playerName = player.getName ( );
+		secondStagePlayer = player;
 	}
 
 	public void start( Stage secondaryStage )
@@ -103,12 +108,25 @@ public class SecondStage extends Stage
 		inGameConsole.setMaxHeight ( 1000 );
 		inGameConsole.setTranslateX ( 750 );
 
+		// Button Nodes
+		Button roadNode1Btn = new Button ( );
+		Button roadNode2Btn = new Button ( );
+		Button roadNode3Btn = new Button ( );
+		Button roadNode4Btn = new Button ( );
+		Button roadNode5Btn = new Button ( );
+		Button roadNode6Btn = new Button ( );
+		Button sideRoadNode1Btn = new Button ( );
+		Button sideRoadNode2Btn = new Button ( );
+		Button sideRoadNode3Btn = new Button ( );
+		Button sideRoadNode4Btn = new Button ( );
+		Button sideRoadNode5Btn = new Button ( );
+		Button sideRoadNode6Btn = new Button ( );
+
 		// MAIN ROADS
 		// -----------------------------------------------------
 		// Road node 1
 		Image road = new Image ( getClass ( ).getResourceAsStream ( "road.png" ) );
 		Image roadC = new Image ( getClass ( ).getResourceAsStream ( "roadC.png" ) );
-		Button roadNode1Btn = new Button ( );
 		roadNode1Btn.setGraphic ( new ImageView ( road ) );
 		roadNode1Btn.setPadding ( Insets.EMPTY );
 		roadNode1Btn.getTransforms ( ).add ( new Rotate ( 135, 0, 0 ) );
@@ -119,41 +137,61 @@ public class SecondStage extends Stage
 			@Override
 			public void handle( MouseEvent e )
 			{
+
 				roadNode1Btn.setGraphic ( new ImageView ( roadC ) );
 				inGameConsole.appendText ( "You purchased main road 1\n" );
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+
+				Node current = secondStagePlayer.getGameBoard().goToTile ( 1 );
+				current.getMainRoad ( ).setUnlocked ( true );
+				current.getMainRoad ( ).setOwned ( true );
+				current.getSideRoad ( ).setUnlocked ( true );
+				current.getBioDome ( ).setUnlocked ( true );
+				current = current.getLink ( );  // THIS IS FUCKED, LINKED LIST DUN BROKED SUCKA, you talk like a fag!
+				current.getMainRoad ( ).setUnlocked ( false );
+				System.out.println ( current.getMainRoad ( ).getUnlocked ( ) );
 			}
 		} );
 		// -----------------------------------------------------
 
 		// -----------------------------------------------------
 		// Road node 2
-		Button roadNode2Btn = new Button ( );
 		roadNode2Btn.setGraphic ( new ImageView ( road ) );
 		roadNode2Btn.getTransforms ( ).add ( new Rotate ( 45, 0, 0 ) );
 		roadNode2Btn.setPadding ( Insets.EMPTY );
 		roadNode2Btn.setTranslateX ( -92 );
 		roadNode2Btn.setTranslateY ( 14 );
-		roadNode2Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
-		{
-			@Override
-			public void handle( MouseEvent e )
+		roadNode2Btn.setDisable ( true );
+		//Node current = secondStagePlayer.getGameBoard().goToTile ( 2 );
+		/*if ( current.getMainRoad ( ).getUnlocked ( ) == true )
+		{*/
+			//roadNode2Btn.setDisable ( false );
+			roadNode2Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 			{
-				roadNode2Btn.setGraphic ( new ImageView ( roadC ) );
-				inGameConsole.appendText ( "You purchased main road 2\n" );
-				score++;
-				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
-			}
-		} );
+				
+				@Override
+				public void handle( MouseEvent e )
+				{
+					roadNode2Btn.setGraphic ( new ImageView ( roadC ) );
+					inGameConsole.appendText ( "You purchased main road 2\n" );
+					score++;
+					turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				}
+			} );
+	/*	}
+		else
+		{
+			System.out.println ( "Road node 2 not unlocked" );
+		}*/
 		// -----------------------------------------------------
 
 		// -----------------------------------------------------
 		// Road node 3
-		Button roadNode3Btn = new Button ( );
 		roadNode3Btn.setGraphic ( new ImageView ( road ) );
 		roadNode3Btn.setPadding ( Insets.EMPTY );
 		roadNode3Btn.setTranslateY ( 85 );
+		roadNode3Btn.setDisable ( true );
 		roadNode3Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -169,12 +207,12 @@ public class SecondStage extends Stage
 
 		// -----------------------------------------------------
 		// Road node 4
-		Button roadNode4Btn = new Button ( );
 		roadNode4Btn.setGraphic ( new ImageView ( road ) );
 		roadNode4Btn.setPadding ( Insets.EMPTY );
 		roadNode4Btn.getTransforms ( ).add ( new Rotate ( 135, 0, 0 ) );
 		roadNode4Btn.setTranslateX ( 192 );
 		roadNode4Btn.setTranslateY ( 32 );
+		roadNode4Btn.setDisable ( true );
 		roadNode4Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -190,12 +228,12 @@ public class SecondStage extends Stage
 
 		// -----------------------------------------------------
 		// Road node 5
-		Button roadNode5Btn = new Button ( );
 		roadNode5Btn.setGraphic ( new ImageView ( road ) );
 		roadNode5Btn.setPadding ( Insets.EMPTY );
 		roadNode5Btn.getTransforms ( ).add ( new Rotate ( 45, 0, 0 ) );
 		roadNode5Btn.setTranslateX ( 134 );
 		roadNode5Btn.setTranslateY ( -67 );
+		roadNode5Btn.setDisable ( true );
 		roadNode5Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -211,10 +249,10 @@ public class SecondStage extends Stage
 
 		// -----------------------------------------------------
 		// Road node 6
-		Button roadNode6Btn = new Button ( );
 		roadNode6Btn.setGraphic ( new ImageView ( road ) );
 		roadNode6Btn.setPadding ( Insets.EMPTY );
 		roadNode6Btn.setTranslateY ( -85 );
+		roadNode6Btn.setDisable ( true );
 		roadNode6Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -231,10 +269,10 @@ public class SecondStage extends Stage
 		// SIDE ROADS
 		// -----------------------------------------------------
 		// Side Road node 1
-		Button sideRoadNode1Btn = new Button ( );
 		sideRoadNode1Btn.setGraphic ( new ImageView ( road ) );
 		sideRoadNode1Btn.setPadding ( Insets.EMPTY );
 		sideRoadNode1Btn.setTranslateX ( -220 );
+		sideRoadNode1Btn.setDisable ( true );
 		sideRoadNode1Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -249,12 +287,12 @@ public class SecondStage extends Stage
 		// -----------------------------------------------------
 
 		// Side Road node 2
-		Button sideRoadNode2Btn = new Button ( );
 		sideRoadNode2Btn.setGraphic ( new ImageView ( road ) );
 		sideRoadNode2Btn.setPadding ( Insets.EMPTY );
 		sideRoadNode2Btn.getTransforms ( ).add ( new Rotate ( 135, 0, 0 ) );
 		sideRoadNode2Btn.setTranslateX ( -32 );
 		sideRoadNode2Btn.setTranslateY ( 115 );
+		sideRoadNode2Btn.setDisable ( true );
 		sideRoadNode2Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -270,12 +308,12 @@ public class SecondStage extends Stage
 
 		// -----------------------------------------------------
 		// Side Road node 3
-		Button sideRoadNode3Btn = new Button ( );
 		sideRoadNode3Btn.setGraphic ( new ImageView ( road ) );
 		sideRoadNode3Btn.setPadding ( Insets.EMPTY );
 		sideRoadNode3Btn.getTransforms ( ).add ( new Rotate ( 45, 0, 0 ) );
 		sideRoadNode3Btn.setTranslateX ( 132 );
 		sideRoadNode3Btn.setTranslateY ( 100 );
+		sideRoadNode3Btn.setDisable ( true );
 		sideRoadNode3Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -291,10 +329,10 @@ public class SecondStage extends Stage
 
 		// -----------------------------------------------------
 		// Side Road node 4
-		Button sideRoadNode4Btn = new Button ( );
 		sideRoadNode4Btn.setGraphic ( new ImageView ( road ) );
 		sideRoadNode4Btn.setPadding ( Insets.EMPTY );
 		sideRoadNode4Btn.setTranslateX ( 216 );
+		sideRoadNode4Btn.setDisable ( true );
 		sideRoadNode4Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -310,12 +348,12 @@ public class SecondStage extends Stage
 
 		// -----------------------------------------------------
 		// Side Road node 5
-		Button sideRoadNode5Btn = new Button ( );
 		sideRoadNode5Btn.setGraphic ( new ImageView ( road ) );
 		sideRoadNode5Btn.setPadding ( Insets.EMPTY );
 		sideRoadNode5Btn.getTransforms ( ).add ( new Rotate ( 135, 0, 0 ) );
 		sideRoadNode5Btn.setTranslateX ( 192 );
 		sideRoadNode5Btn.setTranslateY ( -140 );
+		sideRoadNode5Btn.setDisable ( true );
 		sideRoadNode5Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -331,12 +369,12 @@ public class SecondStage extends Stage
 
 		// -----------------------------------------------------
 		// Side Road node 6
-		Button sideRoadNode6Btn = new Button ( );
 		sideRoadNode6Btn.setGraphic ( new ImageView ( road ) );
 		sideRoadNode6Btn.setPadding ( Insets.EMPTY );
 		sideRoadNode6Btn.getTransforms ( ).add ( new Rotate ( 45, 0, 0 ) );
 		sideRoadNode6Btn.setTranslateX ( -90 );
 		sideRoadNode6Btn.setTranslateY ( -150 );
+		sideRoadNode6Btn.setDisable ( true );
 		sideRoadNode6Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -382,6 +420,7 @@ public class SecondStage extends Stage
 		astroNode2Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		astroNode2Btn.setTranslateX ( -218 );
 		astroNode2Btn.setTranslateY ( 35 );
+		astroNode2Btn.setDisable ( true );
 		astroNode2Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -403,6 +442,7 @@ public class SecondStage extends Stage
 		astroNode3Btn.setGraphic ( new ImageView ( astro3 ) );
 		astroNode3Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		astroNode3Btn.setTranslateY ( 118 );
+		astroNode3Btn.setDisable ( true );
 		astroNode3Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -425,6 +465,7 @@ public class SecondStage extends Stage
 		astroNode4Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		astroNode4Btn.setTranslateX ( 222 );
 		astroNode4Btn.setTranslateY ( 37 );
+		astroNode4Btn.setDisable ( true );
 		astroNode4Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -447,6 +488,7 @@ public class SecondStage extends Stage
 		astroNode5Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		astroNode5Btn.setTranslateX ( 222 );
 		astroNode5Btn.setTranslateY ( -130 );
+		astroNode5Btn.setDisable ( true );
 		astroNode5Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -468,6 +510,7 @@ public class SecondStage extends Stage
 		astroNode6Btn.setGraphic ( new ImageView ( astro6 ) );
 		astroNode6Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		astroNode6Btn.setTranslateY ( -213 );
+		astroNode6Btn.setDisable ( true );
 		astroNode6Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -491,6 +534,7 @@ public class SecondStage extends Stage
 		domeNode1Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode1Btn.setTranslateX ( -150 );
 		domeNode1Btn.setTranslateY ( -5 );
+		domeNode1Btn.setDisable ( true );
 		domeNode1Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -513,6 +557,7 @@ public class SecondStage extends Stage
 		domeNode2Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode2Btn.setTranslateX ( -65 );
 		domeNode2Btn.setTranslateY ( 80 );
+		domeNode2Btn.setDisable ( true );
 		domeNode2Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -535,6 +580,7 @@ public class SecondStage extends Stage
 		domeNode3Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode3Btn.setTranslateX ( 66 );
 		domeNode3Btn.setTranslateY ( 80 );
+		domeNode3Btn.setDisable ( true );
 		domeNode3Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -557,6 +603,7 @@ public class SecondStage extends Stage
 		domeNode4Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode4Btn.setTranslateX ( 148 );
 		domeNode4Btn.setTranslateY ( -3 );
+		domeNode4Btn.setDisable ( true );
 		domeNode4Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -579,6 +626,7 @@ public class SecondStage extends Stage
 		domeNode5Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode5Btn.setTranslateX ( 68 );
 		domeNode5Btn.setTranslateY ( -88 );
+		domeNode5Btn.setDisable ( true );
 		domeNode5Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -601,6 +649,7 @@ public class SecondStage extends Stage
 		domeNode6Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode6Btn.setTranslateX ( -65 );
 		domeNode6Btn.setTranslateY ( -88 );
+		domeNode6Btn.setDisable ( true );
 		domeNode6Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -624,6 +673,7 @@ public class SecondStage extends Stage
 		researchNode1Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode1Btn.setTranslateX ( -285 );
 		researchNode1Btn.setTranslateY ( -10 );
+		researchNode1Btn.setDisable ( true );
 		researchNode1Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -646,6 +696,7 @@ public class SecondStage extends Stage
 		researchNode2Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode2Btn.setTranslateX ( -155 );
 		researchNode2Btn.setTranslateY ( 160 );
+		researchNode2Btn.setDisable ( true );
 		researchNode2Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -668,6 +719,7 @@ public class SecondStage extends Stage
 		researchNode3Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode3Btn.setTranslateX ( 155 );
 		researchNode3Btn.setTranslateY ( 160 );
+		researchNode3Btn.setDisable ( true );
 		researchNode3Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -690,6 +742,7 @@ public class SecondStage extends Stage
 		researchNode4Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode4Btn.setTranslateX ( 283 );
 		researchNode4Btn.setTranslateY ( -10 );
+		researchNode4Btn.setDisable ( true );
 		researchNode4Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -712,6 +765,7 @@ public class SecondStage extends Stage
 		researchNode5Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode5Btn.setTranslateX ( 155 );
 		researchNode5Btn.setTranslateY ( -178 );
+		researchNode5Btn.setDisable ( true );
 		researchNode5Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -734,6 +788,7 @@ public class SecondStage extends Stage
 		researchNode6Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode6Btn.setTranslateX ( -155 );
 		researchNode6Btn.setTranslateY ( -178 );
+		researchNode6Btn.setDisable ( true );
 		researchNode6Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -817,11 +872,6 @@ public class SecondStage extends Stage
 		count.setTranslateX ( 225 );
 		count.setTranslateY ( 350 );
 
-		Button rollButton = new Button ( );
-		rollButton.setText ( " Roll Dice " );
-		rollButton.setTranslateX ( 160 );
-		rollButton.setTranslateY ( 420 );
-
 		Button commit = new Button ( );
 		commit.setText ( " Spend " );
 		commit.setTranslateX ( 280 );
@@ -837,6 +887,10 @@ public class SecondStage extends Stage
 		checkClicked ( d5Check, die5Button );
 		checkClicked ( d6Check, die6Button );
 
+		Button rollButton = new Button ( );
+		rollButton.setText ( " Roll Dice " );
+		rollButton.setTranslateX ( 160 );
+		rollButton.setTranslateY ( 420 );
 		commit.setDisable ( true );
 		rollButton.setOnAction ( new EventHandler<ActionEvent> ( )
 		{
@@ -845,7 +899,7 @@ public class SecondStage extends Stage
 			public void handle( ActionEvent event )
 			{
 				commit.setDisable ( false );
-				count.setText ( "Rolls left " + ( --rollCount ) );
+				// count.setText ( "Rolls left " + ( --rollCount ) );
 				if ( rollCount == 0 )
 				{
 					rollButton.setDisable ( true );
@@ -901,6 +955,7 @@ public class SecondStage extends Stage
 					die1.setDieString ( getDieRolls ( ) );
 					die1Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die1, die1Button );
+					die1Button.setText ( die1.getDieString ( ) );
 				}
 				if ( die2Button.isDisable ( ) )
 				{
@@ -913,6 +968,7 @@ public class SecondStage extends Stage
 					die2.setDieString ( getDieRolls ( ) );
 					die2Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die2, die2Button );
+					die2Button.setText ( die2.getDieString ( ) );
 				}
 				if ( die3Button.isDisable ( ) )
 				{
@@ -924,6 +980,7 @@ public class SecondStage extends Stage
 					die3.setDieString ( getDieRolls ( ) );
 					die3Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die3, die3Button );
+					die3Button.setText ( die3.getDieString ( ) );
 				}
 				if ( die4Button.isDisable ( ) )
 				{
@@ -935,6 +992,7 @@ public class SecondStage extends Stage
 					die4.setDieString ( getDieRolls ( ) );
 					die4Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die4, die4Button );
+					die4Button.setText ( die4.getDieString ( ) );
 				}
 				if ( die5Button.isDisable ( ) )
 				{
@@ -945,8 +1003,8 @@ public class SecondStage extends Stage
 				{
 					die5.setDieString ( getDieRolls ( ) );
 					die5Button.setContentDisplay ( ContentDisplay.TOP );
-					;
 					getImage ( die5, die5Button );
+					die5Button.setText ( die5.getDieString ( ) );
 				}
 				if ( die6Button.isDisable ( ) )
 				{
@@ -958,6 +1016,7 @@ public class SecondStage extends Stage
 					die6.setDieString ( getDieRolls ( ) );
 					die6Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die6, die6Button );
+					die6Button.setText ( die6.getDieString ( ) );
 				}
 			}
 
@@ -1014,6 +1073,8 @@ public class SecondStage extends Stage
 			}
 
 		} );
+
+		// purchase (player1);
 
 		// *************************************************************
 
@@ -1182,4 +1243,85 @@ public class SecondStage extends Stage
 		} );
 
 	}
+
+	static Scanner input = new Scanner ( System.in );
+	/*********************************************************************
+	 * Method to purchase a resource
+	 * 
+	 * @author Luke Johnson
+	 * 
+	 * @param player:
+	 *           player who is purchasing a resource
+	 * @param turn:
+	 *           player's assets in a turn
+	 */
+	/*
+	 * public static void purchase(Player player) { int tileChoice, resourceChoice; Node head =
+	 * player.getGameBoard().getHead(); Node current = head;
+	 * 
+	 * // Execute if player can purchase at least one resource if (player.canPurchase()) { // execute while player can
+	 * purchase while (player.canPurchase()) { do {
+	 * System.out.println("What tile would you like to purchase a resource from?");
+	 * System.out.println("Enter a number 1 - 6."); tileChoice = input.nextInt();
+	 * System.out.println("Which resource would you like to from the tile?");
+	 * System.out.println("1) Main Road\n2) Side Road\n3) Astronaut\n4) Bio-dome\n" + "5) Research Facility");
+	 * resourceChoice = input.nextInt(); if ((tileChoice < 1 || tileChoice > 6) || (resourceChoice < 1 || resourceChoice
+	 * > 5)) { System.out.println("Invalid selection."); } } while (((tileChoice < 1) || (tileChoice > 6)) ||
+	 * (resourceChoice < 1 || resourceChoice > 5));
+	 * 
+	 * for (int i = 1; i < tileChoice; i++) { current = current.getLink(); } switch (resourceChoice) { // purchase a main
+	 * road // unlock side road, next main road and bio-dome case 1: if (current.getMainRoad().isUnlocked() &&
+	 * !current.getMainRoad().isOwned() && player.getTurn().getSil() > 0 && player.getTurn().getOx() > 0) {
+	 * current.getMainRoad().setOwned(true); player.setScore(player.getScore() + current.getMainRoad().getValue());
+	 * player.getTurn().setSil(player.getTurn().getSil() - 1); player.getTurn().setOx(player.getTurn().getOx() - 1);
+	 * current.getSideRoad().setUnlocked(true); current.getBioDome().setUnlocked(true);
+	 * 
+	 * if (current.getLink() != null) { current.getLink().getMainRoad().setUnlocked(true); } } // output error statements
+	 * else if (!current.getMainRoad().isUnlocked()) { System.out.println("That is not unlocked."); } else if
+	 * (current.getMainRoad().isOwned()) { System.out.println("You already own that."); } else {
+	 * System.out.println("You can't afford that."); } break;
+	 * 
+	 * // purchase a side road // unlock the research facility case 2: if (current.getSideRoad().isUnlocked() &&
+	 * !current.getSideRoad().isOwned() && player.getTurn().getSil() > 0 && player.getTurn().getOx() > 0) {
+	 * current.getSideRoad().setOwned(true); player.setScore(player.getScore() + current.getSideRoad().getValue());
+	 * player.getTurn().setSil(player.getTurn().getSil() - 1); player.getTurn().setOx(player.getTurn().getOx() - 1);
+	 * current.getResearch().setUnlocked(true); } // output error statements else if
+	 * (!current.getSideRoad().isUnlocked()) { System.out.println("That is not unlocked."); } else if
+	 * (current.getSideRoad().isOwned()) { System.out.println("You already own that."); } else {
+	 * System.out.println("You can't afford that."); } break;
+	 * 
+	 * // purchase an astronaut // unlock the next astronaut case 3: if (current.getAstronaut().isUnlocked() &&
+	 * !current.getAstronaut().isOwned() && player.getTurn().getWat() > 0 && player.getTurn().getSol() > 0 &&
+	 * player.getTurn().getOre() > 0) { current.getAstronaut().setOwned(true); player.setScore(player.getScore() +
+	 * current.getAstronaut().getValue()); player.getTurn().setWat(player.getTurn().getWat() - 1);
+	 * player.getTurn().setOre(player.getTurn().getOre() - 1); player.getTurn().setSol(player.getTurn().getSol() - 1); if
+	 * (current.getLink() != null) { current.getLink().getAstronaut().setUnlocked(true); } } // output error statements
+	 * else if (!current.getAstronaut().isUnlocked()) { System.out.println("That is not unlocked."); } else if
+	 * (current.getAstronaut().isOwned()) { System.out.println("You already own that."); } else {
+	 * System.out.println("You can't afford that."); } break;
+	 * 
+	 * // purchase a bio-dome case 4: if (current.getBioDome().isUnlocked() && !current.getBioDome().isOwned() &&
+	 * player.getTurn().getSil() > 0 && player.getTurn().getOx() > 0 && player.getTurn().getWat() > 0 &&
+	 * player.getTurn().getSol() > 0) { current.getBioDome().setOwned(true); player.setScore(player.getScore() +
+	 * current.getBioDome().getValue()); player.getTurn().setWat(player.getTurn().getWat() - 1);
+	 * player.getTurn().setOx(player.getTurn().getOx() - 1); player.getTurn().setSol(player.getTurn().getSol() - 1);
+	 * player.getTurn().setSil(player.getTurn().getSil() - 1); } // output error statements else if
+	 * (!current.getBioDome().isUnlocked()) { System.out.println("That is not unlocked."); } else if
+	 * (current.getBioDome().isOwned()) { System.out.println("You already own that."); } else {
+	 * System.out.println("You can't afford that."); } break;
+	 * 
+	 * // purchase a research facility case 5: if (current.getResearch().isUnlocked() && !current.getResearch().isOwned()
+	 * && player.getTurn().getOre() == 3 && player.getTurn().getSol() == 2) { current.getResearch().setOwned(true);
+	 * player.setScore(player.getScore() + current.getResearch().getValue());
+	 * player.getTurn().setWat(player.getTurn().getWat() - 1); player.getTurn().setOx(player.getTurn().getOx() - 1);
+	 * player.getTurn().setSol(player.getTurn().getSol() - 1); player.getTurn().setSil(player.getTurn().getSil() - 1); }
+	 * 
+	 * // output error statements else if (!current.getResearch().isUnlocked()) {
+	 * System.out.println("That is not unlocked."); } else if (current.getResearch().isOwned()) {
+	 * System.out.println("You already own that."); } else { System.out.println("You can't afford that."); } break; } //
+	 * set current back to the head of the list current = head; } System.out.println("No further purchases available.");
+	 * } else { System.out.println("No purchases available.\nBetter luck next turn."); } //reset all of player's dice to
+	 * 0 player.getTurn().setOre(0); player.getTurn().setOx(0); player.getTurn().setSil(0); player.getTurn().setSol(0);
+	 * player.getTurn().setWat(0); }
+	 */
 }
