@@ -837,12 +837,14 @@ public class SecondStage extends Stage
 		checkClicked ( d5Check, die5Button );
 		checkClicked ( d6Check, die6Button );
 
+		commit.setDisable ( true );
 		rollButton.setOnAction ( new EventHandler<ActionEvent> ( )
 		{
 
 			@Override
 			public void handle( ActionEvent event )
 			{
+				commit.setDisable ( false );
 				count.setText ( "Rolls left " + ( --rollCount ) );
 				if ( rollCount == 0 )
 				{
@@ -969,6 +971,13 @@ public class SecondStage extends Stage
 			public void handle( ActionEvent event )
 			{
 				commit.setDisable ( true );
+				rollButton.setDisable ( true );
+				d1Check.setSelected ( true );
+				d2Check.setSelected ( true );
+				d3Check.setSelected ( true );
+				d4Check.setSelected ( true );
+				d5Check.setSelected ( true );
+				d6Check.setSelected ( true );
 				finalDice[0] = die1.getDieString ( );
 				finalDice[1] = die2.getDieString ( );
 				finalDice[2] = die3.getDieString ( );
