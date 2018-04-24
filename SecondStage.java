@@ -1,3 +1,5 @@
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -5,7 +7,9 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.effect.DropShadow;
@@ -27,6 +31,7 @@ public class SecondStage extends Stage
 	String playerName;
 	int turnNum = 1; // Turn number
 	int score = 0; // The players score
+	int rollCount = 3; // The number of die rolls per turn
 
 	// The SecondStage constructor
 	public SecondStage(String playerName)
@@ -83,11 +88,11 @@ public class SecondStage extends Stage
 		player.setFont ( Font.font ( null, 100 ) );
 
 		// Number of turns & score text
-		Text turn = new Text ( );
-		turn.setCache ( true );
-		turn.setTranslateY ( -325 );
-		turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
-		turn.setFont ( Font.font ( null, 35 ) );
+		Text turnScore = new Text ( );
+		turnScore.setCache ( true );
+		turnScore.setTranslateY ( -325 );
+		turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+		turnScore.setFont ( Font.font ( null, 35 ) );
 
 		// Text area for in game console-type output
 		TextArea inGameConsole = new TextArea ( );
@@ -115,9 +120,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				roadNode1Btn.setGraphic ( new ImageView ( roadC ) );
-				inGameConsole.appendText("You purchased main road 1\n");
+				inGameConsole.appendText ( "You purchased main road 1\n" );
 				score++;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -136,9 +141,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				roadNode2Btn.setGraphic ( new ImageView ( roadC ) );
-				inGameConsole.appendText("You purchased main road 2\n");
+				inGameConsole.appendText ( "You purchased main road 2\n" );
 				score++;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -155,9 +160,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				roadNode3Btn.setGraphic ( new ImageView ( roadC ) );
-				inGameConsole.appendText("You purchased main road 3\n");
+				inGameConsole.appendText ( "You purchased main road 3\n" );
 				score++;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -176,9 +181,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				roadNode4Btn.setGraphic ( new ImageView ( roadC ) );
-				inGameConsole.appendText("You purchased main road 4\n");
+				inGameConsole.appendText ( "You purchased main road 4\n" );
 				score++;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -197,9 +202,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				roadNode5Btn.setGraphic ( new ImageView ( roadC ) );
-				inGameConsole.appendText("You purchased main road 5\n");
+				inGameConsole.appendText ( "You purchased main road 5\n" );
 				score++;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -216,9 +221,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				roadNode6Btn.setGraphic ( new ImageView ( roadC ) );
-				inGameConsole.appendText("You purchased main road 6\n");
+				inGameConsole.appendText ( "You purchased main road 6\n" );
 				score++;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -236,9 +241,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				sideRoadNode1Btn.setGraphic ( new ImageView ( roadC ) );
-				inGameConsole.appendText("You purchased side road 1\n");
+				inGameConsole.appendText ( "You purchased side road 1\n" );
 				score++;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -256,9 +261,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				sideRoadNode2Btn.setGraphic ( new ImageView ( roadC ) );
-				inGameConsole.appendText("You purchased side road 2\n");
+				inGameConsole.appendText ( "You purchased side road 2\n" );
 				score++;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -277,9 +282,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				sideRoadNode3Btn.setGraphic ( new ImageView ( roadC ) );
-				inGameConsole.appendText("You purchased side road 3\n");
+				inGameConsole.appendText ( "You purchased side road 3\n" );
 				score++;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -296,9 +301,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				sideRoadNode4Btn.setGraphic ( new ImageView ( roadC ) );
-				inGameConsole.appendText("You purchased side road 4\n");
+				inGameConsole.appendText ( "You purchased side road 4\n" );
 				score++;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -317,9 +322,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				sideRoadNode5Btn.setGraphic ( new ImageView ( roadC ) );
-				inGameConsole.appendText("You purchased side road 5\n");
+				inGameConsole.appendText ( "You purchased side road 5\n" );
 				score++;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -338,9 +343,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				sideRoadNode6Btn.setGraphic ( new ImageView ( roadC ) );
-				inGameConsole.appendText("You purchased side road 6\n");
+				inGameConsole.appendText ( "You purchased side road 6\n" );
 				score++;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -361,9 +366,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				astroNode1Btn.setGraphic ( new ImageView ( astro1C ) );
-				inGameConsole.appendText("You purchased astronaut 1\n");
+				inGameConsole.appendText ( "You purchased astronaut 1\n" );
 				score += 1;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -383,9 +388,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				astroNode2Btn.setGraphic ( new ImageView ( astro2C ) );
-				inGameConsole.appendText("You purchased astronaut 2\n");
+				inGameConsole.appendText ( "You purchased astronaut 2\n" );
 				score += 2;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -404,9 +409,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				astroNode3Btn.setGraphic ( new ImageView ( astro3C ) );
-				inGameConsole.appendText("You purchased astronaut 3\n");
+				inGameConsole.appendText ( "You purchased astronaut 3\n" );
 				score += 3;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -426,9 +431,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				astroNode4Btn.setGraphic ( new ImageView ( astro4C ) );
-				inGameConsole.appendText("You purchased astronaut 4\n");
+				inGameConsole.appendText ( "You purchased astronaut 4\n" );
 				score += 4;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -448,9 +453,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				astroNode5Btn.setGraphic ( new ImageView ( astro5C ) );
-				inGameConsole.appendText("You purchased astronaut 5\n");
+				inGameConsole.appendText ( "You purchased astronaut 5\n" );
 				score += 5;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -469,9 +474,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				astroNode6Btn.setGraphic ( new ImageView ( astro6C ) );
-				inGameConsole.appendText("You purchased Mark Watney!\n");
+				inGameConsole.appendText ( "You purchased Mark Watney!\n" );
 				score += 9;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -492,9 +497,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				domeNode1Btn.setGraphic ( new ImageView ( dome1C ) );
-				inGameConsole.appendText("You purchased dome 1\n");
+				inGameConsole.appendText ( "You purchased dome 1\n" );
 				score += 2;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -514,9 +519,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				domeNode2Btn.setGraphic ( new ImageView ( dome2C ) );
-				inGameConsole.appendText("You purchased dome 2\n");
+				inGameConsole.appendText ( "You purchased dome 2\n" );
 				score += 4;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -536,9 +541,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				domeNode3Btn.setGraphic ( new ImageView ( dome3C ) );
-				inGameConsole.appendText("You purchased dome 3\n");
+				inGameConsole.appendText ( "You purchased dome 3\n" );
 				score += 6;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -558,9 +563,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				domeNode4Btn.setGraphic ( new ImageView ( dome4C ) );
-				inGameConsole.appendText("You purchased dome 4\n");
+				inGameConsole.appendText ( "You purchased dome 4\n" );
 				score += 8;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -580,9 +585,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				domeNode5Btn.setGraphic ( new ImageView ( dome5C ) );
-				inGameConsole.appendText("You purchased dome 5\n");
+				inGameConsole.appendText ( "You purchased dome 5\n" );
 				score += 10;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -602,9 +607,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				domeNode6Btn.setGraphic ( new ImageView ( dome6C ) );
-				inGameConsole.appendText("You purchased dome 6\n");
+				inGameConsole.appendText ( "You purchased dome 6\n" );
 				score += 12;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -625,9 +630,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				researchNode1Btn.setGraphic ( new ImageView ( research1C ) );
-				inGameConsole.appendText("You purchased research station 1\n");
+				inGameConsole.appendText ( "You purchased research station 1\n" );
 				score += 4;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -647,9 +652,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				researchNode2Btn.setGraphic ( new ImageView ( research2C ) );
-				inGameConsole.appendText("You purchased research station 2\n");
+				inGameConsole.appendText ( "You purchased research station 2\n" );
 				score += 8;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -669,9 +674,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				researchNode3Btn.setGraphic ( new ImageView ( research3C ) );
-				inGameConsole.appendText("You purchased research station 3\n");
+				inGameConsole.appendText ( "You purchased research station 3\n" );
 				score += 12;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -691,9 +696,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				researchNode4Btn.setGraphic ( new ImageView ( research4C ) );
-				inGameConsole.appendText("You purchased research station 4\n");
+				inGameConsole.appendText ( "You purchased research station 4\n" );
 				score += 16;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -713,9 +718,9 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				researchNode5Btn.setGraphic ( new ImageView ( research5C ) );
-				inGameConsole.appendText("You purchased research station 5\n");
+				inGameConsole.appendText ( "You purchased research station 5\n" );
 				score += 20;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
@@ -735,19 +740,280 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				researchNode6Btn.setGraphic ( new ImageView ( research6C ) );
-				inGameConsole.appendText("You purchased research station 6\n");
+				inGameConsole.appendText ( "You purchased research station 6\n" );
 				score += 24;
-				turn.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 			}
 		} );
 		// -----------------------------------------------------
+
+		// *************************************************************
+		// DICE
+		Die die1 = new Die ( );
+		Die die2 = new Die ( );
+		Die die3 = new Die ( );
+		Die die4 = new Die ( );
+		Die die5 = new Die ( );
+		Die die6 = new Die ( );
+
+		Button die1Button = new Button ( );
+		die1Button.setTranslateX ( -850 );
+		die1Button.setTranslateY ( 360 );
+		die1Button.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
+		Button die2Button = new Button ( );
+		die2Button.setTranslateX ( -700 );
+		die2Button.setTranslateY ( 360 );
+		die2Button.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
+		Button die3Button = new Button ( );
+		die3Button.setTranslateX ( -550 );
+		die3Button.setTranslateY ( 360 );
+		die3Button.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
+		Button die4Button = new Button ( );
+		die4Button.setTranslateX ( -400 );
+		die4Button.setTranslateY ( 360 );
+		die4Button.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
+		Button die5Button = new Button ( );
+		die5Button.setTranslateX ( -250 );
+		die5Button.setTranslateY ( 360 );
+		die5Button.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
+		Button die6Button = new Button ( );
+		die6Button.setTranslateX ( -100 );
+		die6Button.setTranslateY ( 360 );
+		die6Button.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
+
+		CheckBox d1Check = new CheckBox ( "Hold" );
+		d1Check.setTranslateX ( -850 );
+		d1Check.setTranslateY ( 440 );
+		d1Check.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
+		d1Check.setFont ( Font.font ( null, FontWeight.BOLD, 20 ) );
+		CheckBox d2Check = new CheckBox ( "Hold" );
+		d2Check.setTranslateX ( -700 );
+		d2Check.setTranslateY ( 440 );
+		d2Check.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
+		d2Check.setFont ( Font.font ( null, FontWeight.BOLD, 20 ) );
+		CheckBox d3Check = new CheckBox ( "Hold" );
+		d3Check.setTranslateX ( -550 );
+		d3Check.setTranslateY ( 440 );
+		d3Check.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
+		d3Check.setFont ( Font.font ( null, FontWeight.BOLD, 20 ) );
+		CheckBox d4Check = new CheckBox ( "Hold" );
+		d4Check.setTranslateX ( -400 );
+		d4Check.setTranslateY ( 440 );
+		d4Check.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
+		d4Check.setFont ( Font.font ( null, FontWeight.BOLD, 20 ) );
+		CheckBox d5Check = new CheckBox ( "Hold" );
+		d5Check.setTranslateX ( -250 );
+		d5Check.setTranslateY ( 440 );
+		d5Check.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
+		d5Check.setFont ( Font.font ( null, FontWeight.BOLD, 20 ) );
+		CheckBox d6Check = new CheckBox ( "Hold" );
+		d6Check.setTranslateX ( -100 );
+		d6Check.setTranslateY ( 440 );
+		d6Check.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
+		d6Check.setFont ( Font.font ( null, FontWeight.BOLD, 20 ) );
+
+		Text count = new Text ( "Rolls left " + rollCount );
+		count.setFont ( Font.font ( null, FontWeight.BOLD, 50 ) );
+		count.setTranslateX ( 225 );
+		count.setTranslateY ( 350 );
+
+		Button rollButton = new Button ( );
+		rollButton.setText ( " Roll Dice " );
+		rollButton.setTranslateX ( 160 );
+		rollButton.setTranslateY ( 420 );
+
+		Button commit = new Button ( );
+		commit.setText ( " Spend " );
+		commit.setTranslateX ( 280 );
+		commit.setTranslateY ( 420 );
+
+		String[ ] finalDice = new String[6];
+
+		// runs through to check for saved dice
+		checkClicked ( d1Check, die1Button );
+		checkClicked ( d2Check, die2Button );
+		checkClicked ( d3Check, die3Button );
+		checkClicked ( d4Check, die4Button );
+		checkClicked ( d5Check, die5Button );
+		checkClicked ( d6Check, die6Button );
+
+		rollButton.setOnAction ( new EventHandler<ActionEvent> ( )
+		{
+
+			@Override
+			public void handle( ActionEvent event )
+			{
+				count.setText ( "Rolls left " + ( --rollCount ) );
+				if ( rollCount == 0 )
+				{
+					rollButton.setDisable ( true );
+					Turn turn = new Turn ( );
+					finalDice[0] = die1.getDieString ( );
+					finalDice[1] = die2.getDieString ( );
+					finalDice[2] = die3.getDieString ( );
+					finalDice[3] = die4.getDieString ( );
+					finalDice[4] = die5.getDieString ( );
+					finalDice[5] = die6.getDieString ( );
+					for ( int i = 0; i < finalDice.length; i++ )
+					{
+						System.out.println ( finalDice[i] );
+					}
+					for ( int i = 0; i < finalDice.length; i++ )
+					{
+						switch ( finalDice[i] )
+						{
+							case "Dihydrogen Monoxide":
+								turn.setWat ( turn.getWat ( ) + 1 );
+								break;
+							case "Silicon Dioxide":
+								turn.setSil ( turn.getSil ( ) + 1 );
+								break;
+							case "Iron Ore":
+								turn.setOre ( turn.getOre ( ) + 1 );
+								break;
+							case "Oxygen":
+								turn.setOx ( turn.getOx ( ) + 1 );
+								break;
+							case "Solar Batteries":
+								turn.setSol ( turn.getSol ( ) + 1 );
+								break;
+
+						}
+					}
+					turn.toString ( );
+					d1Check.setSelected ( true );
+					d2Check.setSelected ( true );
+					d3Check.setSelected ( true );
+					d4Check.setSelected ( true );
+					d5Check.setSelected ( true );
+					d6Check.setSelected ( true );
+					commit.setDisable ( true );
+				}
+				if ( die1Button.isDisable ( ) )
+				{
+
+					// do nothing
+				}
+				else
+				{
+					die1.setDieString ( getDieRolls ( ) );
+					die1Button.setContentDisplay ( ContentDisplay.TOP );
+					getImage ( die1, die1Button );
+				}
+				if ( die2Button.isDisable ( ) )
+				{
+
+					// do nothing
+				}
+				else
+				{
+
+					die2.setDieString ( getDieRolls ( ) );
+					die2Button.setContentDisplay ( ContentDisplay.TOP );
+					getImage ( die2, die2Button );
+				}
+				if ( die3Button.isDisable ( ) )
+				{
+
+					// do nothing
+				}
+				else
+				{
+					die3.setDieString ( getDieRolls ( ) );
+					die3Button.setContentDisplay ( ContentDisplay.TOP );
+					getImage ( die3, die3Button );
+				}
+				if ( die4Button.isDisable ( ) )
+				{
+
+					// do nothing
+				}
+				else
+				{
+					die4.setDieString ( getDieRolls ( ) );
+					die4Button.setContentDisplay ( ContentDisplay.TOP );
+					getImage ( die4, die4Button );
+				}
+				if ( die5Button.isDisable ( ) )
+				{
+
+					// do nothing
+				}
+				else
+				{
+					die5.setDieString ( getDieRolls ( ) );
+					die5Button.setContentDisplay ( ContentDisplay.TOP );
+					;
+					getImage ( die5, die5Button );
+				}
+				if ( die6Button.isDisable ( ) )
+				{
+
+					// do nothing
+				}
+				else
+				{
+					die6.setDieString ( getDieRolls ( ) );
+					die6Button.setContentDisplay ( ContentDisplay.TOP );
+					getImage ( die6, die6Button );
+				}
+			}
+
+		} );
+
+		Turn turn = new Turn ( );
+		commit.setOnAction ( new EventHandler<ActionEvent> ( )
+		{
+
+			@Override
+			public void handle( ActionEvent event )
+			{
+				commit.setDisable ( true );
+				finalDice[0] = die1.getDieString ( );
+				finalDice[1] = die2.getDieString ( );
+				finalDice[2] = die3.getDieString ( );
+				finalDice[3] = die4.getDieString ( );
+				finalDice[4] = die5.getDieString ( );
+				finalDice[5] = die6.getDieString ( );
+				for ( int i = 0; i < finalDice.length; i++ )
+				{
+					System.out.println ( finalDice[i] );
+				}
+				for ( int i = 0; i < finalDice.length; i++ )
+				{
+					switch ( finalDice[i] )
+					{
+						case "Dihydrogen Monoxide":
+							turn.setWat ( turn.getWat ( ) + 1 );
+							break;
+						case "Silicon Dioxide":
+							turn.setSil ( turn.getSil ( ) + 1 );
+							break;
+						case "Iron Ore":
+							turn.setOre ( turn.getOre ( ) + 1 );
+							break;
+						case "Oxygen":
+							turn.setOx ( turn.getOx ( ) + 1 );
+							break;
+						case "Solar Batteries":
+							turn.setSol ( turn.getSol ( ) + 1 );
+							break;
+
+					}
+				}
+				turn.toString ( );
+			}
+
+		} );
+
+		// *************************************************************
 
 		// Add background & buttons here-----------------------------------------------------------
 		root.getChildren ( ).add ( new ImageView ( image ) );
 		root.getChildren ( ).add ( quit );
 		root.getChildren ( ).add ( guide );
 		root.getChildren ( ).add ( player );
-		root.getChildren ( ).add ( turn );
+		root.getChildren ( ).add ( turnScore );
 		root.getChildren ( ).add ( inGameConsole );
 		root.getChildren ( ).add ( roadNode1Btn );
 		root.getChildren ( ).add ( roadNode2Btn );
@@ -779,16 +1045,132 @@ public class SecondStage extends Stage
 		root.getChildren ( ).add ( researchNode4Btn );
 		root.getChildren ( ).add ( researchNode5Btn );
 		root.getChildren ( ).add ( researchNode6Btn );
-
+		root.getChildren ( ).add ( rollButton );
+		root.getChildren ( ).add ( die1Button );
+		root.getChildren ( ).add ( die2Button );
+		root.getChildren ( ).add ( die3Button );
+		root.getChildren ( ).add ( die4Button );
+		root.getChildren ( ).add ( die5Button );
+		root.getChildren ( ).add ( die6Button );
+		root.getChildren ( ).add ( d1Check );
+		root.getChildren ( ).add ( d2Check );
+		root.getChildren ( ).add ( d3Check );
+		root.getChildren ( ).add ( d4Check );
+		root.getChildren ( ).add ( d5Check );
+		root.getChildren ( ).add ( d6Check );
+		root.getChildren ( ).add ( commit );
+		root.getChildren ( ).add ( count );
 		root.setVisible ( true );
 
 		secondaryStage.setTitle ( playerName + "'s Martian Colony" ); // Set the stage title
 		secondaryStage.setScene ( scene ); // Place the scene in the stage
 		secondaryStage.show ( ); // Display the stage
-		
+
 		// Change color of the inGameConsole textarea after stage is shown
-		//Region region = ( Region ) inGameConsole.lookup( ".content" );
-		//region.setStyle( "-fx-background-color: black; -fx-text-fill: #00ff00;" ); //#00ff00
+		// Region region = ( Region ) inGameConsole.lookup( ".content" );
+		// region.setStyle( "-fx-background-color: black; -fx-text-fill: #00ff00;" ); //#00ff00
+
+	}
+
+	/****************
+	 * @author Nicks
+	 * @return the randomized resource name
+	 */
+	public static String getDieRolls( )
+	{
+		int die1 = 0;
+		String dieString = "No Dice";
+		for ( int i = 0; i < 1; i++ )
+		{
+			die1 = (int) ( Math.random ( ) * 5 + 1 );
+			switch ( die1 )
+			{
+				case 1:
+					dieString = "Dihydrogen Monoxide";
+					break;
+				case 2:
+					dieString = "Silicon Dioxide";
+					break;
+				case 3:
+					dieString = "Iron Ore";
+					break;
+				case 4:
+					dieString = "Oxygen";
+					break;
+				case 5:
+					dieString = "Solar Batteries";
+					break;
+				case 0:
+					dieString = "Yarr thar be a grave ERROR";
+					break;
+			}
+
+			// System.out.println ( dieString );
+		}
+		return dieString;
+	}
+
+	/**********************
+	 * @author Nicks
+	 * @param button
+	 * @return the image related to the name for each button
+	 */
+	public static Image getImage( Die die, Button button )
+	{
+		Image water = new Image ( "water die.png" );
+		Image ore = new Image ( "ore die.png" );
+		Image oxygen = new Image ( "oxygen die.png" );
+		Image silicon = new Image ( "silicon die.png" );
+		Image solar = new Image ( "solar die.png" );
+
+		Image imageName = water;
+		switch ( die.getDieString ( ) )
+		{
+			case "Dihydrogen Monoxide":
+				button.setGraphic ( new ImageView ( water ) );
+				break;
+			case "Silicon Dioxide":
+				button.setGraphic ( new ImageView ( silicon ) );
+				break;
+			case "Iron Ore":
+				button.setGraphic ( new ImageView ( ore ) );
+				break;
+			case "Oxygen":
+				button.setGraphic ( new ImageView ( oxygen ) );
+				break;
+			case "Solar Batteries":
+				button.setGraphic ( new ImageView ( solar ) );
+				break;
+
+		}
+		return imageName;
+
+	}
+
+	/*********************
+	 * @author Nicks
+	 * @param check
+	 *           the check box
+	 * @param button
+	 *           the corresponding button
+	 */
+	public static void checkClicked( CheckBox check, Button button )
+	{
+		check.selectedProperty ( ).addListener ( new ChangeListener<Boolean> ( )
+		{
+			public void changed( ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val )
+			{
+				System.out.println ( check.isSelected ( ) );
+				if ( check.isSelected ( ) )
+				{
+					button.setDisable ( true );
+				}
+				else
+				{
+					button.setDisable ( false );
+				}
+			}
+		} );
 
 	}
 }
