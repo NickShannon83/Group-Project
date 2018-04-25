@@ -18,6 +18,5 @@ public class Die
 	{
 		this.dieString = dieString;
 	}
-	
 
 }

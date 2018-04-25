@@ -10,15 +10,25 @@ public class Player
 	private GameBoard gameBoard; // player's gameBoard
 	private Turn turn; // a turn for a player that stores their dice roll
 	private int score; // player's score
+	private String name; // The players name
 
 	/***********************************************************************************
 	 * Default and only constructor for Player
 	 */
 	public Player()
 	{
-		this.gameBoard = new GameBoard();
+		this.gameBoard = new GameBoard ( );
 		this.score = 0;
-		this.turn = new Turn();
+		this.turn = new Turn ( );
+	}
+
+	// The player constructor
+	public Player(String name)
+	{
+		this.gameBoard = new GameBoard ( );
+		this.score = 0;
+		this.turn = new Turn ( );
+		this.name = name;
 	}
 
 	/***********************************************************************************
@@ -26,13 +36,14 @@ public class Player
 	 * 
 	 * @return canPurchase: boolean representing whether or not the player can purchase
 	 */
-	public boolean canPurchase()
+	public boolean canPurchase( )
 	{
 		boolean canPurchase = false;
 
-		if ((turn.getSil() > 0 && turn.getOx() > 0) || (turn.getWat() > 0 && turn.getSol() > 0 && turn.getOre() > 0)
-				|| (turn.getSil() > 0 && turn.getOx() > 0 && turn.getWat() > 0 && turn.getSol() > 0)
-				|| (turn.getOre() == 3 && turn.getSol() == 2))
+		if ( ( turn.getSil ( ) > 0 && turn.getOx ( ) > 0 )
+				|| ( turn.getWat ( ) > 0 && turn.getSol ( ) > 0 && turn.getOre ( ) > 0 )
+				|| ( turn.getSil ( ) > 0 && turn.getOx ( ) > 0 && turn.getWat ( ) > 0 && turn.getSol ( ) > 0 )
+				|| ( turn.getOre ( ) == 3 && turn.getSol ( ) == 2 ) )
 		{
 			canPurchase = true;
 		}
@@ -42,34 +53,44 @@ public class Player
 	/***********************************************************************************
 	 * GETTERS AND SETTERS
 	 */
-	public GameBoard getGameBoard()
+	public GameBoard getGameBoard( )
 	{
 		return gameBoard;
 	}
 
-	public void setGameBoard(GameBoard gameBoard)
+	public void setGameBoard( GameBoard gameBoard )
 	{
 		this.gameBoard = gameBoard;
 	}
 
-	public int getScore()
+	public int getScore( )
 	{
 		return score;
 	}
 
-	public void setScore(int score)
+	public void setScore( int score )
 	{
 		this.score = score;
 	}
 
-	public Turn getTurn()
+	public Turn getTurn( )
 	{
 		return turn;
 	}
 
-	public void setTurn(Turn turn)
+	public void setTurn( Turn turn )
 	{
 		this.turn = turn;
+	}
+
+	public String getName( )
+	{
+		return name;
+	}
+
+	public void setName( String name )
+	{
+		this.name = name;
 	}
 
 }

@@ -51,7 +51,25 @@ public class GameBoard
 			current = current.getLink();
 		}
 	}
-
+	
+	/************************************************************************
+	 * Method to go to a node in the linked list
+	 * 
+	 * @param tileNum: desired node to traverse to
+	 */
+	public Node goToTile(int tileNum)
+	{
+		Node current = this.head;
+		if (tileNum < 7 && tileNum > 0)
+		{
+			for (int i = 1; i < tileNum; i++)
+			{
+				current = current.getLink ( );
+			}
+		}
+		return current;
+	}
+	
 	/*************************************************************************/
 	// GETTER
 
