@@ -103,8 +103,7 @@ public class GUI extends Application
 				else
 				{
 					String playerName = name.getText ( );
-					Player player1 = new Player ( playerName );
-					SecondStage playerWindow = new SecondStage ( player1 );
+					SecondStage playerWindow = new SecondStage ( playerName );
 					playerWindow.start ( playerWindow );
 					primaryStage.close ( );
 				}
@@ -216,34 +215,6 @@ public class GUI extends Application
 		String topScore = ( names + "\t" + score );
 		return topScore;
 	}
-
-	/**********************************************************************************
-	 * Method to initialize a player
-	 * 
-	 * @author Luke Johnson
-	 * @param player:
-	 *           player whose board is being initialized
-	 */
-	public static void initializePlayer( Player player )
-	{
-		Node head = player.getGameBoard ( ).getHead ( );
-		Node current = head;
-
-		// create all of the tiles on the board
-		for ( int i = 0; i < 5; i++ )
-		{
-			Node newNode = new Node ( ( i + 2 ), current.getResearch ( ).getValue ( ),
-					current.getAstronaut ( ).getValue ( ), current.getBioDome ( ).getValue ( ) );
-			player.getGameBoard ( ).addToTail ( newNode );
-			current.setLink ( newNode );
-			current = newNode;
-			player.getGameBoard ( ).setNumTiles ( player.getGameBoard ( ).getNumTiles ( ) + 1 );
-
-		}
-		// unlock main road and astronaut on first tile
-		player.getGameBoard ( ).getHead ( ).getMainRoad ( ).setUnlocked ( true );
-		player.getGameBoard ( ).getHead ( ).getAstronaut ( ).setUnlocked ( true );
-	}
 }
 
 class SortByScore implements Comparator<HighScores>
@@ -255,3 +226,9 @@ class SortByScore implements Comparator<HighScores>
 		return b.getScore ( ) - a.getScore ( );
 	}
 }
+
+
+
+
+
+

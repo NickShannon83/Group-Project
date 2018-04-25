@@ -38,15 +38,16 @@ public class SecondStage extends Stage
 	//Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 1 );
 
 	// The SecondStage constructor
-	public SecondStage(Player player)
+	public SecondStage(String name)
 	{
 		super ( );
-		this.playerName = player.getName ( );
-		secondStagePlayer = player;
+		this.playerName = name;
+		secondStagePlayer = new Player (name);
 	}
 
 	public void start( Stage secondaryStage )
 	{
+		initializePlayer (secondStagePlayer);
 		StackPane root = new StackPane ( );
 		Scene scene = new Scene ( root, 1920, 1080 );
 		Image image = new Image ( "Player Screen White.jpg" );
@@ -144,13 +145,12 @@ public class SecondStage extends Stage
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 
 				Node current = secondStagePlayer.getGameBoard().goToTile ( 1 );
-				current.getMainRoad ( ).setUnlocked ( true );
 				current.getMainRoad ( ).setOwned ( true );
 				current.getSideRoad ( ).setUnlocked ( true );
 				current.getBioDome ( ).setUnlocked ( true );
-				current = current.getLink ( );  // THIS IS FUCKED, LINKED LIST DUN BROKED SUCKA, you talk like a fag!
-				current.getMainRoad ( ).setUnlocked ( false );
-				System.out.println ( current.getMainRoad ( ).getUnlocked ( ) );
+				current = secondStagePlayer.getGameBoard().goToTile ( 2 );
+				current.getMainRoad ( ).setUnlocked ( true );
+				//System.out.println ( current.getMainRoad ( ).getUnlocked ( ) );
 			}
 		} );
 		// -----------------------------------------------------
@@ -163,10 +163,11 @@ public class SecondStage extends Stage
 		roadNode2Btn.setTranslateX ( -92 );
 		roadNode2Btn.setTranslateY ( 14 );
 		roadNode2Btn.setDisable ( true );
-		//Node current = secondStagePlayer.getGameBoard().goToTile ( 2 );
-		/*if ( current.getMainRoad ( ).getUnlocked ( ) == true )
-		{*/
-			//roadNode2Btn.setDisable ( false );
+		Node current = secondStagePlayer.getGameBoard().goToTile ( 2 );
+		
+		if ( current.getMainRoad ( ).isUnlocked ( ) )
+		{
+			roadNode2Btn.setDisable ( false );
 			roadNode2Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 			{
 				
@@ -179,11 +180,12 @@ public class SecondStage extends Stage
 					turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 				}
 			} );
-	/*	}
+		}
 		else
 		{
+			//System.out.println ( current.getMainRoad ( ).getUnlocked ( ));
 			System.out.println ( "Road node 2 not unlocked" );
-		}*/
+		}
 		// -----------------------------------------------------
 
 		// -----------------------------------------------------
@@ -1243,7 +1245,35 @@ public class SecondStage extends Stage
 		} );
 
 	}
+	
+	/**********************************************************************************
+	 * Method to initialize a player
+	 * 
+	 * @author Luke Johnson
+	 * @param player:
+	 *           player whose board is being initialized
+	 */
+	public void initializePlayer( Player player )
+	{
+		Node head = player.getGameBoard ( ).getHead ( );
+		Node current = head;
 
+		// create all of the tiles on the board
+		for ( int i = 0; i < 5; i++ )
+		{
+			Node newNode = new Node ( ( i + 2 ), current.getResearch ( ).getValue ( ),
+					current.getAstronaut ( ).getValue ( ), current.getBioDome ( ).getValue ( ) );
+			player.getGameBoard ( ).addToTail ( newNode );
+			current.setLink ( newNode );
+			current = newNode;
+			player.getGameBoard ( ).setNumTiles ( player.getGameBoard ( ).getNumTiles ( ) + 1 );
+
+		}
+		// unlock main road and astronaut on first tile
+		player.getGameBoard ( ).getHead ( ).getMainRoad ( ).setUnlocked ( true );
+		player.getGameBoard ( ).getHead ( ).getAstronaut ( ).setUnlocked ( true );
+	}
+	
 	static Scanner input = new Scanner ( System.in );
 	/*********************************************************************
 	 * Method to purchase a resource
@@ -1325,3 +1355,4 @@ public class SecondStage extends Stage
 	 * player.getTurn().setWat(0); }
 	 */
 }
+
