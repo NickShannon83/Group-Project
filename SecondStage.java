@@ -156,21 +156,24 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 
-				purchaseMainRoad(1, roadNode1Btn, inGameConsole, roadC, secondStagePlayer );
-				score++;
+				boolean purchased = purchaseMainRoad(1, roadNode1Btn, inGameConsole, roadC, secondStagePlayer );
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 
-				roadNode2Btn.setDisable ( false );
-				sideRoadNode1Btn.setDisable ( false );
-				domeNode1Btn.setDisable (false);
-				roadNode1Btn.setText ( "P" );
-				roadNode1Btn.setFont(Font.font ( 0 ));
-				Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 1 );
-			
-				current.getSideRoad ( ).setUnlocked ( true );
-				current.getBioDome ( ).setUnlocked ( true );
-				current = secondStagePlayer.getGameBoard ( ).goToTile ( 2 );
-				current.getMainRoad ( ).setUnlocked ( true );
+				if (purchased)
+				{
+					roadNode2Btn.setDisable ( false );
+					sideRoadNode1Btn.setDisable ( false );
+					domeNode1Btn.setDisable (false);
+				}
+				
+//				roadNode1Btn.setText ( "P" );
+//				roadNode1Btn.setFont(Font.font ( 0 ));
+//				Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 1 );
+//			
+//				current.getSideRoad ( ).setUnlocked ( true );
+//				current.getBioDome ( ).setUnlocked ( true );
+//				current = secondStagePlayer.getGameBoard ( ).goToTile ( 2 );
+//				current.getMainRoad ( ).setUnlocked ( true );
 			}
 		} );
 		// -----------------------------------------------------
@@ -182,7 +185,7 @@ public class SecondStage extends Stage
 		roadNode2Btn.setPadding ( Insets.EMPTY );
 		roadNode2Btn.setTranslateX ( -92 );
 		roadNode2Btn.setTranslateY ( 14 );
-		//roadNode2Btn.setDisable ( true );
+		roadNode2Btn.setDisable ( true );
 		roadNode2Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 
@@ -190,18 +193,19 @@ public class SecondStage extends Stage
 			public void handle( MouseEvent e )
 			{
 				
-				purchaseMainRoad(2, roadNode2Btn, inGameConsole, roadC, secondStagePlayer );
+				boolean purchased = purchaseMainRoad(2, roadNode2Btn, inGameConsole, roadC, secondStagePlayer );
 				
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 				
-				roadNode3Btn.setDisable ( false );
-				sideRoadNode2Btn.setDisable ( false );
-				if (domeNode1Btn.getText ( ).equals ( "P" ))
+				
+				if (purchased)
 				{
 					domeNode2Btn.setDisable (false);
+					roadNode3Btn.setDisable ( false );
+					sideRoadNode2Btn.setDisable ( false );
 				}
-				roadNode2Btn.setText ( "P" );
-				roadNode2Btn.setFont(Font.font ( 0 ));
+				//roadNode2Btn.setText ( "P" );
+//				roadNode2Btn.setFont(Font.font ( 0 ));
 				/*Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 2 );
 				current.getMainRoad ( ).setOwned ( true );
 				current.getSideRoad ( ).setUnlocked ( true );
@@ -1387,7 +1391,7 @@ public class SecondStage extends Stage
 	 * @param inGameConsole: the console for output
 	 * @param roadC: colored road image
 	 */
-	public static void purchaseMainRoad(int tileNum, Labeled roadNodeBtn, TextInputControl inGameConsole, Image roadC, Player player)
+	public static boolean purchaseMainRoad(int tileNum, Labeled roadNodeBtn, TextInputControl inGameConsole, Image roadC, Player player)
 	{
 		Node current = player.getGameBoard().goToTile(tileNum);
 		
@@ -1403,6 +1407,7 @@ public class SecondStage extends Stage
 				current.getLink().getMainRoad().setUnlocked(true);
 
 			}
+			return true;
 		}
 		else if(current.getMainRoad().isOwned())
 		{
@@ -1417,6 +1422,7 @@ public class SecondStage extends Stage
 		 * 	System.out.println("You can't afford that);
 		 * }
 		 */
+		return false;
 	}
 	
 	/**********************************************************************************
