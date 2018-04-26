@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class ColonizeMarsDriver
@@ -8,7 +7,7 @@ public class ColonizeMarsDriver
 	public static void main(String[] args)
 	{
 		Player player1 = new Player();
-		initializePlayer(player1);
+		//initializePlayer(player1);
 		player1.getGameBoard().printBoard();
 
 		// Execute 15 turns
@@ -242,7 +241,7 @@ public class ColonizeMarsDriver
 	 * @param player:
 	 *           player whose board is being initialized
 	 */
-	public static void initializePlayer(Player player)
+	public void initializePlayer(Player player)
 	{
 		Node head = player.getGameBoard().getHead();
 		Node current = head;

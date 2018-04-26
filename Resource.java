@@ -100,6 +100,11 @@ public class Resource
 	{
 		this.unlocked = unlocked;
 	}
+	
+	public boolean getUnlocked()
+	{
+		return unlocked;
+	}
 
 	public int getOreCost()
 	{
