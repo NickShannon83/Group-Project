@@ -136,6 +136,12 @@ public class SecondStage extends Stage
 		Button researchNode4Btn = new Button ( );
 		Button researchNode5Btn = new Button ( );
 		Button researchNode6Btn = new Button ( );
+		Button astroNode1Btn = new Button ( );
+		Button astroNode2Btn = new Button ( );
+		Button astroNode3Btn = new Button ( );
+		Button astroNode4Btn = new Button ( );
+		Button astroNode5Btn = new Button ( );
+		Button astroNode6Btn = new Button ( );
 		
 
 		// MAIN ROADS
@@ -227,10 +233,13 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased main road 3\n" );
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				if (domeNode2Btn.getText ( ).equals ( "P" ))
+				{
+					domeNode3Btn.setDisable (false);
+				}
 				
 				roadNode4Btn.setDisable ( false );
 				sideRoadNode3Btn.setDisable ( false );
-				domeNode3Btn.setDisable (false);
 				roadNode3Btn.setText ( "P" );
 				roadNode3Btn.setFont(Font.font ( 0 ));
 				Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 3 );
@@ -260,10 +269,12 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased main road 4\n" );
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
-				
+				if (domeNode3Btn.getText ( ).equals ( "P" ))
+				{
+					domeNode4Btn.setDisable (false);
+				}
 				roadNode5Btn.setDisable ( false );
 				sideRoadNode4Btn.setDisable ( false );
-				domeNode4Btn.setDisable (false);
 				roadNode4Btn.setText ( "P" );
 				roadNode4Btn.setFont(Font.font ( 0 ));
 				Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 4 );
@@ -293,10 +304,12 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased main road 5\n" );
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
-				
+				if (domeNode4Btn.getText ( ).equals ( "P" ))
+				{
+					domeNode5Btn.setDisable (false);
+				}
 				roadNode6Btn.setDisable ( false );
 				sideRoadNode5Btn.setDisable ( false );
-				domeNode5Btn.setDisable (false);
 				roadNode5Btn.setText ( "P" );
 				roadNode5Btn.setFont(Font.font ( 0 ));
 				Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 5 );
@@ -324,9 +337,11 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased main road 6\n" );
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
-				
+				if (domeNode5Btn.getText ( ).equals ( "P" ))
+				{
+					domeNode6Btn.setDisable (false);
+				}
 				sideRoadNode6Btn.setDisable ( false );
-				domeNode6Btn.setDisable (false);
 				roadNode6Btn.setText ( "P" );
 				roadNode6Btn.setFont(Font.font ( 0 ));
 				Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 6 );
@@ -476,7 +491,7 @@ public class SecondStage extends Stage
 		// Astronaut node 1
 		Image astro1 = new Image ( getClass ( ).getResourceAsStream ( "astro1.png" ) );
 		Image astro1C = new Image ( getClass ( ).getResourceAsStream ( "astro1C.png" ) );
-		Button astroNode1Btn = new Button ( );
+		//Button astroNode1Btn = new Button ( );
 		astroNode1Btn.setGraphic ( new ImageView ( astro1 ) );
 		astroNode1Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		astroNode1Btn.setTranslateX ( -218 );
@@ -492,6 +507,7 @@ public class SecondStage extends Stage
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 				astroNode1Btn.setText ( "P" );
 				astroNode1Btn.setFont(Font.font ( 0 ));
+				astroNode2Btn.setDisable(false);
 			}
 		} );
 		// -----------------------------------------------------
@@ -500,7 +516,7 @@ public class SecondStage extends Stage
 		// Astronaut node 2
 		Image astro2 = new Image ( getClass ( ).getResourceAsStream ( "astro2.png" ) );
 		Image astro2C = new Image ( getClass ( ).getResourceAsStream ( "astro2C.png" ) );
-		Button astroNode2Btn = new Button ( );
+		
 		astroNode2Btn.setGraphic ( new ImageView ( astro2 ) );
 		astroNode2Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		astroNode2Btn.setTranslateX ( -218 );
@@ -517,6 +533,7 @@ public class SecondStage extends Stage
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 				astroNode2Btn.setText ( "P" );
 				astroNode2Btn.setFont(Font.font ( 0 ));
+				astroNode3Btn.setDisable(false);
 			}
 		} );
 		// -----------------------------------------------------
@@ -525,7 +542,7 @@ public class SecondStage extends Stage
 		// Astronaut node 3
 		Image astro3 = new Image ( getClass ( ).getResourceAsStream ( "astro3.png" ) );
 		Image astro3C = new Image ( getClass ( ).getResourceAsStream ( "astro3C.png" ) );
-		Button astroNode3Btn = new Button ( );
+		//Button astroNode3Btn = new Button ( );
 		astroNode3Btn.setGraphic ( new ImageView ( astro3 ) );
 		astroNode3Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		astroNode3Btn.setTranslateY ( 118 );
@@ -541,6 +558,7 @@ public class SecondStage extends Stage
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 				astroNode3Btn.setText ( "P" );
 				astroNode3Btn.setFont(Font.font ( 0 ));
+				astroNode4Btn.setDisable(false);
 			}
 		} );
 		// -----------------------------------------------------
@@ -549,7 +567,7 @@ public class SecondStage extends Stage
 		// Astronaut node 4
 		Image astro4 = new Image ( getClass ( ).getResourceAsStream ( "astro4.png" ) );
 		Image astro4C = new Image ( getClass ( ).getResourceAsStream ( "astro4C.png" ) );
-		Button astroNode4Btn = new Button ( );
+		//Button astroNode4Btn = new Button ( );
 		astroNode4Btn.setGraphic ( new ImageView ( astro4 ) );
 		astroNode4Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		astroNode4Btn.setTranslateX ( 222 );
@@ -566,6 +584,7 @@ public class SecondStage extends Stage
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 				astroNode4Btn.setText ( "P" );
 				astroNode4Btn.setFont(Font.font ( 0 ));
+				astroNode5Btn.setDisable(false);
 			}
 		} );
 		// -----------------------------------------------------
@@ -574,7 +593,7 @@ public class SecondStage extends Stage
 		// Astronaut node 5
 		Image astro5 = new Image ( getClass ( ).getResourceAsStream ( "astro5.png" ) );
 		Image astro5C = new Image ( getClass ( ).getResourceAsStream ( "astro5C.png" ) );
-		Button astroNode5Btn = new Button ( );
+		//Button astroNode5Btn = new Button ( );
 		astroNode5Btn.setGraphic ( new ImageView ( astro5 ) );
 		astroNode5Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		astroNode5Btn.setTranslateX ( 222 );
@@ -591,6 +610,7 @@ public class SecondStage extends Stage
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 				astroNode5Btn.setText ( "P" );
 				astroNode5Btn.setFont(Font.font ( 0 ));
+				astroNode6Btn.setDisable(false);
 			}
 		} );
 		// -----------------------------------------------------
@@ -599,7 +619,7 @@ public class SecondStage extends Stage
 		// Astronaut node 6
 		Image astro6 = new Image ( getClass ( ).getResourceAsStream ( "astro6.png" ) );
 		Image astro6C = new Image ( getClass ( ).getResourceAsStream ( "astro6C.png" ) );
-		Button astroNode6Btn = new Button ( );
+		//Button astroNode6Btn = new Button ( );
 		astroNode6Btn.setGraphic ( new ImageView ( astro6 ) );
 		astroNode6Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		astroNode6Btn.setTranslateY ( -213 );
@@ -671,6 +691,10 @@ public class SecondStage extends Stage
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 				domeNode2Btn.setText ( "P" );
 				domeNode2Btn.setFont(Font.font ( 0 ));
+				if(roadNode3Btn.getText ( ).equals ( "P" ))
+				{
+					domeNode3Btn.setDisable ( false );
+				}
 			}
 		} );
 		// -----------------------------------------------------
@@ -696,6 +720,10 @@ public class SecondStage extends Stage
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 				domeNode3Btn.setText ( "P" );
 				domeNode3Btn.setFont(Font.font ( 0 ));
+				if(roadNode4Btn.getText ( ).equals ( "P" ))
+				{
+					domeNode4Btn.setDisable ( false );
+				}
 			}
 		} );
 		// -----------------------------------------------------
@@ -721,6 +749,10 @@ public class SecondStage extends Stage
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 				domeNode4Btn.setText ( "P" );
 				domeNode4Btn.setFont(Font.font ( 0 ));
+				if(roadNode5Btn.getText ( ).equals ( "P" ))
+				{
+					domeNode5Btn.setDisable ( false );
+				}
 			}
 		} );
 		// -----------------------------------------------------
@@ -746,6 +778,10 @@ public class SecondStage extends Stage
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 				domeNode5Btn.setText ( "P" );
 				domeNode5Btn.setFont(Font.font ( 0 ));
+				if(roadNode6Btn.getText ( ).equals ( "P" ))
+				{
+					domeNode6Btn.setDisable ( false );
+				}
 			}
 		} );
 		// -----------------------------------------------------
