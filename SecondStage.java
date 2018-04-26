@@ -35,19 +35,21 @@ public class SecondStage extends Stage
 	int score = 0; // The players score
 	int rollCount = 3; // The number of die rolls per turn
 	Player secondStagePlayer;
-	//Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 1 );
+	boolean gameOver = false;
+	// Node current = new Node();
+	// current = secondStagePlayer.getGameBoard ( ).goToTile ( 1 );
 
 	// The SecondStage constructor
 	public SecondStage(String name)
 	{
 		super ( );
 		this.playerName = name;
-		secondStagePlayer = new Player (name);
+		secondStagePlayer = new Player ( name );
 	}
 
 	public void start( Stage secondaryStage )
 	{
-		initializePlayer (secondStagePlayer);
+		initializePlayer ( secondStagePlayer );
 		StackPane root = new StackPane ( );
 		Scene scene = new Scene ( root, 1920, 1080 );
 		Image image = new Image ( "Player Screen White.jpg" );
@@ -122,6 +124,19 @@ public class SecondStage extends Stage
 		Button sideRoadNode4Btn = new Button ( );
 		Button sideRoadNode5Btn = new Button ( );
 		Button sideRoadNode6Btn = new Button ( );
+		Button domeNode1Btn = new Button ( );
+		Button domeNode2Btn = new Button ( );
+		Button domeNode3Btn = new Button ( );
+		Button domeNode4Btn = new Button ( );
+		Button domeNode5Btn = new Button ( );
+		Button domeNode6Btn = new Button ( );
+		Button researchNode1Btn = new Button ( );
+		Button researchNode2Btn = new Button ( );
+		Button researchNode3Btn = new Button ( );
+		Button researchNode4Btn = new Button ( );
+		Button researchNode5Btn = new Button ( );
+		Button researchNode6Btn = new Button ( );
+		
 
 		// MAIN ROADS
 		// -----------------------------------------------------
@@ -144,13 +159,17 @@ public class SecondStage extends Stage
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 
-				Node current = secondStagePlayer.getGameBoard().goToTile ( 1 );
+				roadNode2Btn.setDisable ( false );
+				sideRoadNode1Btn.setDisable ( false );
+				domeNode1Btn.setDisable (false);
+				roadNode1Btn.setText ( "P" );
+				roadNode1Btn.setFont(Font.font ( 0 ));
+				Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 1 );
 				current.getMainRoad ( ).setOwned ( true );
 				current.getSideRoad ( ).setUnlocked ( true );
 				current.getBioDome ( ).setUnlocked ( true );
-				current = secondStagePlayer.getGameBoard().goToTile ( 2 );
+				current = secondStagePlayer.getGameBoard ( ).goToTile ( 2 );
 				current.getMainRoad ( ).setUnlocked ( true );
-				//System.out.println ( current.getMainRoad ( ).getUnlocked ( ) );
 			}
 		} );
 		// -----------------------------------------------------
@@ -163,29 +182,34 @@ public class SecondStage extends Stage
 		roadNode2Btn.setTranslateX ( -92 );
 		roadNode2Btn.setTranslateY ( 14 );
 		roadNode2Btn.setDisable ( true );
-		Node current = secondStagePlayer.getGameBoard().goToTile ( 2 );
-		
-		if ( current.getMainRoad ( ).isUnlocked ( ) )
+		roadNode2Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
-			roadNode2Btn.setDisable ( false );
-			roadNode2Btn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
+
+			@Override
+			public void handle( MouseEvent e )
 			{
+				roadNode2Btn.setGraphic ( new ImageView ( roadC ) );
+				inGameConsole.appendText ( "You purchased main road 2\n" );
+				score++;
+				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
 				
-				@Override
-				public void handle( MouseEvent e )
+				roadNode3Btn.setDisable ( false );
+				sideRoadNode2Btn.setDisable ( false );
+				if (domeNode1Btn.getText ( ).equals ( "P" ))
 				{
-					roadNode2Btn.setGraphic ( new ImageView ( roadC ) );
-					inGameConsole.appendText ( "You purchased main road 2\n" );
-					score++;
-					turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+					domeNode2Btn.setDisable (false);
 				}
-			} );
-		}
-		else
-		{
-			//System.out.println ( current.getMainRoad ( ).getUnlocked ( ));
-			System.out.println ( "Road node 2 not unlocked" );
-		}
+				roadNode2Btn.setText ( "P" );
+				roadNode2Btn.setFont(Font.font ( 0 ));
+				/*Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 2 );
+				current.getMainRoad ( ).setOwned ( true );
+				current.getSideRoad ( ).setUnlocked ( true );
+				current.getBioDome ( ).setUnlocked ( true );
+				current = secondStagePlayer.getGameBoard ( ).goToTile ( 3 );
+				current.getMainRoad ( ).setUnlocked ( true );*/
+			}
+		} );
+
 		// -----------------------------------------------------
 
 		// -----------------------------------------------------
@@ -203,6 +227,18 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased main road 3\n" );
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				
+				roadNode4Btn.setDisable ( false );
+				sideRoadNode3Btn.setDisable ( false );
+				domeNode3Btn.setDisable (false);
+				roadNode3Btn.setText ( "P" );
+				roadNode3Btn.setFont(Font.font ( 0 ));
+				Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 3 );
+				current.getMainRoad ( ).setOwned ( true );
+				current.getSideRoad ( ).setUnlocked ( true );
+				current.getBioDome ( ).setUnlocked ( true );
+				current = secondStagePlayer.getGameBoard ( ).goToTile ( 4 );
+				current.getMainRoad ( ).setUnlocked ( true );
 			}
 		} );
 		// -----------------------------------------------------
@@ -224,6 +260,18 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased main road 4\n" );
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				
+				roadNode5Btn.setDisable ( false );
+				sideRoadNode4Btn.setDisable ( false );
+				domeNode4Btn.setDisable (false);
+				roadNode4Btn.setText ( "P" );
+				roadNode4Btn.setFont(Font.font ( 0 ));
+				Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 4 );
+				current.getMainRoad ( ).setOwned ( true );
+				current.getSideRoad ( ).setUnlocked ( true );
+				current.getBioDome ( ).setUnlocked ( true );
+				current = secondStagePlayer.getGameBoard ( ).goToTile ( 5 );
+				current.getMainRoad ( ).setUnlocked ( true );
 			}
 		} );
 		// -----------------------------------------------------
@@ -245,6 +293,18 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased main road 5\n" );
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				
+				roadNode6Btn.setDisable ( false );
+				sideRoadNode5Btn.setDisable ( false );
+				domeNode5Btn.setDisable (false);
+				roadNode5Btn.setText ( "P" );
+				roadNode5Btn.setFont(Font.font ( 0 ));
+				Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 5 );
+				current.getMainRoad ( ).setOwned ( true );
+				current.getSideRoad ( ).setUnlocked ( true );
+				current.getBioDome ( ).setUnlocked ( true );
+				current = secondStagePlayer.getGameBoard ( ).goToTile ( 6 );
+				current.getMainRoad ( ).setUnlocked ( true );
 			}
 		} );
 		// -----------------------------------------------------
@@ -264,6 +324,15 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased main road 6\n" );
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				
+				sideRoadNode6Btn.setDisable ( false );
+				domeNode6Btn.setDisable (false);
+				roadNode6Btn.setText ( "P" );
+				roadNode6Btn.setFont(Font.font ( 0 ));
+				Node current = secondStagePlayer.getGameBoard ( ).goToTile ( 6 );
+				current.getMainRoad ( ).setOwned ( true );
+				current.getSideRoad ( ).setUnlocked ( true );
+				current.getBioDome ( ).setUnlocked ( true );
 			}
 		} );
 		// -----------------------------------------------------
@@ -284,6 +353,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased side road 1\n" );
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				sideRoadNode1Btn.setText ( "P" );
+				sideRoadNode1Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -304,6 +375,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased side road 2\n" );
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				sideRoadNode2Btn.setText ( "P" );
+				sideRoadNode2Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -325,6 +398,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased side road 3\n" );
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				sideRoadNode3Btn.setText ( "P" );
+				sideRoadNode3Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -344,6 +419,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased side road 4\n" );
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				sideRoadNode4Btn.setText ( "P" );
+				sideRoadNode4Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -365,6 +442,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased side road 5\n" );
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				sideRoadNode5Btn.setText ( "P" );
+				sideRoadNode5Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -386,6 +465,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased side road 6\n" );
 				score++;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				sideRoadNode6Btn.setText ( "P" );
+				sideRoadNode6Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -409,6 +490,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased astronaut 1\n" );
 				score += 1;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				astroNode1Btn.setText ( "P" );
+				astroNode1Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -432,6 +515,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased astronaut 2\n" );
 				score += 2;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				astroNode2Btn.setText ( "P" );
+				astroNode2Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -454,6 +539,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased astronaut 3\n" );
 				score += 3;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				astroNode3Btn.setText ( "P" );
+				astroNode3Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -477,6 +564,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased astronaut 4\n" );
 				score += 4;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				astroNode4Btn.setText ( "P" );
+				astroNode4Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -500,6 +589,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased astronaut 5\n" );
 				score += 5;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				astroNode5Btn.setText ( "P" );
+				astroNode5Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -522,6 +613,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased Mark Watney!\n" );
 				score += 9;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				astroNode6Btn.setText ( "P" );
+				astroNode6Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -531,7 +624,7 @@ public class SecondStage extends Stage
 		// Dome node 1
 		Image dome1 = new Image ( getClass ( ).getResourceAsStream ( "dome1.png" ) );
 		Image dome1C = new Image ( getClass ( ).getResourceAsStream ( "dome1C.png" ) );
-		Button domeNode1Btn = new Button ( );
+		//Button domeNode1Btn = new Button ( );
 		domeNode1Btn.setGraphic ( new ImageView ( dome1 ) );
 		domeNode1Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode1Btn.setTranslateX ( -150 );
@@ -546,6 +639,13 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased dome 1\n" );
 				score += 2;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				domeNode1Btn.setText ( "P" );
+				domeNode1Btn.setFont(Font.font ( 0 ));
+				
+				if(roadNode2Btn.getText ( ).equals ( "P" ))
+				{
+					domeNode2Btn.setDisable ( false );
+				}
 			}
 		} );
 		// -----------------------------------------------------
@@ -554,7 +654,7 @@ public class SecondStage extends Stage
 		// Dome node 2
 		Image dome2 = new Image ( getClass ( ).getResourceAsStream ( "dome2.png" ) );
 		Image dome2C = new Image ( getClass ( ).getResourceAsStream ( "dome2C.png" ) );
-		Button domeNode2Btn = new Button ( );
+		//Button domeNode2Btn = new Button ( );
 		domeNode2Btn.setGraphic ( new ImageView ( dome2 ) );
 		domeNode2Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode2Btn.setTranslateX ( -65 );
@@ -569,6 +669,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased dome 2\n" );
 				score += 4;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				domeNode2Btn.setText ( "P" );
+				domeNode2Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -577,7 +679,7 @@ public class SecondStage extends Stage
 		// Dome node 3
 		Image dome3 = new Image ( getClass ( ).getResourceAsStream ( "dome3.png" ) );
 		Image dome3C = new Image ( getClass ( ).getResourceAsStream ( "dome3C.png" ) );
-		Button domeNode3Btn = new Button ( );
+		//Button domeNode3Btn = new Button ( );
 		domeNode3Btn.setGraphic ( new ImageView ( dome3 ) );
 		domeNode3Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode3Btn.setTranslateX ( 66 );
@@ -592,6 +694,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased dome 3\n" );
 				score += 6;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				domeNode3Btn.setText ( "P" );
+				domeNode3Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -600,7 +704,7 @@ public class SecondStage extends Stage
 		// Dome node 4
 		Image dome4 = new Image ( getClass ( ).getResourceAsStream ( "dome4.png" ) );
 		Image dome4C = new Image ( getClass ( ).getResourceAsStream ( "dome4C.png" ) );
-		Button domeNode4Btn = new Button ( );
+		//Button domeNode4Btn = new Button ( );
 		domeNode4Btn.setGraphic ( new ImageView ( dome4 ) );
 		domeNode4Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode4Btn.setTranslateX ( 148 );
@@ -615,6 +719,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased dome 4\n" );
 				score += 8;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				domeNode4Btn.setText ( "P" );
+				domeNode4Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -623,7 +729,7 @@ public class SecondStage extends Stage
 		// Dome node 5
 		Image dome5 = new Image ( getClass ( ).getResourceAsStream ( "dome5.png" ) );
 		Image dome5C = new Image ( getClass ( ).getResourceAsStream ( "dome5C.png" ) );
-		Button domeNode5Btn = new Button ( );
+		//Button domeNode5Btn = new Button ( );
 		domeNode5Btn.setGraphic ( new ImageView ( dome5 ) );
 		domeNode5Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode5Btn.setTranslateX ( 68 );
@@ -638,6 +744,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased dome 5\n" );
 				score += 10;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				domeNode5Btn.setText ( "P" );
+				domeNode5Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -646,7 +754,7 @@ public class SecondStage extends Stage
 		// Dome node 6
 		Image dome6 = new Image ( getClass ( ).getResourceAsStream ( "dome6.png" ) );
 		Image dome6C = new Image ( getClass ( ).getResourceAsStream ( "dome6C.png" ) );
-		Button domeNode6Btn = new Button ( );
+		//Button domeNode6Btn = new Button ( );
 		domeNode6Btn.setGraphic ( new ImageView ( dome6 ) );
 		domeNode6Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode6Btn.setTranslateX ( -65 );
@@ -661,6 +769,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased dome 6\n" );
 				score += 12;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				domeNode6Btn.setText ( "P" );
+				domeNode6Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -670,7 +780,7 @@ public class SecondStage extends Stage
 		// Research node 1
 		Image research1 = new Image ( getClass ( ).getResourceAsStream ( "research1.png" ) );
 		Image research1C = new Image ( getClass ( ).getResourceAsStream ( "research1C.png" ) );
-		Button researchNode1Btn = new Button ( );
+		//Button researchNode1Btn = new Button ( );
 		researchNode1Btn.setGraphic ( new ImageView ( research1 ) );
 		researchNode1Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode1Btn.setTranslateX ( -285 );
@@ -685,6 +795,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased research station 1\n" );
 				score += 4;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				researchNode1Btn.setText ( "P" );
+				researchNode1Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -693,7 +805,7 @@ public class SecondStage extends Stage
 		// Research node 2
 		Image research2 = new Image ( getClass ( ).getResourceAsStream ( "research2.png" ) );
 		Image research2C = new Image ( getClass ( ).getResourceAsStream ( "research2C.png" ) );
-		Button researchNode2Btn = new Button ( );
+		//Button researchNode2Btn = new Button ( );
 		researchNode2Btn.setGraphic ( new ImageView ( research2 ) );
 		researchNode2Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode2Btn.setTranslateX ( -155 );
@@ -708,6 +820,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased research station 2\n" );
 				score += 8;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				researchNode2Btn.setText ( "P" );
+				researchNode2Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -716,7 +830,7 @@ public class SecondStage extends Stage
 		// Research node 3
 		Image research3 = new Image ( getClass ( ).getResourceAsStream ( "research3.png" ) );
 		Image research3C = new Image ( getClass ( ).getResourceAsStream ( "research3C.png" ) );
-		Button researchNode3Btn = new Button ( );
+		//Button researchNode3Btn = new Button ( );
 		researchNode3Btn.setGraphic ( new ImageView ( research3 ) );
 		researchNode3Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode3Btn.setTranslateX ( 155 );
@@ -731,6 +845,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased research station 3\n" );
 				score += 12;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				researchNode3Btn.setText ( "P" );
+				researchNode3Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -739,7 +855,7 @@ public class SecondStage extends Stage
 		// Research node 4
 		Image research4 = new Image ( getClass ( ).getResourceAsStream ( "research4.png" ) );
 		Image research4C = new Image ( getClass ( ).getResourceAsStream ( "research4C.png" ) );
-		Button researchNode4Btn = new Button ( );
+		//Button researchNode4Btn = new Button ( );
 		researchNode4Btn.setGraphic ( new ImageView ( research4 ) );
 		researchNode4Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode4Btn.setTranslateX ( 283 );
@@ -754,6 +870,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased research station 4\n" );
 				score += 16;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				researchNode4Btn.setText ( "P" );
+				researchNode4Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -762,7 +880,7 @@ public class SecondStage extends Stage
 		// Research node 5
 		Image research5 = new Image ( getClass ( ).getResourceAsStream ( "research5.png" ) );
 		Image research5C = new Image ( getClass ( ).getResourceAsStream ( "research5C.png" ) );
-		Button researchNode5Btn = new Button ( );
+		//Button researchNode5Btn = new Button ( );
 		researchNode5Btn.setGraphic ( new ImageView ( research5 ) );
 		researchNode5Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode5Btn.setTranslateX ( 155 );
@@ -777,6 +895,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased research station 5\n" );
 				score += 20;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				researchNode5Btn.setText ( "P" );
+				researchNode5Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -785,7 +905,7 @@ public class SecondStage extends Stage
 		// Research node 6
 		Image research6 = new Image ( getClass ( ).getResourceAsStream ( "research6.png" ) );
 		Image research6C = new Image ( getClass ( ).getResourceAsStream ( "research6C.png" ) );
-		Button researchNode6Btn = new Button ( );
+		//Button researchNode6Btn = new Button ( );
 		researchNode6Btn.setGraphic ( new ImageView ( research6 ) );
 		researchNode6Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode6Btn.setTranslateX ( -155 );
@@ -800,6 +920,8 @@ public class SecondStage extends Stage
 				inGameConsole.appendText ( "You purchased research station 6\n" );
 				score += 24;
 				turnScore.setText ( "Turn: " + turnNum + "\tScore: " + score );
+				researchNode6Btn.setText ( "P" );
+				researchNode6Btn.setFont(Font.font ( 0 ));
 			}
 		} );
 		// -----------------------------------------------------
@@ -901,7 +1023,7 @@ public class SecondStage extends Stage
 			public void handle( ActionEvent event )
 			{
 				commit.setDisable ( false );
-				// count.setText ( "Rolls left " + ( --rollCount ) );
+				count.setText ( "Rolls left " + ( --rollCount ) );
 				if ( rollCount == 0 )
 				{
 					rollButton.setDisable ( true );
@@ -957,7 +1079,7 @@ public class SecondStage extends Stage
 					die1.setDieString ( getDieRolls ( ) );
 					die1Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die1, die1Button );
-					die1Button.setText ( die1.getDieString ( ) );
+					//die1Button.setText ( die1.getDieString ( ) );
 				}
 				if ( die2Button.isDisable ( ) )
 				{
@@ -970,7 +1092,7 @@ public class SecondStage extends Stage
 					die2.setDieString ( getDieRolls ( ) );
 					die2Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die2, die2Button );
-					die2Button.setText ( die2.getDieString ( ) );
+					//die2Button.setText ( die2.getDieString ( ) );
 				}
 				if ( die3Button.isDisable ( ) )
 				{
@@ -982,7 +1104,7 @@ public class SecondStage extends Stage
 					die3.setDieString ( getDieRolls ( ) );
 					die3Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die3, die3Button );
-					die3Button.setText ( die3.getDieString ( ) );
+					//die3Button.setText ( die3.getDieString ( ) );
 				}
 				if ( die4Button.isDisable ( ) )
 				{
@@ -994,7 +1116,7 @@ public class SecondStage extends Stage
 					die4.setDieString ( getDieRolls ( ) );
 					die4Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die4, die4Button );
-					die4Button.setText ( die4.getDieString ( ) );
+					//die4Button.setText ( die4.getDieString ( ) );
 				}
 				if ( die5Button.isDisable ( ) )
 				{
@@ -1006,7 +1128,7 @@ public class SecondStage extends Stage
 					die5.setDieString ( getDieRolls ( ) );
 					die5Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die5, die5Button );
-					die5Button.setText ( die5.getDieString ( ) );
+					//die5Button.setText ( die5.getDieString ( ) );
 				}
 				if ( die6Button.isDisable ( ) )
 				{
@@ -1018,7 +1140,7 @@ public class SecondStage extends Stage
 					die6.setDieString ( getDieRolls ( ) );
 					die6Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die6, die6Button );
-					die6Button.setText ( die6.getDieString ( ) );
+					//die6Button.setText ( die6.getDieString ( ) );
 				}
 			}
 
@@ -1137,12 +1259,22 @@ public class SecondStage extends Stage
 		secondaryStage.setTitle ( playerName + "'s Martian Colony" ); // Set the stage title
 		secondaryStage.setScene ( scene ); // Place the scene in the stage
 		secondaryStage.show ( ); // Display the stage
-
-		// Change color of the inGameConsole textarea after stage is shown
-		// Region region = ( Region ) inGameConsole.lookup( ".content" );
-		// region.setStyle( "-fx-background-color: black; -fx-text-fill: #00ff00;" ); //#00ff00
-
 	}
+
+	/*
+	 * Node currentMainRoad = secondStagePlayer.getGameBoard ( ).goToTile ( 1 ); while (current.getMainRoad (
+	 * ).isUnlocked ( )) { roadNode1Btn.setGraphic ( new ImageView ( road ) ); roadNode1Btn.setPadding ( Insets.EMPTY );
+	 * roadNode1Btn.getTransforms ( ).add ( new Rotate ( 135, 0, 0 ) ); roadNode1Btn.setTranslateX ( -31 );
+	 * roadNode1Btn.setTranslateY ( -55 ); roadNode2Btn.setDisable ( true ); roadNode3Btn.setDisable ( true );
+	 * roadNode4Btn.setDisable ( true ); roadNode5Btn.setDisable ( true ); roadNode6Btn.setDisable ( true ); } while
+	 * (!currentMainRoad.getLink().getMainRoad().isUnlocked()) {
+	 * 
+	 * }
+	 */
+
+	// Change color of the inGameConsole textarea after stage is shown
+	// Region region = ( Region ) inGameConsole.lookup( ".content" );
+	// region.setStyle( "-fx-background-color: black; -fx-text-fill: #00ff00;" ); //#00ff00
 
 	/****************
 	 * @author Nicks
@@ -1245,7 +1377,7 @@ public class SecondStage extends Stage
 		} );
 
 	}
-	
+
 	/**********************************************************************************
 	 * Method to initialize a player
 	 * 
@@ -1253,7 +1385,7 @@ public class SecondStage extends Stage
 	 * @param player:
 	 *           player whose board is being initialized
 	 */
-	public void initializePlayer( Player player )
+	public static Player initializePlayer( Player player )
 	{
 		Node head = player.getGameBoard ( ).getHead ( );
 		Node current = head;
@@ -1272,8 +1404,10 @@ public class SecondStage extends Stage
 		// unlock main road and astronaut on first tile
 		player.getGameBoard ( ).getHead ( ).getMainRoad ( ).setUnlocked ( true );
 		player.getGameBoard ( ).getHead ( ).getAstronaut ( ).setUnlocked ( true );
+
+		return player;
 	}
-	
+
 	static Scanner input = new Scanner ( System.in );
 	/*********************************************************************
 	 * Method to purchase a resource
@@ -1355,4 +1489,3 @@ public class SecondStage extends Stage
 	 * player.getTurn().setWat(0); }
 	 */
 }
-

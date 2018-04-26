@@ -44,12 +44,14 @@ public class GUI extends Application
 {
 	public static void main( String[ ] args ) throws FileNotFoundException
 	{
+		//Player player1 = new Player();
+		//initializePlayer(player1);
 		Application.launch ( args );
 
 	}
 
 	@Override // Override the start method in the Application class
-	public void start( Stage primaryStage ) throws FileNotFoundException
+	public void start( Stage primaryStage) throws FileNotFoundException
 	{
 		StackPane root = new StackPane ( );
 		Scene scene = new Scene ( root, 1920, 1080 );
@@ -103,6 +105,7 @@ public class GUI extends Application
 				else
 				{
 					String playerName = name.getText ( );
+					//Player player1 = new Player()
 					SecondStage playerWindow = new SecondStage ( playerName );
 					playerWindow.start ( playerWindow );
 					primaryStage.close ( );
