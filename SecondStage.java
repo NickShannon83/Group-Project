@@ -1382,6 +1382,50 @@ public class SecondStage extends Stage
 		 */
 		return false;
 	}
+	/**************************************************************************************
+	 * Method to purchase an astronaut
+	 * 
+	 * @param tileNum
+	 * @param astroNodeBtn
+	 * @param inGameConsole
+	 * @param astroC
+	 * @param player
+	 * @return
+	 */
+	public boolean purchaseAstronaut(int tileNum, Labeled astroNodeBtn, TextInputControl inGameConsole, Image astroC, Player player)
+	{
+		Node current = player.getGameBoard().goToTile(tileNum);
+		Resource astronaut = current.getAstronaut();
+		boolean purchased = false;
+		
+		if (astronaut.isUnlocked() && !astronaut.isOwned())//&& enough stuff)
+		{
+			astroNodeBtn.setGraphic ( new ImageView ( astroC ) );
+			inGameConsole.appendText (tileNum == 6 ? ("You've unlocked Mark Watney, the space pirate!"):( "You purchased"
+					+ " astronaut "+ tileNum + " \n"));
+			player.setScore(player.getScore() + current.getAstronaut().getValue());
+			astronaut.setOwned(true);;
+			purchased = true;
+			if (current.getLink() != null)
+			{
+				current.getLink().getAstronaut().setUnlocked(true);
+			}
+		}
+		else if(astronaut.isOwned())
+		{
+			inGameConsole.appendText("You already own that.");
+		}
+		else if(!astronaut.isUnlocked())
+		{
+			inGameConsole.appendText("That isn't unlocked.");
+		}
+		/*else if(not enough stuff)
+		 * {
+		 * 	inGameConsole.appendText("You can't afford that");
+		 * }
+		 */
+		return purchased;
+	}
 	
 	/**********************************************************************************
 	 * Method to initialize a player
