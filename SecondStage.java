@@ -188,17 +188,17 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				
+
 				boolean purchased = purchaseMainRoad(2, roadNode2Btn, inGameConsole, roadC, secondStagePlayer);
 
 				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
 
 				if (purchased)
 				{
-					domeNode2Btn.setDisable(secondStagePlayer.getGameBoard().goToTile(1).getBioDome().isOwned() ? false : true);
+					domeNode2Btn
+							.setDisable(secondStagePlayer.getGameBoard().goToTile(1).getBioDome().isOwned() ? false : true);
 					roadNode3Btn.setDisable(false);
 					sideRoadNode2Btn.setDisable(false);
-					
 
 				}
 			}
@@ -224,7 +224,8 @@ public class SecondStage extends Stage
 				{
 					roadNode4Btn.setDisable(false);
 					sideRoadNode3Btn.setDisable(false);
-					domeNode3Btn.setDisable(secondStagePlayer.getGameBoard().goToTile(2).getBioDome().isOwned() ? false : true);
+					domeNode3Btn
+							.setDisable(secondStagePlayer.getGameBoard().goToTile(2).getBioDome().isOwned() ? false : true);
 				}
 			}
 		});
@@ -250,7 +251,8 @@ public class SecondStage extends Stage
 				{
 					roadNode5Btn.setDisable(false);
 					sideRoadNode4Btn.setDisable(false);
-					domeNode4Btn.setDisable(secondStagePlayer.getGameBoard().goToTile(3).getBioDome().isOwned() ? false : true);
+					domeNode4Btn
+							.setDisable(secondStagePlayer.getGameBoard().goToTile(3).getBioDome().isOwned() ? false : true);
 				}
 			}
 		});
@@ -276,7 +278,8 @@ public class SecondStage extends Stage
 				{
 					roadNode6Btn.setDisable(false);
 					sideRoadNode5Btn.setDisable(false);
-					domeNode5Btn.setDisable(secondStagePlayer.getGameBoard().goToTile(4).getBioDome().isOwned() ? false : true);
+					domeNode5Btn
+							.setDisable(secondStagePlayer.getGameBoard().goToTile(4).getBioDome().isOwned() ? false : true);
 				}
 			}
 		});
@@ -299,11 +302,12 @@ public class SecondStage extends Stage
 				if (purchased)
 				{
 					sideRoadNode6Btn.setDisable(false);
-					domeNode6Btn.setDisable(secondStagePlayer.getGameBoard().goToTile(5).getBioDome().isOwned() ? false : true);
+					domeNode6Btn
+							.setDisable(secondStagePlayer.getGameBoard().goToTile(5).getBioDome().isOwned() ? false : true);
 				}
 			}
 		});
-		// -----------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
 
 		// SIDE ROADS
 		// -----------------------------------------------------
@@ -437,7 +441,7 @@ public class SecondStage extends Stage
 				sideRoadNode6Btn.setFont(Font.font(0));
 			}
 		});
-		// -----------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
 
 		// ASTRONAUTS
 		// -----------------------------------------------------
@@ -573,10 +577,9 @@ public class SecondStage extends Stage
 			public void handle(MouseEvent e)
 			{
 				purchaseAstronaut(6, astroNode6Btn, inGameConsole, astro6C, secondStagePlayer);
-
 			}
 		});
-		// -----------------------------------------------------
+		// --------------------------------------------------------------------------------------------------------------------------
 
 		// DOMES
 		// -----------------------------------------------------
@@ -594,14 +597,9 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				domeNode1Btn.setGraphic(new ImageView(dome1C));
-				inGameConsole.appendText("You purchased dome 1\n");
-				score += 2;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				domeNode1Btn.setText("P");
-				domeNode1Btn.setFont(Font.font(0));
+				boolean purchased = purchaseDome(1, domeNode1Btn, inGameConsole, dome1C, secondStagePlayer);
 
-				if (roadNode2Btn.getText().equals("P"))
+				if (purchased && secondStagePlayer.getGameBoard().goToTile(2).getMainRoad().isOwned())
 				{
 					domeNode2Btn.setDisable(false);
 				}
@@ -624,12 +622,12 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				domeNode2Btn.setGraphic(new ImageView(dome2C));
-				inGameConsole.appendText("You purchased dome 2\n");
-				score += 4;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				domeNode2Btn.setText("P");
-				domeNode2Btn.setFont(Font.font(0));
+				boolean purchased = purchaseDome(2, domeNode2Btn, inGameConsole, dome2C, secondStagePlayer);
+
+				if (purchased && secondStagePlayer.getGameBoard().goToTile(3).getMainRoad().isOwned())
+				{
+					domeNode3Btn.setDisable(false);
+				}
 			}
 		});
 		// -----------------------------------------------------
@@ -649,12 +647,12 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				domeNode3Btn.setGraphic(new ImageView(dome3C));
-				inGameConsole.appendText("You purchased dome 3\n");
-				score += 6;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				domeNode3Btn.setText("P");
-				domeNode3Btn.setFont(Font.font(0));
+				boolean purchased = purchaseDome(3, domeNode3Btn, inGameConsole, dome3C, secondStagePlayer);
+
+				if (purchased && secondStagePlayer.getGameBoard().goToTile(4).getMainRoad().isOwned())
+				{
+					domeNode4Btn.setDisable(false);
+				}
 			}
 		});
 		// -----------------------------------------------------
@@ -674,12 +672,12 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				domeNode4Btn.setGraphic(new ImageView(dome4C));
-				inGameConsole.appendText("You purchased dome 4\n");
-				score += 8;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				domeNode4Btn.setText("P");
-				domeNode4Btn.setFont(Font.font(0));
+				boolean purchased = purchaseDome(4, domeNode4Btn, inGameConsole, dome4C, secondStagePlayer);
+
+				if (purchased && secondStagePlayer.getGameBoard().goToTile(5).getMainRoad().isOwned())
+				{
+					domeNode5Btn.setDisable(false);
+				}
 			}
 		});
 		// -----------------------------------------------------
@@ -699,12 +697,12 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				domeNode5Btn.setGraphic(new ImageView(dome5C));
-				inGameConsole.appendText("You purchased dome 5\n");
-				score += 10;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				domeNode5Btn.setText("P");
-				domeNode5Btn.setFont(Font.font(0));
+				boolean purchased = purchaseDome(5, domeNode5Btn, inGameConsole, dome5C, secondStagePlayer);
+
+				if (purchased && secondStagePlayer.getGameBoard().goToTile(6).getMainRoad().isOwned())
+				{
+					domeNode6Btn.setDisable(false);
+				}
 			}
 		});
 		// -----------------------------------------------------
@@ -724,12 +722,7 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				domeNode6Btn.setGraphic(new ImageView(dome6C));
-				inGameConsole.appendText("You purchased dome 6\n");
-				score += 12;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				domeNode6Btn.setText("P");
-				domeNode6Btn.setFont(Font.font(0));
+				purchaseDome(6, domeNode6Btn, inGameConsole, dome6C, secondStagePlayer);
 			}
 		});
 		// -----------------------------------------------------
@@ -1349,7 +1342,7 @@ public class SecondStage extends Stage
 		Node current = player.getGameBoard().goToTile(tileNum);
 		Node previous = tileNum > 1 ? player.getGameBoard().goToTile(tileNum - 1) : null;
 		Resource mainRoad = current.getMainRoad();
-		
+
 		if (mainRoad.isUnlocked() && !mainRoad.isOwned())// && enough stuff)
 		{
 			roadNodeBtn.setGraphic(new ImageView(roadC));
@@ -1360,8 +1353,7 @@ public class SecondStage extends Stage
 			if (previous != null && previous.getBioDome().isOwned())
 			{
 				current.getBioDome().setUnlocked(true);
-			}
-			else if (previous == null)
+			} else if (previous == null)
 			{
 				current.getBioDome().setUnlocked(true);
 			}
@@ -1385,14 +1377,71 @@ public class SecondStage extends Stage
 	}
 
 	/**************************************************************************************
+	 * Method to purchase a bio-dome
+	 * 
+	 * @author Luke Johnson
+	 * 
+	 * @param tileNum:
+	 *           corresponding tile on the game board
+	 * @param domeNodeBtn:
+	 *           corresponding dome button
+	 * @param inGameConsole:
+	 *           in game console for output
+	 * @param domeC:
+	 *           corresponding colored dome button
+	 * @param player:
+	 *           player whose game board is being dealt with
+	 * @return: boolean value for whether the purchase was successful
+	 */
+	public boolean purchaseDome(int tileNum, Labeled domeNodeBtn, TextInputControl inGameConsole, Image domeC,
+			Player player)
+	{
+		Node current = player.getGameBoard().goToTile(tileNum);
+		Node next = current.getLink();
+		Resource bioDome = current.getBioDome();
+		boolean purchased = false;
+
+		if (bioDome.isUnlocked() && !bioDome.isOwned())// && enough stuff)
+		{
+			domeNodeBtn.setGraphic(new ImageView(domeC));
+			inGameConsole.appendText("You purchased Bio-dome " + tileNum + "\n");
+			player.setScore(player.getScore() + bioDome.getValue());
+			bioDome.setOwned(true);
+			purchased = true;
+
+			if (next != null && next.getMainRoad().isOwned())
+			{
+				next.getBioDome().setUnlocked(true);
+			}
+		} else if (bioDome.isOwned())
+		{
+			inGameConsole.appendText("You already own that.\n");
+		} else if (!bioDome.isUnlocked())
+		{
+			inGameConsole.appendText("That isn't unlocked.\n");
+		}
+		/*
+		 * else if(not enough stuff) { inGameConsole.appendText("You can't afford that.\n"); }
+		 */
+		return purchased;
+	}
+
+	/**************************************************************************************
 	 * Method to purchase an astronaut
 	 * 
-	 * @param tileNum
-	 * @param astroNodeBtn
-	 * @param inGameConsole
-	 * @param astroC
-	 * @param player
-	 * @return
+	 * @author Luke Johnson
+	 * 
+	 * @param tileNum:
+	 *           tile on the game board
+	 * @param astroNodeBtn:
+	 *           button for the corresponding astronaut
+	 * @param inGameConsole:
+	 *           in-game output console
+	 * @param astroC:
+	 *           the corresponding colored button
+	 * @param player:
+	 *           player whose board is being dealt with
+	 * @return: boolean value for whether the purchase was successful
 	 */
 	public boolean purchaseAstronaut(int tileNum, Labeled astroNodeBtn, TextInputControl inGameConsole, Image astroC,
 			Player player)
@@ -1408,7 +1457,6 @@ public class SecondStage extends Stage
 					: ("You purchased" + " astronaut " + tileNum + " \n"));
 			player.setScore(player.getScore() + current.getAstronaut().getValue());
 			astronaut.setOwned(true);
-			;
 			purchased = true;
 			if (current.getLink() != null)
 			{
