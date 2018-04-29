@@ -321,12 +321,12 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				sideRoadNode1Btn.setGraphic(new ImageView(roadC));
-				inGameConsole.appendText("You purchased side road 1\n");
-				score++;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				sideRoadNode1Btn.setText("P");
-				sideRoadNode1Btn.setFont(Font.font(0));
+				boolean purchased = purchaseSideRoad(1, sideRoadNode1Btn, inGameConsole, roadC, secondStagePlayer);
+
+				if (purchased)
+				{
+					researchNode1Btn.setDisable(false);
+				}
 			}
 		});
 		// -----------------------------------------------------
@@ -343,12 +343,12 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				sideRoadNode2Btn.setGraphic(new ImageView(roadC));
-				inGameConsole.appendText("You purchased side road 2\n");
-				score++;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				sideRoadNode2Btn.setText("P");
-				sideRoadNode2Btn.setFont(Font.font(0));
+				boolean purchased = purchaseSideRoad(2, sideRoadNode2Btn, inGameConsole, roadC, secondStagePlayer);
+
+				if (purchased && secondStagePlayer.getGameBoard().goToTile(1).getResearch().isOwned())
+				{
+					researchNode2Btn.setDisable(false);
+				}
 			}
 		});
 		// -----------------------------------------------------
@@ -366,12 +366,12 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				sideRoadNode3Btn.setGraphic(new ImageView(roadC));
-				inGameConsole.appendText("You purchased side road 3\n");
-				score++;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				sideRoadNode3Btn.setText("P");
-				sideRoadNode3Btn.setFont(Font.font(0));
+				boolean purchased = purchaseSideRoad(3, sideRoadNode3Btn, inGameConsole, roadC, secondStagePlayer);
+
+				if (purchased && secondStagePlayer.getGameBoard().goToTile(2).getResearch().isOwned())
+				{
+					researchNode3Btn.setDisable(false);
+				}
 			}
 		});
 		// -----------------------------------------------------
@@ -387,12 +387,12 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				sideRoadNode4Btn.setGraphic(new ImageView(roadC));
-				inGameConsole.appendText("You purchased side road 4\n");
-				score++;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				sideRoadNode4Btn.setText("P");
-				sideRoadNode4Btn.setFont(Font.font(0));
+				boolean purchased = purchaseSideRoad(4, sideRoadNode4Btn, inGameConsole, roadC, secondStagePlayer);
+
+				if (purchased && secondStagePlayer.getGameBoard().goToTile(3).getResearch().isOwned())
+				{
+					researchNode4Btn.setDisable(false);
+				}
 			}
 		});
 		// -----------------------------------------------------
@@ -410,12 +410,12 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				sideRoadNode5Btn.setGraphic(new ImageView(roadC));
-				inGameConsole.appendText("You purchased side road 5\n");
-				score++;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				sideRoadNode5Btn.setText("P");
-				sideRoadNode5Btn.setFont(Font.font(0));
+				boolean purchased = purchaseSideRoad(5, sideRoadNode5Btn, inGameConsole, roadC, secondStagePlayer);
+
+				if (purchased && secondStagePlayer.getGameBoard().goToTile(4).getResearch().isOwned())
+				{
+					researchNode5Btn.setDisable(false);
+				}
 			}
 		});
 		// -----------------------------------------------------
@@ -433,12 +433,12 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				sideRoadNode6Btn.setGraphic(new ImageView(roadC));
-				inGameConsole.appendText("You purchased side road 6\n");
-				score++;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				sideRoadNode6Btn.setText("P");
-				sideRoadNode6Btn.setFont(Font.font(0));
+				boolean purchased = purchaseSideRoad(6, sideRoadNode6Btn, inGameConsole, roadC, secondStagePlayer);
+
+				if (purchased && secondStagePlayer.getGameBoard().goToTile(5).getResearch().isOwned())
+				{
+					researchNode6Btn.setDisable(false);
+				}
 			}
 		});
 		// -------------------------------------------------------------------------------------------------------------------------
@@ -725,7 +725,7 @@ public class SecondStage extends Stage
 				purchaseDome(6, domeNode6Btn, inGameConsole, dome6C, secondStagePlayer);
 			}
 		});
-		// -----------------------------------------------------
+		// ------------------------------------------------------------------------------------------------------------------------
 
 		// RESEARCH STATIONS
 		// -----------------------------------------------------
@@ -743,12 +743,12 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				researchNode1Btn.setGraphic(new ImageView(research1C));
-				inGameConsole.appendText("You purchased research station 1\n");
-				score += 4;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				researchNode1Btn.setText("P");
-				researchNode1Btn.setFont(Font.font(0));
+				boolean purchased = purchaseResearch(1, researchNode1Btn, inGameConsole, research1C, secondStagePlayer);
+
+				if (purchased && secondStagePlayer.getGameBoard().goToTile(2).getSideRoad().isOwned())
+				{
+					researchNode2Btn.setDisable(false);
+				}
 			}
 		});
 		// -----------------------------------------------------
@@ -768,12 +768,12 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				researchNode2Btn.setGraphic(new ImageView(research2C));
-				inGameConsole.appendText("You purchased research station 2\n");
-				score += 8;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				researchNode2Btn.setText("P");
-				researchNode2Btn.setFont(Font.font(0));
+				boolean purchased = purchaseResearch(2, researchNode2Btn, inGameConsole, research2C, secondStagePlayer);
+
+				if (purchased && secondStagePlayer.getGameBoard().goToTile(3).getSideRoad().isOwned())
+				{
+					researchNode3Btn.setDisable(false);
+				}
 			}
 		});
 		// -----------------------------------------------------
@@ -793,12 +793,12 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				researchNode3Btn.setGraphic(new ImageView(research3C));
-				inGameConsole.appendText("You purchased research station 3\n");
-				score += 12;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				researchNode3Btn.setText("P");
-				researchNode3Btn.setFont(Font.font(0));
+				boolean purchased = purchaseResearch(3, researchNode3Btn, inGameConsole, research3C, secondStagePlayer);
+
+				if (purchased && secondStagePlayer.getGameBoard().goToTile(4).getSideRoad().isOwned())
+				{
+					researchNode4Btn.setDisable(false);
+				}
 			}
 		});
 		// -----------------------------------------------------
@@ -818,12 +818,12 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				researchNode4Btn.setGraphic(new ImageView(research4C));
-				inGameConsole.appendText("You purchased research station 4\n");
-				score += 16;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				researchNode4Btn.setText("P");
-				researchNode4Btn.setFont(Font.font(0));
+				boolean purchased = purchaseResearch(4, researchNode4Btn, inGameConsole, research4C, secondStagePlayer);
+
+				if (purchased && secondStagePlayer.getGameBoard().goToTile(5).getSideRoad().isOwned())
+				{
+					researchNode5Btn.setDisable(false);
+				}
 			}
 		});
 		// -----------------------------------------------------
@@ -843,12 +843,12 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				researchNode5Btn.setGraphic(new ImageView(research5C));
-				inGameConsole.appendText("You purchased research station 5\n");
-				score += 20;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				researchNode5Btn.setText("P");
-				researchNode5Btn.setFont(Font.font(0));
+				boolean purchased = purchaseResearch(5, researchNode5Btn, inGameConsole, research5C, secondStagePlayer);
+
+				if (purchased && secondStagePlayer.getGameBoard().goToTile(6).getSideRoad().isOwned())
+				{
+					researchNode6Btn.setDisable(false);
+				}
 			}
 		});
 		// -----------------------------------------------------
@@ -868,12 +868,8 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(MouseEvent e)
 			{
-				researchNode6Btn.setGraphic(new ImageView(research6C));
-				inGameConsole.appendText("You purchased research station 6\n");
-				score += 24;
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
-				researchNode6Btn.setText("P");
-				researchNode6Btn.setFont(Font.font(0));
+				purchaseResearch(6, researchNode6Btn, inGameConsole, research6C, secondStagePlayer);
+				
 			}
 		});
 		// -----------------------------------------------------
@@ -1025,7 +1021,8 @@ public class SecondStage extends Stage
 				{
 
 					// do nothing
-				} else
+				}
+				else
 				{
 					die1.setDieString(getDieRolls());
 					die1Button.setContentDisplay(ContentDisplay.TOP);
@@ -1036,7 +1033,8 @@ public class SecondStage extends Stage
 				{
 
 					// do nothing
-				} else
+				}
+				else
 				{
 
 					die2.setDieString(getDieRolls());
@@ -1048,7 +1046,8 @@ public class SecondStage extends Stage
 				{
 
 					// do nothing
-				} else
+				}
+				else
 				{
 					die3.setDieString(getDieRolls());
 					die3Button.setContentDisplay(ContentDisplay.TOP);
@@ -1059,7 +1058,8 @@ public class SecondStage extends Stage
 				{
 
 					// do nothing
-				} else
+				}
+				else
 				{
 					die4.setDieString(getDieRolls());
 					die4Button.setContentDisplay(ContentDisplay.TOP);
@@ -1070,7 +1070,8 @@ public class SecondStage extends Stage
 				{
 
 					// do nothing
-				} else
+				}
+				else
 				{
 					die5.setDieString(getDieRolls());
 					die5Button.setContentDisplay(ContentDisplay.TOP);
@@ -1081,7 +1082,8 @@ public class SecondStage extends Stage
 				{
 
 					// do nothing
-				} else
+				}
+				else
 				{
 					die6.setDieString(getDieRolls());
 					die6Button.setContentDisplay(ContentDisplay.TOP);
@@ -1314,13 +1316,127 @@ public class SecondStage extends Stage
 				if (check.isSelected())
 				{
 					button.setDisable(true);
-				} else
+				}
+				else
 				{
 					button.setDisable(false);
 				}
 			}
 		});
 
+	}
+
+	/******************************************************************************************************
+	 * Method to purchase a research facility
+	 * 
+	 * @author Luke Johnson
+	 * 
+	 * @param tileNum:
+	 *           corresponding tile on the game board
+	 * @param researchNodeBtn:
+	 *           corresponding research button
+	 * @param inGameConsole:
+	 *           in game output console
+	 * @param researchC:
+	 *           colored research facility image
+	 * @param player:
+	 *           player whose game board is being dealt with
+	 * 
+	 * @return: boolean value for whether the purchase was successful
+	 */
+	public static boolean purchaseResearch(int tileNum, Labeled researchNodeBtn, TextInputControl inGameConsole,
+			Image researchC, Player player)
+	{
+		boolean purchased = false;
+		Node current = player.getGameBoard().goToTile(tileNum);
+		Node next = current.getLink();
+		Resource research = current.getResearch();
+
+		if (research.isUnlocked() && !research.isOwned())// && enough stuff)
+		{
+			researchNodeBtn.setGraphic(new ImageView(researchC));
+			inGameConsole.appendText("You purchased Research Facility " + tileNum + "\n");
+			player.setScore(player.getScore() + research.getValue());
+			research.setOwned(true);
+			purchased = true;
+
+			if (next != null && next.getMainRoad().isOwned())
+			{
+				next.getResearch().setUnlocked(true);
+			}
+		}
+		else if (research.isOwned())
+		{
+			inGameConsole.appendText("You already own that.\n");
+		}
+		else if (!research.isUnlocked())
+		{
+			inGameConsole.appendText("That isn't unlocked.\n");
+		}
+		/*
+		 * else if(not enough stuff) { inGameConsole.appendText("You can't afford that.\n"); }
+		 */
+
+		return purchased;
+	}
+
+	/******************************************************************************************************
+	 * Method to purchase a side road
+	 * 
+	 * @author Luke Johnson
+	 * 
+	 * @param tileNum:
+	 *           corresponding tile on the game board
+	 * @param roadNodeBtn:
+	 *           corresponding road button
+	 * @param inGameConsole:
+	 *           in game output console
+	 * @param roadC:
+	 *           colored road image
+	 * @param player:
+	 *           player whose game board is being dealt with
+	 * 
+	 * @return: boolean value for whether the purchase was successful
+	 */
+	public static boolean purchaseSideRoad(int tileNum, Labeled roadNodeBtn, TextInputControl inGameConsole, Image roadC,
+			Player player)
+	{
+		boolean purchased = false;
+		Node current = player.getGameBoard().goToTile(tileNum);
+		Node previous = tileNum > 1 ? player.getGameBoard().goToTile(tileNum - 1) : null;
+		Resource sideRoad = current.getSideRoad();
+		Resource mainRoad = current.getMainRoad();
+
+		if (mainRoad.isOwned() && !sideRoad.isOwned())// && enough stuff)
+		{
+			roadNodeBtn.setGraphic(new ImageView(roadC));
+			inGameConsole.appendText("You purchased side road " + tileNum + " \n");
+			player.setScore(player.getScore() + sideRoad.getValue());
+			sideRoad.setOwned(true);
+			purchased = true;
+
+			if (previous != null && previous.getResearch().isOwned())
+			{
+				current.getResearch().setUnlocked(true);
+			}
+			else if (previous == null)
+			{
+				current.getResearch().setUnlocked(true);
+			}
+		}
+		else if (sideRoad.isOwned())
+		{
+			inGameConsole.appendText("You already own that.\n");
+		}
+		else if (!sideRoad.isUnlocked())
+		{
+			inGameConsole.appendText("That isn't unlocked.\n");
+		}
+		/*
+		 * else if (not enough stuff) { inGameConsole.appendText("You can't afford that.\n"); }
+		 */
+
+		return purchased;
 	}
 
 	/***************************************************************************************************
@@ -1335,6 +1451,10 @@ public class SecondStage extends Stage
 	 *           the console for output
 	 * @param roadC:
 	 *           colored road image
+	 * @param player:
+	 *           player whosed board is being dealt with
+	 * 
+	 * @return: boolean value for whether the purchase is successful
 	 */
 	public static boolean purchaseMainRoad(int tileNum, Labeled roadNodeBtn, TextInputControl inGameConsole, Image roadC,
 			Player player)
@@ -1353,7 +1473,8 @@ public class SecondStage extends Stage
 			if (previous != null && previous.getBioDome().isOwned())
 			{
 				current.getBioDome().setUnlocked(true);
-			} else if (previous == null)
+			}
+			else if (previous == null)
 			{
 				current.getBioDome().setUnlocked(true);
 			}
@@ -1363,10 +1484,12 @@ public class SecondStage extends Stage
 
 			}
 			return true;
-		} else if (current.getMainRoad().isOwned())
+		}
+		else if (current.getMainRoad().isOwned())
 		{
 			inGameConsole.appendText("You already own that\n");
-		} else if (!current.getMainRoad().isUnlocked())
+		}
+		else if (!current.getMainRoad().isUnlocked())
 		{
 			inGameConsole.appendText("That is not unlocked\n");
 		}
@@ -1391,6 +1514,7 @@ public class SecondStage extends Stage
 	 *           corresponding colored dome button
 	 * @param player:
 	 *           player whose game board is being dealt with
+	 * 
 	 * @return: boolean value for whether the purchase was successful
 	 */
 	public boolean purchaseDome(int tileNum, Labeled domeNodeBtn, TextInputControl inGameConsole, Image domeC,
@@ -1413,10 +1537,12 @@ public class SecondStage extends Stage
 			{
 				next.getBioDome().setUnlocked(true);
 			}
-		} else if (bioDome.isOwned())
+		}
+		else if (bioDome.isOwned())
 		{
 			inGameConsole.appendText("You already own that.\n");
-		} else if (!bioDome.isUnlocked())
+		}
+		else if (!bioDome.isUnlocked())
 		{
 			inGameConsole.appendText("That isn't unlocked.\n");
 		}
@@ -1462,10 +1588,12 @@ public class SecondStage extends Stage
 			{
 				current.getLink().getAstronaut().setUnlocked(true);
 			}
-		} else if (astronaut.isOwned())
+		}
+		else if (astronaut.isOwned())
 		{
 			inGameConsole.appendText("You already own that.\n");
-		} else if (!astronaut.isUnlocked())
+		}
+		else if (!astronaut.isUnlocked())
 		{
 			inGameConsole.appendText("That isn't unlocked.\n");
 		}
