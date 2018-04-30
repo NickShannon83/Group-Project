@@ -869,7 +869,7 @@ public class SecondStage extends Stage
 			public void handle(MouseEvent e)
 			{
 				purchaseResearch(6, researchNode6Btn, inGameConsole, research6C, secondStagePlayer);
-				
+
 			}
 		});
 		// -----------------------------------------------------
@@ -991,19 +991,19 @@ public class SecondStage extends Stage
 						switch (finalDice[i])
 						{
 							case "Dihydrogen Monoxide":
-								turn.setWat(turn.getWat() + 1);
+								secondStagePlayer.getTurn().setWat(turn.getWat() + 1);
 								break;
 							case "Silicon Dioxide":
-								turn.setSil(turn.getSil() + 1);
+								secondStagePlayer.getTurn().setSil(turn.getSil() + 1);
 								break;
 							case "Iron Ore":
-								turn.setOre(turn.getOre() + 1);
+								secondStagePlayer.getTurn().setOre(turn.getOre() + 1);
 								break;
 							case "Oxygen":
-								turn.setOx(turn.getOx() + 1);
+								secondStagePlayer.getTurn().setOx(turn.getOx() + 1);
 								break;
 							case "Solar Batteries":
-								turn.setSol(turn.getSol() + 1);
+								secondStagePlayer.getTurn().setSol(turn.getSol() + 1);
 								break;
 
 						}
@@ -1352,7 +1352,8 @@ public class SecondStage extends Stage
 		Node next = current.getLink();
 		Resource research = current.getResearch();
 
-		if (research.isUnlocked() && !research.isOwned())// && enough stuff)
+		if (research.isUnlocked() && !research.isOwned() && player.getTurn().getOre() == 3
+				&& player.getTurn().getSol() == 2)
 		{
 			researchNodeBtn.setGraphic(new ImageView(researchC));
 			inGameConsole.appendText("You purchased Research Facility " + tileNum + "\n");
@@ -1373,9 +1374,11 @@ public class SecondStage extends Stage
 		{
 			inGameConsole.appendText("That isn't unlocked.\n");
 		}
-		/*
-		 * else if(not enough stuff) { inGameConsole.appendText("You can't afford that.\n"); }
-		 */
+
+		else if (player.getTurn().getOre() != 3 || player.getTurn().getSol() != 2)
+		{
+			inGameConsole.appendText("You can't afford that.\n");
+		}
 
 		return purchased;
 	}
@@ -1407,7 +1410,7 @@ public class SecondStage extends Stage
 		Resource sideRoad = current.getSideRoad();
 		Resource mainRoad = current.getMainRoad();
 
-		if (mainRoad.isOwned() && !sideRoad.isOwned())// && enough stuff)
+		if (mainRoad.isOwned() && !sideRoad.isOwned() && player.getTurn().getSil() > 0 && player.getTurn().getOx() > 0)
 		{
 			roadNodeBtn.setGraphic(new ImageView(roadC));
 			inGameConsole.appendText("You purchased side road " + tileNum + " \n");
@@ -1432,9 +1435,11 @@ public class SecondStage extends Stage
 		{
 			inGameConsole.appendText("That isn't unlocked.\n");
 		}
-		/*
-		 * else if (not enough stuff) { inGameConsole.appendText("You can't afford that.\n"); }
-		 */
+
+		else if (player.getTurn().getSil() < 1 || player.getTurn().getOx() < 1)
+		{
+			inGameConsole.appendText("You can't afford that.\n");
+		}
 
 		return purchased;
 	}
@@ -1462,12 +1467,15 @@ public class SecondStage extends Stage
 		Node current = player.getGameBoard().goToTile(tileNum);
 		Node previous = tileNum > 1 ? player.getGameBoard().goToTile(tileNum - 1) : null;
 		Resource mainRoad = current.getMainRoad();
-
-		if (mainRoad.isUnlocked() && !mainRoad.isOwned())// && enough stuff)
+		// System.out.println(player.getTurn().toString());
+		if (mainRoad.isUnlocked() && !mainRoad.isOwned()
+				&& player.getTurn().getSil() > 0 && player.getTurn().getOx() > 0)
 		{
 			roadNodeBtn.setGraphic(new ImageView(roadC));
 			inGameConsole.appendText("You purchased main road " + tileNum + " \n");
 			player.setScore(player.getScore() + 1);
+			player.getTurn().setSil(player.getTurn().getSil() - 1);
+			player.getTurn().setOx(player.getTurn().getOx() - 1);
 			mainRoad.setOwned(true);
 			current.getSideRoad().setUnlocked(true);
 			if (previous != null && previous.getBioDome().isOwned())
@@ -1493,9 +1501,12 @@ public class SecondStage extends Stage
 		{
 			inGameConsole.appendText("That is not unlocked\n");
 		}
-		/*
-		 * else if(!enoughStuff) { inGameConsole.appendText("You can't afford that"); }
-		 */
+
+		else if (player.getTurn().getSil() < 1 || player.getTurn().getOx() < 1)
+		{
+			inGameConsole.appendText("You can't afford that\n");
+		}
+
 		return false;
 	}
 
@@ -1525,11 +1536,16 @@ public class SecondStage extends Stage
 		Resource bioDome = current.getBioDome();
 		boolean purchased = false;
 
-		if (bioDome.isUnlocked() && !bioDome.isOwned())// && enough stuff)
+		if (bioDome.isUnlocked() && !bioDome.isOwned() && (player.getTurn().getSil() > 0 && player.getTurn().getOx() > 0
+				&& player.getTurn().getWat() > 0 && player.getTurn().getSol() > 0))
 		{
 			domeNodeBtn.setGraphic(new ImageView(domeC));
 			inGameConsole.appendText("You purchased Bio-dome " + tileNum + "\n");
 			player.setScore(player.getScore() + bioDome.getValue());
+			player.getTurn().setWat(player.getTurn().getWat() - 1);
+			player.getTurn().setOx(player.getTurn().getOx() - 1);
+			player.getTurn().setSol(player.getTurn().getSol() - 1);
+			player.getTurn().setSil(player.getTurn().getSil() - 1);
 			bioDome.setOwned(true);
 			purchased = true;
 
@@ -1546,9 +1562,13 @@ public class SecondStage extends Stage
 		{
 			inGameConsole.appendText("That isn't unlocked.\n");
 		}
-		/*
-		 * else if(not enough stuff) { inGameConsole.appendText("You can't afford that.\n"); }
-		 */
+
+		else if (player.getTurn().getSil() < 1 || player.getTurn().getOx() < 1 || player.getTurn().getWat() < 1
+				|| player.getTurn().getSol() < 1)
+		{
+			inGameConsole.appendText("You can't afford that.\n");
+		}
+
 		return purchased;
 	}
 
@@ -1576,10 +1596,11 @@ public class SecondStage extends Stage
 		Resource astronaut = current.getAstronaut();
 		boolean purchased = false;
 
-		if (astronaut.isUnlocked() && !astronaut.isOwned())// && enough stuff)
+		if (astronaut.isUnlocked() && !astronaut.isOwned() && player.getTurn().getWat() > 0
+				&& player.getTurn().getSol() > 0 && player.getTurn().getOre() > 0)
 		{
 			astroNodeBtn.setGraphic(new ImageView(astroC));
-			inGameConsole.appendText(tileNum == 6 ? ("You've purchased Mark Watney,\n the space pirate!")
+			inGameConsole.appendText(tileNum == 6 ? ("You've purchased Mark Watney,\nthe space pirate!\n")
 					: ("You purchased" + " astronaut " + tileNum + " \n"));
 			player.setScore(player.getScore() + current.getAstronaut().getValue());
 			astronaut.setOwned(true);
@@ -1597,9 +1618,12 @@ public class SecondStage extends Stage
 		{
 			inGameConsole.appendText("That isn't unlocked.\n");
 		}
-		/*
-		 * else if(not enough stuff) { inGameConsole.appendText("You can't afford that"); }
-		 */
+
+		else if (player.getTurn().getWat() < 1 || player.getTurn().getSol() < 1 || player.getTurn().getOre() < 1)
+		{
+			inGameConsole.appendText("You can't afford that\n");
+		}
+
 		return purchased;
 	}
 
