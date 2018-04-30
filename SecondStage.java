@@ -144,6 +144,10 @@ public class SecondStage extends Stage
 		Button astroNode4Btn = new Button();
 		Button astroNode5Btn = new Button();
 		Button astroNode6Btn = new Button();
+		Button endTurn = new Button();
+		endTurn.setText(" End Turn ");
+		endTurn.setTranslateX(310);
+		endTurn.setTranslateY(420);
 
 		// MAIN ROADS
 		// -----------------------------------------------------
@@ -988,6 +992,7 @@ public class SecondStage extends Stage
 					}
 					for (int i = 0; i < finalDice.length; i++)
 					{
+						System.out.println(finalDice[i]);
 						switch (finalDice[i])
 						{
 							case "Dihydrogen Monoxide":
@@ -1008,7 +1013,7 @@ public class SecondStage extends Stage
 
 						}
 					}
-					turn.toString();
+					//turn.toString();
 					d1Check.setSelected(true);
 					d2Check.setSelected(true);
 					d3Check.setSelected(true);
@@ -1101,6 +1106,7 @@ public class SecondStage extends Stage
 			@Override
 			public void handle(ActionEvent event)
 			{
+
 				commit.setDisable(true);
 				rollButton.setDisable(true);
 				d1Check.setSelected(true);
@@ -1124,27 +1130,57 @@ public class SecondStage extends Stage
 					switch (finalDice[i])
 					{
 						case "Dihydrogen Monoxide":
-							turn.setWat(turn.getWat() + 1);
+							secondStagePlayer.getTurn().setWat(turn.getWat() + 1);
 							break;
 						case "Silicon Dioxide":
-							turn.setSil(turn.getSil() + 1);
+							secondStagePlayer.getTurn().setSil(turn.getSil() + 1);
 							break;
 						case "Iron Ore":
-							turn.setOre(turn.getOre() + 1);
+							secondStagePlayer.getTurn().setOre(turn.getOre() + 1);
 							break;
 						case "Oxygen":
-							turn.setOx(turn.getOx() + 1);
+							secondStagePlayer.getTurn().setOx(turn.getOx() + 1);
 							break;
 						case "Solar Batteries":
-							turn.setSol(turn.getSol() + 1);
+							secondStagePlayer.getTurn().setSol(turn.getSol() + 1);
 							break;
-
 					}
 				}
 				turn.toString();
 			}
-
 		});
+
+		endTurn.setOnMouseClicked(new EventHandler<MouseEvent>()
+      {
+          @Override
+          public void handle(MouseEvent e)
+          {
+              secondStagePlayer.getTurn().setOre ( 0 );
+              secondStagePlayer.getTurn().setOx ( 0 );
+              secondStagePlayer.getTurn().setSil ( 0 );
+              secondStagePlayer.getTurn().setSol ( 0 );
+              secondStagePlayer.getTurn().setWat ( 0 );
+              turnNum++;
+              inGameConsole.appendText("Starting Turn num " + turnNum + "\n");
+              die1Button.setGraphic(null);
+              die2Button.setGraphic(null);
+              die3Button.setGraphic(null);
+              die4Button.setGraphic(null);
+              die5Button.setGraphic(null);
+              die6Button.setGraphic(null);
+              d1Check.setSelected ( false );
+              d2Check.setSelected ( false );
+              d3Check.setSelected ( false );
+              d4Check.setSelected ( false );
+              d5Check.setSelected ( false );
+              d6Check.setSelected ( false );
+              commit.setDisable ( false );
+              rollButton.setDisable ( false );
+              rollCount = 3;
+              count.setText("Rolls left " + (--rollCount));
+
+          }
+      });
 
 		// purchase (player1);
 
@@ -1203,6 +1239,7 @@ public class SecondStage extends Stage
 		root.getChildren().add(commit);
 		root.getChildren().add(count);
 		root.setVisible(true);
+		root.getChildren().add(endTurn);
 
 		secondaryStage.setTitle(playerName + "'s Martian Colony"); // Set the stage title
 		secondaryStage.setScene(scene); // Place the scene in the stage
@@ -1468,8 +1505,7 @@ public class SecondStage extends Stage
 		Node previous = tileNum > 1 ? player.getGameBoard().goToTile(tileNum - 1) : null;
 		Resource mainRoad = current.getMainRoad();
 		// System.out.println(player.getTurn().toString());
-		if (mainRoad.isUnlocked() && !mainRoad.isOwned()
-				&& player.getTurn().getSil() > 0 && player.getTurn().getOx() > 0)
+		if (mainRoad.isUnlocked() && !mainRoad.isOwned() && player.getTurn().getSil() > 0 && player.getTurn().getOx() > 0)
 		{
 			roadNodeBtn.setGraphic(new ImageView(roadC));
 			inGameConsole.appendText("You purchased main road " + tileNum + " \n");
@@ -1535,7 +1571,7 @@ public class SecondStage extends Stage
 		Node next = current.getLink();
 		Resource bioDome = current.getBioDome();
 		boolean purchased = false;
-
+		System.out.println(player.getTurn().toString());
 		if (bioDome.isUnlocked() && !bioDome.isOwned() && (player.getTurn().getSil() > 0 && player.getTurn().getOx() > 0
 				&& player.getTurn().getWat() > 0 && player.getTurn().getSol() > 0))
 		{
@@ -1658,6 +1694,7 @@ public class SecondStage extends Stage
 	}
 
 	static Scanner input = new Scanner(System.in);
+
 	/*********************************************************************
 	 * Method to purchase a resource
 	 * 
