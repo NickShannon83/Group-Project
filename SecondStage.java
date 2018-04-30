@@ -996,19 +996,19 @@ public class SecondStage extends Stage
 						switch (finalDice[i])
 						{
 							case "Dihydrogen Monoxide":
-								secondStagePlayer.getTurn().setWat(turn.getWat() + 1);
+								secondStagePlayer.getTurn().setWat(secondStagePlayer.getTurn().getWat() + 1);
 								break;
 							case "Silicon Dioxide":
-								secondStagePlayer.getTurn().setSil(turn.getSil() + 1);
+								secondStagePlayer.getTurn().setSil(secondStagePlayer.getTurn().getSil() + 1);
 								break;
 							case "Iron Ore":
-								secondStagePlayer.getTurn().setOre(turn.getOre() + 1);
+								secondStagePlayer.getTurn().setOre(secondStagePlayer.getTurn().getOre() + 1);
 								break;
 							case "Oxygen":
-								secondStagePlayer.getTurn().setOx(turn.getOx() + 1);
+								secondStagePlayer.getTurn().setOx(secondStagePlayer.getTurn().getOx() + 1);
 								break;
 							case "Solar Batteries":
-								secondStagePlayer.getTurn().setSol(turn.getSol() + 1);
+								secondStagePlayer.getTurn().setSol(secondStagePlayer.getTurn().getSol() + 1);
 								break;
 
 						}
@@ -1099,7 +1099,7 @@ public class SecondStage extends Stage
 
 		});
 
-		Turn turn = new Turn();
+		//Turn turn = new Turn();
 		commit.setOnAction(new EventHandler<ActionEvent>()
 		{
 
@@ -1130,23 +1130,23 @@ public class SecondStage extends Stage
 					switch (finalDice[i])
 					{
 						case "Dihydrogen Monoxide":
-							secondStagePlayer.getTurn().setWat(turn.getWat() + 1);
+							secondStagePlayer.getTurn().setWat(secondStagePlayer.getTurn().getWat() + 1);
 							break;
 						case "Silicon Dioxide":
-							secondStagePlayer.getTurn().setSil(turn.getSil() + 1);
+							secondStagePlayer.getTurn().setSil(secondStagePlayer.getTurn().getSil() + 1);
 							break;
 						case "Iron Ore":
-							secondStagePlayer.getTurn().setOre(turn.getOre() + 1);
+							secondStagePlayer.getTurn().setOre(secondStagePlayer.getTurn().getOre() + 1);
 							break;
 						case "Oxygen":
-							secondStagePlayer.getTurn().setOx(turn.getOx() + 1);
+							secondStagePlayer.getTurn().setOx(secondStagePlayer.getTurn().getOx() + 1);
 							break;
 						case "Solar Batteries":
-							secondStagePlayer.getTurn().setSol(turn.getSol() + 1);
+							secondStagePlayer.getTurn().setSol(secondStagePlayer.getTurn().getSol() + 1);
 							break;
 					}
 				}
-				turn.toString();
+				secondStagePlayer.getTurn().toString();
 			}
 		});
 
