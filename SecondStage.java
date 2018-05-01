@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 import javafx.beans.value.ChangeListener;
@@ -101,7 +102,7 @@ public class SecondStage extends Stage
 		Text turnScore = new Text();
 		turnScore.setCache(true);
 		turnScore.setTranslateY(-325);
-		turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
+		turnScore.setText("Turn: " + secondStagePlayer.getTurnNum ( ) + "\tScore: " + secondStagePlayer.getScore ( ));
 		turnScore.setFont(Font.font(null, 35));
 
 		// Text area for in game console-type output
@@ -146,7 +147,7 @@ public class SecondStage extends Stage
 		Button astroNode6Btn = new Button();
 		Button endTurn = new Button();
 		endTurn.setText(" End Turn ");
-		endTurn.setTranslateX(310);
+		endTurn.setTranslateX(350);
 		endTurn.setTranslateY(420);
 
 		// MAIN ROADS
@@ -166,7 +167,7 @@ public class SecondStage extends Stage
 			{
 
 				boolean purchased = purchaseMainRoad(1, roadNode1Btn, inGameConsole, roadC, secondStagePlayer);
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
+				turnScore.setText("Turn: " + turnNum + "\tScore: " +  secondStagePlayer.getScore ( ));
 
 				if (purchased)
 				{
@@ -195,7 +196,7 @@ public class SecondStage extends Stage
 
 				boolean purchased = purchaseMainRoad(2, roadNode2Btn, inGameConsole, roadC, secondStagePlayer);
 
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
+				turnScore.setText("Turn: " + turnNum + "\tScore: " + secondStagePlayer.getScore ( ));
 
 				if (purchased)
 				{
@@ -222,7 +223,7 @@ public class SecondStage extends Stage
 			public void handle(MouseEvent e)
 			{
 				boolean purchased = purchaseMainRoad(3, roadNode3Btn, inGameConsole, roadC, secondStagePlayer);
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
+				turnScore.setText("Turn: " + turnNum + "\tScore: " +  secondStagePlayer.getScore ( ));
 
 				if (purchased)
 				{
@@ -249,7 +250,7 @@ public class SecondStage extends Stage
 			public void handle(MouseEvent e)
 			{
 				boolean purchased = purchaseMainRoad(4, roadNode4Btn, inGameConsole, roadC, secondStagePlayer);
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
+				turnScore.setText("Turn: " + turnNum + "\tScore: " +  secondStagePlayer.getScore ( ));
 
 				if (purchased)
 				{
@@ -276,7 +277,7 @@ public class SecondStage extends Stage
 			public void handle(MouseEvent e)
 			{
 				boolean purchased = purchaseMainRoad(5, roadNode5Btn, inGameConsole, roadC, secondStagePlayer);
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
+				turnScore.setText("Turn: " + turnNum + "\tScore: " +  secondStagePlayer.getScore ( ));
 
 				if (purchased)
 				{
@@ -301,7 +302,7 @@ public class SecondStage extends Stage
 			public void handle(MouseEvent e)
 			{
 				boolean purchased = purchaseMainRoad(6, roadNode6Btn, inGameConsole, roadC, secondStagePlayer);
-				turnScore.setText("Turn: " + turnNum + "\tScore: " + score);
+				turnScore.setText("Turn: " + turnNum + "\tScore: " +  secondStagePlayer.getScore ( ));
 
 				if (purchased)
 				{
@@ -950,7 +951,7 @@ public class SecondStage extends Stage
 
 		Button commit = new Button();
 		commit.setText(" Spend ");
-		commit.setTranslateX(280);
+		commit.setTranslateX(250);
 		commit.setTranslateY(420);
 
 		String[] finalDice = new String[6];
@@ -1160,8 +1161,8 @@ public class SecondStage extends Stage
               secondStagePlayer.getTurn().setSil ( 0 );
               secondStagePlayer.getTurn().setSol ( 0 );
               secondStagePlayer.getTurn().setWat ( 0 );
-              turnNum++;
-              inGameConsole.appendText("Starting Turn num " + turnNum + "\n");
+              secondStagePlayer.setTurnNum (secondStagePlayer.getTurnNum ( )+1 );
+              inGameConsole.appendText("Starting Turn number " + secondStagePlayer.getTurnNum ( ) + "\n");
               die1Button.setGraphic(null);
               die2Button.setGraphic(null);
               die3Button.setGraphic(null);
@@ -1177,7 +1178,8 @@ public class SecondStage extends Stage
               commit.setDisable ( false );
               rollButton.setDisable ( false );
               rollCount = 3;
-              count.setText("Rolls left " + (--rollCount));
+              count.setText("Rolls left " + rollCount);
+              turnScore.setText("Turn: " + secondStagePlayer.getTurnNum ( ) + "\tScore: " +  secondStagePlayer.getScore ( ));
 
           }
       });
