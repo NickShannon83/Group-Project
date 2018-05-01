@@ -11,6 +11,7 @@ public class Player
 	private Turn turn; // a turn for a player that stores their dice roll
 	private int score; // player's score
 	private String name; // The players name
+	private int turnNum;
 
 	/***********************************************************************************
 	 * Default and only constructor for Player
@@ -29,7 +30,10 @@ public class Player
 		this.score = 0;
 		this.turn = new Turn ( );
 		this.name = name;
+		this.turnNum = 1;
 	}
+
+
 
 	/***********************************************************************************
 	 * Method used to determine whether a player is able to make a purchase
@@ -91,6 +95,15 @@ public class Player
 	public void setName( String name )
 	{
 		this.name = name;
+	}
+	public int getTurnNum( )
+	{
+		return turnNum;
+	}
+
+	public void setTurnNum( int turnNum )
+	{
+		this.turnNum = turnNum;
 	}
 
 }
