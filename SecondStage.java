@@ -1642,6 +1642,9 @@ public class SecondStage extends Stage
 					: ("You purchased" + " astronaut " + tileNum + " \n"));
 			player.setScore(player.getScore() + current.getAstronaut().getValue());
 			astronaut.setOwned(true);
+			player.getTurn().setWat(player.getTurn().getWat() - 1);
+			player.getTurn().setOre(player.getTurn().getOre() - 1);
+			player.getTurn().setSol(player.getTurn().getSol() - 1);
 			purchased = true;
 			if (current.getLink() != null)
 			{
