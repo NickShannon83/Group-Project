@@ -105,7 +105,6 @@ public class GUI extends Application
 				else
 				{
 					String playerName = name.getText ( );
-					//Player player1 = new Player()
 					SecondStage playerWindow = new SecondStage ( playerName );
 					playerWindow.start ( playerWindow );
 					primaryStage.close ( );
@@ -196,7 +195,7 @@ public class GUI extends Application
 
 	}
 
-	// work in progress for the highscores output
+	// Highscores method
 
 	public static String highScores( int loc ) throws FileNotFoundException
 	{
