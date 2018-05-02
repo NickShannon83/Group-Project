@@ -113,6 +113,7 @@ public class SecondStage extends Stage
 		inGameConsole.setMaxWidth(425);
 		inGameConsole.setMaxHeight(1000);
 		inGameConsole.setTranslateX(750);
+		inGameConsole.appendText("Starting turn number 1\n");
 
 		// Button Nodes
 		Button roadNode1Btn = new Button();
@@ -147,7 +148,7 @@ public class SecondStage extends Stage
 		Button astroNode6Btn = new Button();
 		Button endTurn = new Button();
 		endTurn.setText(" End Turn ");
-		endTurn.setTranslateX(350);
+		endTurn.setTranslateX(320);
 		endTurn.setTranslateY(420);
 
 		// MAIN ROADS
@@ -951,7 +952,7 @@ public class SecondStage extends Stage
 
 		Button commit = new Button();
 		commit.setText(" Spend ");
-		commit.setTranslateX(250);
+		commit.setTranslateX(225);
 		commit.setTranslateY(420);
 
 		String[] finalDice = new String[6];
@@ -966,7 +967,7 @@ public class SecondStage extends Stage
 
 		Button rollButton = new Button();
 		rollButton.setText(" Roll Dice ");
-		rollButton.setTranslateX(160);
+		rollButton.setTranslateX(130);
 		rollButton.setTranslateY(420);
 		commit.setDisable(true);
 		rollButton.setOnAction(new EventHandler<ActionEvent>()
@@ -1163,7 +1164,7 @@ public class SecondStage extends Stage
               secondStagePlayer.getTurn().setSol ( 0 );
               secondStagePlayer.getTurn().setWat ( 0 );
               secondStagePlayer.setTurnNum (secondStagePlayer.getTurnNum ( )+1 );
-              inGameConsole.appendText("Starting Turn number " + secondStagePlayer.getTurnNum ( ) + "\n");
+              inGameConsole.appendText("Starting turn number " + secondStagePlayer.getTurnNum ( ) + "\n");
               die1Button.setGraphic(null);
               die2Button.setGraphic(null);
               die3Button.setGraphic(null);
