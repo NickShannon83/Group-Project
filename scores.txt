@@ -1,4 +1,4 @@
-Sally Ride
+Nick Sucks
 10
 Margaret Hamilton
 9
@@ -6,7 +6,7 @@ Mae Jemison
 8
 Nancy Roman
 7
-Tony Stark
+Elon Musk
 6
 Wade Wilson
 5
@@ -18,4 +18,3 @@ Jason Bourne
 2
 Pizza Steve
 1
-
