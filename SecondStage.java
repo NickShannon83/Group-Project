@@ -977,52 +977,7 @@ public class SecondStage extends Stage
 			{
 				commit.setDisable(false);
 				count.setText("Rolls left " + (--rollCount));
-				if (rollCount == 0)
-				{
-					rollButton.setDisable(true);
-					Turn turn = new Turn();
-					finalDice[0] = die1.getDieString();
-					finalDice[1] = die2.getDieString();
-					finalDice[2] = die3.getDieString();
-					finalDice[3] = die4.getDieString();
-					finalDice[4] = die5.getDieString();
-					finalDice[5] = die6.getDieString();
-					for (int i = 0; i < finalDice.length; i++)
-					{
-						System.out.println(finalDice[i]);
-					}
-					for (int i = 0; i < finalDice.length; i++)
-					{
-						System.out.println(finalDice[i]);
-						switch (finalDice[i])
-						{
-							case "Dihydrogen Monoxide":
-								secondStagePlayer.getTurn().setWat(secondStagePlayer.getTurn().getWat() + 1);
-								break;
-							case "Silicon Dioxide":
-								secondStagePlayer.getTurn().setSil(secondStagePlayer.getTurn().getSil() + 1);
-								break;
-							case "Iron Ore":
-								secondStagePlayer.getTurn().setOre(secondStagePlayer.getTurn().getOre() + 1);
-								break;
-							case "Oxygen":
-								secondStagePlayer.getTurn().setOx(secondStagePlayer.getTurn().getOx() + 1);
-								break;
-							case "Solar Batteries":
-								secondStagePlayer.getTurn().setSol(secondStagePlayer.getTurn().getSol() + 1);
-								break;
-
-						}
-					}
-					//turn.toString();
-					d1Check.setSelected(true);
-					d2Check.setSelected(true);
-					d3Check.setSelected(true);
-					d4Check.setSelected(true);
-					d5Check.setSelected(true);
-					d6Check.setSelected(true);
-					commit.setDisable(true);
-				}
+		
 				if (die1Button.isDisable())
 				{
 
@@ -1095,6 +1050,52 @@ public class SecondStage extends Stage
 					die6Button.setContentDisplay(ContentDisplay.TOP);
 					getImage(die6, die6Button);
 					// die6Button.setText ( die6.getDieString ( ) );
+				}
+				if (rollCount == 0)
+				{
+					rollButton.setDisable(true);
+					Turn turn = new Turn();
+					finalDice[0] = die1.getDieString();
+					finalDice[1] = die2.getDieString();
+					finalDice[2] = die3.getDieString();
+					finalDice[3] = die4.getDieString();
+					finalDice[4] = die5.getDieString();
+					finalDice[5] = die6.getDieString();
+					for (int i = 0; i < finalDice.length; i++)
+					{
+						System.out.println(finalDice[i]);
+					}
+					for (int i = 0; i < finalDice.length; i++)
+					{
+						System.out.println(finalDice[i]);
+						switch (finalDice[i])
+						{
+							case "Dihydrogen Monoxide":
+								secondStagePlayer.getTurn().setWat(secondStagePlayer.getTurn().getWat() + 1);
+								break;
+							case "Silicon Dioxide":
+								secondStagePlayer.getTurn().setSil(secondStagePlayer.getTurn().getSil() + 1);
+								break;
+							case "Iron Ore":
+								secondStagePlayer.getTurn().setOre(secondStagePlayer.getTurn().getOre() + 1);
+								break;
+							case "Oxygen":
+								secondStagePlayer.getTurn().setOx(secondStagePlayer.getTurn().getOx() + 1);
+								break;
+							case "Solar Batteries":
+								secondStagePlayer.getTurn().setSol(secondStagePlayer.getTurn().getSol() + 1);
+								break;
+
+						}
+					}
+					//turn.toString();
+					d1Check.setSelected(true);
+					d2Check.setSelected(true);
+					d3Check.setSelected(true);
+					d4Check.setSelected(true);
+					d5Check.setSelected(true);
+					d6Check.setSelected(true);
+					commit.setDisable(true);
 				}
 			}
 
