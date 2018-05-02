@@ -1,5 +1,5 @@
 Nick Sucks
-10
+100
 Margaret Hamilton
 9
 Mae Jemison
@@ -18,3 +18,5 @@ Jason Bourne
 2
 Pizza Steve
 1
+Jared
+46
