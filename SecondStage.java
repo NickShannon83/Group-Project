@@ -1498,7 +1498,7 @@ public class SecondStage extends Stage
 			inGameConsole.appendText ( "That isn't unlocked.\n" );
 		}
 
-		else if ( player.getTurn ( ).getOre ( ) != 3 || player.getTurn ( ).getSol ( ) != 2 )
+		else if ( player.getTurn ( ).getOre ( ) < 3 || player.getTurn ( ).getSol ( ) < 2 )
 		{
 			inGameConsole.appendText ( "You can't afford that.\n" );
 		}
