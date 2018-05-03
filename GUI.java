@@ -126,7 +126,7 @@ public class GUI extends Application
 		score1.setFont ( Font.font ( null, 35 ) );
 		Text score2 = new Text ( );
 		score2.setFill ( Color.YELLOW );
-		score1.setTranslateY ( 50 );
+		score2.setTranslateY ( 55 );
 		score2.setText ( highScores ( 1 ) );
 		score2.setFont ( Font.font ( null, 35 ) );
 		Text score3 = new Text ( );
@@ -197,13 +197,11 @@ public class GUI extends Application
 
 	// Highscores method
 
-	public static String highScores( int loc ) throws FileNotFoundException
+	public static void fillArray(ArrayList<HighScores> leaderBoard) throws FileNotFoundException
 	{
 		java.io.File inFile;
 		inFile = new java.io.File ( "scores.txt" );
 		Scanner input = new Scanner ( inFile );
-		ArrayList<HighScores> leaderBoard = new ArrayList<HighScores> ( );
-
 		while ( input.hasNext ( ) )
 		{
 			String name = input.nextLine ( );
@@ -212,6 +210,11 @@ public class GUI extends Application
 			leaderBoard.add ( new HighScores ( name, score ) );
 		}
 		Collections.sort ( leaderBoard, new SortByScore ( ) );
+	}
+
+	public static String highScores(ArrayList<HighScores> leaderBoard, int loc) throws FileNotFoundException
+	{
+		
 		String names = leaderBoard.get ( loc ).getPlayerName ( );
 		String score = Integer.toString ( leaderBoard.get ( loc ).getScore ( ) );
 		String topScore = ( names + "\t" + score );
@@ -226,9 +229,3 @@ class SortByScore implements Comparator<HighScores>
 		return b.getScore ( ) - a.getScore ( );
 	}
 }
-
-
-
-
-
-
