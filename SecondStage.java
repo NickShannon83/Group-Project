@@ -1498,7 +1498,7 @@ public class SecondStage extends Stage
 			inGameConsole.appendText ( "That isn't unlocked.\n" );
 		}
 
-		else if ( player.getTurn ( ).getOre ( ) < 3 || player.getTurn ( ).getSol ( ) < 2 )
+		else if ( player.getTurn ( ).getOre ( ) != 3 || player.getTurn ( ).getSol ( ) != 2 )
 		{
 			inGameConsole.appendText ( "You can't afford that.\n" );
 		}
@@ -1532,6 +1532,7 @@ public class SecondStage extends Stage
 		Node previous = tileNum > 1 ? player.getGameBoard ( ).goToTile ( tileNum - 1 ) : null;
 		Resource sideRoad = current.getSideRoad ( );
 		Resource mainRoad = current.getMainRoad ( );
+		
 
 		if ( mainRoad.isOwned ( ) && !sideRoad.isOwned ( ) && player.getTurn ( ).getSil ( ) > 0
 				&& player.getTurn ( ).getOx ( ) > 0 )
@@ -1540,6 +1541,8 @@ public class SecondStage extends Stage
 			inGameConsole.appendText ( "You purchased side road " + tileNum + " \n" );
 			player.setScore ( player.getScore ( ) + sideRoad.getValue ( ) );
 			sideRoad.setOwned ( true );
+			player.getTurn ( ).setSil ( player.getTurn ( ).getSil ( ) - 1 );
+			player.getTurn ( ).setOx ( player.getTurn ( ).getOx ( ) - 1 );
 			purchased = true;
 
 			if ( previous != null && previous.getResearch ( ).isOwned ( ) )
