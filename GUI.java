@@ -221,8 +221,6 @@ public class GUI extends Application
 
 class SortByScore implements Comparator<HighScores>
 {
-	// Used for sorting in ascending order of
-	// roll number
 	public int compare( HighScores a, HighScores b )
 	{
 		return b.getScore ( ) - a.getScore ( );
