@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,6 +46,9 @@ public class GUI extends Application
 {
 	public static void main( String[ ] args ) throws FileNotFoundException
 	{
+		
+		//ArrayList<HighScores> leaderBoard = new ArrayList<HighScores> ( );
+		//fillArray(leaderBoard);
 		//Player player1 = new Player();
 		//initializePlayer(player1);
 		Application.launch ( args );
@@ -53,6 +58,13 @@ public class GUI extends Application
 	@Override // Override the start method in the Application class
 	public void start( Stage primaryStage) throws FileNotFoundException
 	{
+		ArrayList<HighScores> leaderBoard = new ArrayList<HighScores> ( );
+		fillArray(leaderBoard);
+		System.out.println ( "Order test" );
+		for(int i = 0; i<leaderBoard.size ( );i++)
+		{
+			System.out.println ( leaderBoard.get ( i ).getPlayerName ( ) );
+		}
 		StackPane root = new StackPane ( );
 		Scene scene = new Scene ( root, 1920, 1080 );
 		Image splash = new Image ( "Background.jpeg" );
@@ -105,6 +117,7 @@ public class GUI extends Application
 				else
 				{
 					String playerName = name.getText ( );
+					//Player player1 = new Player()
 					SecondStage playerWindow = new SecondStage ( playerName );
 					playerWindow.start ( playerWindow );
 					primaryStage.close ( );
@@ -122,52 +135,53 @@ public class GUI extends Application
 
 		Text score1 = new Text ( );
 		score1.setFill ( Color.YELLOW );
-		score1.setText ( highScores ( 0 ) );
+		//score1.setTranslateY ( 50 );
+		score1.setText ( highScores ( leaderBoard,0 ) );
 		score1.setFont ( Font.font ( null, 35 ) );
 		Text score2 = new Text ( );
 		score2.setFill ( Color.YELLOW );
 		score2.setTranslateY ( 55 );
-		score2.setText ( highScores ( 1 ) );
+		score2.setText ( highScores (leaderBoard, 1 ) );
 		score2.setFont ( Font.font ( null, 35 ) );
 		Text score3 = new Text ( );
 		score3.setFill ( Color.YELLOW );
 		score3.setTranslateY ( 100 );
-		score3.setText ( highScores ( 2 ) );
+		score3.setText ( highScores (leaderBoard, 2 ) );
 		score3.setFont ( Font.font ( null, 35 ) );
 		Text score4 = new Text ( );
 		score4.setFill ( Color.YELLOW );
 		score4.setTranslateY ( 150 );
-		score4.setText ( highScores ( 3 ) );
+		score4.setText ( highScores (leaderBoard, 3 ) );
 		score4.setFont ( Font.font ( null, 35 ) );
 		Text score5 = new Text ( );
 		score5.setFill ( Color.YELLOW );
 		score5.setTranslateY ( 200 );
-		score5.setText ( highScores ( 4 ) );
+		score5.setText ( highScores (leaderBoard, 4 ) );
 		score5.setFont ( Font.font ( null, 35 ) );
 		Text score6 = new Text ( );
 		score6.setFill ( Color.YELLOW );
 		score6.setTranslateY ( 250 );
-		score6.setText ( highScores ( 5 ) );
+		score6.setText ( highScores ( leaderBoard,5 ) );
 		score6.setFont ( Font.font ( null, 35 ) );
 		Text score7 = new Text ( );
 		score7.setFill ( Color.YELLOW );
 		score7.setTranslateY ( 300 );
-		score7.setText ( highScores ( 6 ) );
+		score7.setText ( highScores ( leaderBoard,6 ) );
 		score7.setFont ( Font.font ( null, 35 ) );
 		Text score8 = new Text ( );
 		score8.setFill ( Color.YELLOW );
 		score8.setTranslateY ( 350 );
-		score8.setText ( highScores ( 7 ) );
+		score8.setText ( highScores ( leaderBoard,7 ) );
 		score8.setFont ( Font.font ( null, 35 ) );
 		Text score9 = new Text ( );
 		score9.setFill ( Color.YELLOW );
 		score9.setTranslateY ( 400 );
-		score9.setText ( highScores ( 8 ) );
+		score9.setText ( highScores (leaderBoard, 8 ) );
 		score9.setFont ( Font.font ( null, 35 ) );
 		Text score10 = new Text ( );
 		score10.setFill ( Color.YELLOW );
 		score10.setTranslateY ( 450 );
-		score10.setText ( highScores ( 9 ) );
+		score10.setText ( highScores (leaderBoard, 9 ) );
 		score10.setFont ( Font.font ( null, 35 ) );
 
 		// Add background & buttons here-----------------------------------------------------------
@@ -195,8 +209,7 @@ public class GUI extends Application
 
 	}
 
-	// Highscores method
-
+	// work in progress for the highscores output
 	public static void fillArray(ArrayList<HighScores> leaderBoard) throws FileNotFoundException
 	{
 		java.io.File inFile;
@@ -209,7 +222,18 @@ public class GUI extends Application
 			String junk = input.nextLine ( );
 			leaderBoard.add ( new HighScores ( name, score ) );
 		}
+		System.out.println ( "pre" );
+		for(int i = 0; i<leaderBoard.size ( );i++)
+		{
+			
+			System.out.println ( leaderBoard.get ( i ).getPlayerName ( ) );
+		}
 		Collections.sort ( leaderBoard, new SortByScore ( ) );
+		System.out.println ( "post" );
+		for(int i = 0; i<leaderBoard.size ( );i++)
+		{
+			System.out.println ( leaderBoard.get ( i ).getPlayerName ( ) );
+		}
 	}
 
 	public static String highScores(ArrayList<HighScores> leaderBoard, int loc) throws FileNotFoundException
@@ -226,6 +250,14 @@ class SortByScore implements Comparator<HighScores>
 {
 	public int compare( HighScores a, HighScores b )
 	{
-		return b.getScore ( ) - a.getScore ( );
+		int score1 = a.getScore ( );
+		int score2= b.getScore ( );
+		return score2 - score1;
 	}
 }
+
+
+
+
+
+
