@@ -107,5 +107,3 @@ public class Player
 	}
 
 }
-
-// NEED TO INITIALIZE GAMEBOARD ARRAY WITH THE NODES

@@ -1,3 +1,9 @@
+/*****************************************************
+ * This class is the biggest and basically runs the whole game.
+ * @author Jared Crouse
+ * 
+ */
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,12 +40,12 @@ import javafx.stage.Stage;
 
 public class SecondStage extends Stage
 {
-	String playerName;
+	String playerName; // Players name
 	int turnNum = 1; // Turn number
 	int score = 0; // The players score
 	int rollCount = 3; // The number of die rolls per turn
-	Player secondStagePlayer;
-	boolean gameOver = false;
+	Player secondStagePlayer; // The second stage player
+	boolean gameOver = false; // gameOver boolean
 
 	// The SecondStage constructor
 	public SecondStage(String name)
@@ -49,12 +55,13 @@ public class SecondStage extends Stage
 		secondStagePlayer = new Player ( name );
 	}
 
+	// Start the secondaryStage
 	public void start( Stage secondaryStage )
 	{
 		initializePlayer ( secondStagePlayer );
 		StackPane root = new StackPane ( );
-		Scene scene = new Scene ( root, 1920, 1080 );
-		Image image = new Image ( "Player Screen White.jpg" );
+		Scene scene = new Scene ( root, 1920, 1080 ); // Window size
+		Image image = new Image ( "Player Screen White.jpg" ); // Background image
 
 		// Quit button
 		Button quit = new Button ( "Evacuate Colony" );
@@ -591,7 +598,6 @@ public class SecondStage extends Stage
 		// Dome node 1
 		Image dome1 = new Image ( getClass ( ).getResourceAsStream ( "dome1.png" ) );
 		Image dome1C = new Image ( getClass ( ).getResourceAsStream ( "dome1C.png" ) );
-		// Button domeNode1Btn = new Button ( );
 		domeNode1Btn.setGraphic ( new ImageView ( dome1 ) );
 		domeNode1Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode1Btn.setTranslateX ( -150 );
@@ -616,7 +622,6 @@ public class SecondStage extends Stage
 		// Dome node 2
 		Image dome2 = new Image ( getClass ( ).getResourceAsStream ( "dome2.png" ) );
 		Image dome2C = new Image ( getClass ( ).getResourceAsStream ( "dome2C.png" ) );
-		// Button domeNode2Btn = new Button ( );
 		domeNode2Btn.setGraphic ( new ImageView ( dome2 ) );
 		domeNode2Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode2Btn.setTranslateX ( -65 );
@@ -641,7 +646,6 @@ public class SecondStage extends Stage
 		// Dome node 3
 		Image dome3 = new Image ( getClass ( ).getResourceAsStream ( "dome3.png" ) );
 		Image dome3C = new Image ( getClass ( ).getResourceAsStream ( "dome3C.png" ) );
-		// Button domeNode3Btn = new Button ( );
 		domeNode3Btn.setGraphic ( new ImageView ( dome3 ) );
 		domeNode3Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode3Btn.setTranslateX ( 66 );
@@ -666,7 +670,6 @@ public class SecondStage extends Stage
 		// Dome node 4
 		Image dome4 = new Image ( getClass ( ).getResourceAsStream ( "dome4.png" ) );
 		Image dome4C = new Image ( getClass ( ).getResourceAsStream ( "dome4C.png" ) );
-		// Button domeNode4Btn = new Button ( );
 		domeNode4Btn.setGraphic ( new ImageView ( dome4 ) );
 		domeNode4Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode4Btn.setTranslateX ( 148 );
@@ -691,7 +694,6 @@ public class SecondStage extends Stage
 		// Dome node 5
 		Image dome5 = new Image ( getClass ( ).getResourceAsStream ( "dome5.png" ) );
 		Image dome5C = new Image ( getClass ( ).getResourceAsStream ( "dome5C.png" ) );
-		// Button domeNode5Btn = new Button ( );
 		domeNode5Btn.setGraphic ( new ImageView ( dome5 ) );
 		domeNode5Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode5Btn.setTranslateX ( 68 );
@@ -716,7 +718,6 @@ public class SecondStage extends Stage
 		// Dome node 6
 		Image dome6 = new Image ( getClass ( ).getResourceAsStream ( "dome6.png" ) );
 		Image dome6C = new Image ( getClass ( ).getResourceAsStream ( "dome6C.png" ) );
-		// Button domeNode6Btn = new Button ( );
 		domeNode6Btn.setGraphic ( new ImageView ( dome6 ) );
 		domeNode6Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		domeNode6Btn.setTranslateX ( -65 );
@@ -737,7 +738,6 @@ public class SecondStage extends Stage
 		// Research node 1
 		Image research1 = new Image ( getClass ( ).getResourceAsStream ( "research1.png" ) );
 		Image research1C = new Image ( getClass ( ).getResourceAsStream ( "research1C.png" ) );
-		// Button researchNode1Btn = new Button ( );
 		researchNode1Btn.setGraphic ( new ImageView ( research1 ) );
 		researchNode1Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode1Btn.setTranslateX ( -285 );
@@ -762,7 +762,6 @@ public class SecondStage extends Stage
 		// Research node 2
 		Image research2 = new Image ( getClass ( ).getResourceAsStream ( "research2.png" ) );
 		Image research2C = new Image ( getClass ( ).getResourceAsStream ( "research2C.png" ) );
-		// Button researchNode2Btn = new Button ( );
 		researchNode2Btn.setGraphic ( new ImageView ( research2 ) );
 		researchNode2Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode2Btn.setTranslateX ( -155 );
@@ -787,7 +786,6 @@ public class SecondStage extends Stage
 		// Research node 3
 		Image research3 = new Image ( getClass ( ).getResourceAsStream ( "research3.png" ) );
 		Image research3C = new Image ( getClass ( ).getResourceAsStream ( "research3C.png" ) );
-		// Button researchNode3Btn = new Button ( );
 		researchNode3Btn.setGraphic ( new ImageView ( research3 ) );
 		researchNode3Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode3Btn.setTranslateX ( 155 );
@@ -812,7 +810,6 @@ public class SecondStage extends Stage
 		// Research node 4
 		Image research4 = new Image ( getClass ( ).getResourceAsStream ( "research4.png" ) );
 		Image research4C = new Image ( getClass ( ).getResourceAsStream ( "research4C.png" ) );
-		// Button researchNode4Btn = new Button ( );
 		researchNode4Btn.setGraphic ( new ImageView ( research4 ) );
 		researchNode4Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode4Btn.setTranslateX ( 283 );
@@ -837,7 +834,6 @@ public class SecondStage extends Stage
 		// Research node 5
 		Image research5 = new Image ( getClass ( ).getResourceAsStream ( "research5.png" ) );
 		Image research5C = new Image ( getClass ( ).getResourceAsStream ( "research5C.png" ) );
-		// Button researchNode5Btn = new Button ( );
 		researchNode5Btn.setGraphic ( new ImageView ( research5 ) );
 		researchNode5Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode5Btn.setTranslateX ( 155 );
@@ -862,7 +858,6 @@ public class SecondStage extends Stage
 		// Research node 6
 		Image research6 = new Image ( getClass ( ).getResourceAsStream ( "research6.png" ) );
 		Image research6C = new Image ( getClass ( ).getResourceAsStream ( "research6C.png" ) );
-		// Button researchNode6Btn = new Button ( );
 		researchNode6Btn.setGraphic ( new ImageView ( research6 ) );
 		researchNode6Btn.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		researchNode6Btn.setTranslateX ( -155 );
@@ -944,11 +939,13 @@ public class SecondStage extends Stage
 		d6Check.setStyle ( "-fx-background-color: rgba(0, 0, 0, 0);" );
 		d6Check.setFont ( Font.font ( null, FontWeight.BOLD, 20 ) );
 
+		// Rolls left text
 		Text count = new Text ( "Rolls left " + rollCount );
 		count.setFont ( Font.font ( null, FontWeight.BOLD, 50 ) );
 		count.setTranslateX ( 225 );
 		count.setTranslateY ( 350 );
 
+		//Commit button to "spend" dice
 		Button commit = new Button ( );
 		commit.setText ( " Spend " );
 		commit.setTranslateX ( 225 );
@@ -964,11 +961,14 @@ public class SecondStage extends Stage
 		checkClicked ( d5Check, die5Button );
 		checkClicked ( d6Check, die6Button );
 
+		//Roll dice button
 		Button rollButton = new Button ( );
 		rollButton.setText ( " Roll Dice " );
 		rollButton.setTranslateX ( 130 );
 		rollButton.setTranslateY ( 420 );
 		commit.setDisable ( true );
+		
+		//Roll dice button event handler
 		rollButton.setOnAction ( new EventHandler<ActionEvent> ( )
 		{
 
@@ -980,7 +980,6 @@ public class SecondStage extends Stage
 
 				if ( die1Button.isDisable ( ) )
 				{
-
 					// do nothing
 				}
 				else
@@ -988,11 +987,9 @@ public class SecondStage extends Stage
 					die1.setDieString ( getDieRolls ( ) );
 					die1Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die1, die1Button );
-					// die1Button.setText ( die1.getDieString ( ) );
 				}
 				if ( die2Button.isDisable ( ) )
 				{
-
 					// do nothing
 				}
 				else
@@ -1001,11 +998,9 @@ public class SecondStage extends Stage
 					die2.setDieString ( getDieRolls ( ) );
 					die2Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die2, die2Button );
-					// die2Button.setText ( die2.getDieString ( ) );
 				}
 				if ( die3Button.isDisable ( ) )
 				{
-
 					// do nothing
 				}
 				else
@@ -1013,11 +1008,9 @@ public class SecondStage extends Stage
 					die3.setDieString ( getDieRolls ( ) );
 					die3Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die3, die3Button );
-					// die3Button.setText ( die3.getDieString ( ) );
 				}
 				if ( die4Button.isDisable ( ) )
 				{
-
 					// do nothing
 				}
 				else
@@ -1025,11 +1018,9 @@ public class SecondStage extends Stage
 					die4.setDieString ( getDieRolls ( ) );
 					die4Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die4, die4Button );
-					// die4Button.setText ( die4.getDieString ( ) );
 				}
 				if ( die5Button.isDisable ( ) )
 				{
-
 					// do nothing
 				}
 				else
@@ -1037,11 +1028,9 @@ public class SecondStage extends Stage
 					die5.setDieString ( getDieRolls ( ) );
 					die5Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die5, die5Button );
-					// die5Button.setText ( die5.getDieString ( ) );
 				}
 				if ( die6Button.isDisable ( ) )
 				{
-
 					// do nothing
 				}
 				else
@@ -1049,7 +1038,6 @@ public class SecondStage extends Stage
 					die6.setDieString ( getDieRolls ( ) );
 					die6Button.setContentDisplay ( ContentDisplay.TOP );
 					getImage ( die6, die6Button );
-					// die6Button.setText ( die6.getDieString ( ) );
 				}
 				if ( rollCount == 0 )
 				{
@@ -1088,7 +1076,6 @@ public class SecondStage extends Stage
 
 						}
 					}
-					// turn.toString();
 					d1Check.setSelected ( true );
 					d2Check.setSelected ( true );
 					d3Check.setSelected ( true );
@@ -1101,7 +1088,7 @@ public class SecondStage extends Stage
 
 		} );
 
-		// Turn turn = new Turn();
+		//Commit button event handler
 		commit.setOnAction ( new EventHandler<ActionEvent> ( )
 		{
 
@@ -1152,6 +1139,7 @@ public class SecondStage extends Stage
 			}
 		} );
 
+		//End turn button event handler
 		endTurn.setOnMouseClicked ( new EventHandler<MouseEvent> ( )
 		{
 			@Override
@@ -1250,9 +1238,7 @@ public class SecondStage extends Stage
 			}
 		} );
 
-		// purchase (player1);
-
-		// *************************************************************
+		// Dice end here ***************************************************
 
 		// Add background & buttons here-----------------------------------------------------------
 		root.getChildren ( ).add ( new ImageView ( image ) );
@@ -1313,21 +1299,6 @@ public class SecondStage extends Stage
 		secondaryStage.setScene ( scene ); // Place the scene in the stage
 		secondaryStage.show ( ); // Display the stage
 	}
-
-	/*
-	 * Node currentMainRoad = secondStagePlayer.getGameBoard ( ).goToTile ( 1 ); while (current.getMainRoad (
-	 * ).isUnlocked ( )) { roadNode1Btn.setGraphic ( new ImageView ( road ) ); roadNode1Btn.setPadding ( Insets.EMPTY );
-	 * roadNode1Btn.getTransforms ( ).add ( new Rotate ( 135, 0, 0 ) ); roadNode1Btn.setTranslateX ( -31 );
-	 * roadNode1Btn.setTranslateY ( -55 ); roadNode2Btn.setDisable ( true ); roadNode3Btn.setDisable ( true );
-	 * roadNode4Btn.setDisable ( true ); roadNode5Btn.setDisable ( true ); roadNode6Btn.setDisable ( true ); } while
-	 * (!currentMainRoad.getLink().getMainRoad().isUnlocked()) {
-	 * 
-	 * }
-	 */
-
-	// Change color of the inGameConsole textarea after stage is shown
-	// Region region = ( Region ) inGameConsole.lookup( ".content" );
-	// region.setStyle( "-fx-background-color: black; -fx-text-fill: #00ff00;" ); //#00ff00
 
 	/****************
 	 * @author Nicks
@@ -1594,7 +1565,6 @@ public class SecondStage extends Stage
 		Node current = player.getGameBoard ( ).goToTile ( tileNum );
 		Node previous = tileNum > 1 ? player.getGameBoard ( ).goToTile ( tileNum - 1 ) : null;
 		Resource mainRoad = current.getMainRoad ( );
-		// System.out.println(player.getTurn().toString());
 		if ( mainRoad.isUnlocked ( ) && !mainRoad.isOwned ( ) && player.getTurn ( ).getSil ( ) > 0
 				&& player.getTurn ( ).getOx ( ) > 0 )
 		{
@@ -1790,84 +1760,4 @@ public class SecondStage extends Stage
 	}
 
 	static Scanner input = new Scanner ( System.in );
-
-	/*********************************************************************
-	 * Method to purchase a resource
-	 * 
-	 * @author Luke Johnson
-	 * 
-	 * @param player:
-	 *           player who is purchasing a resource
-	 * @param turn:
-	 *           player's assets in a turn
-	 */
-	/*
-	 * public static void purchase(Player player) { int tileChoice, resourceChoice; Node head =
-	 * player.getGameBoard().getHead(); Node current = head;
-	 * 
-	 * // Execute if player can purchase at least one resource if (player.canPurchase()) { // execute while player can
-	 * purchase while (player.canPurchase()) { do {
-	 * System.out.println("What tile would you like to purchase a resource from?");
-	 * System.out.println("Enter a number 1 - 6."); tileChoice = input.nextInt();
-	 * System.out.println("Which resource would you like to from the tile?");
-	 * System.out.println("1) Main Road\n2) Side Road\n3) Astronaut\n4) Bio-dome\n" + "5) Research Facility");
-	 * resourceChoice = input.nextInt(); if ((tileChoice < 1 || tileChoice > 6) || (resourceChoice < 1 || resourceChoice
-	 * > 5)) { System.out.println("Invalid selection."); } } while (((tileChoice < 1) || (tileChoice > 6)) ||
-	 * (resourceChoice < 1 || resourceChoice > 5));
-	 * 
-	 * for (int i = 1; i < tileChoice; i++) { current = current.getLink(); } switch (resourceChoice) { // purchase a main
-	 * road // unlock side road, next main road and bio-dome case 1: if (current.getMainRoad().isUnlocked() &&
-	 * !current.getMainRoad().isOwned() && player.getTurn().getSil() > 0 && player.getTurn().getOx() > 0) {
-	 * current.getMainRoad().setOwned(true); player.setScore(player.getScore() + current.getMainRoad().getValue());
-	 * player.getTurn().setSil(player.getTurn().getSil() - 1); player.getTurn().setOx(player.getTurn().getOx() - 1);
-	 * current.getSideRoad().setUnlocked(true); current.getBioDome().setUnlocked(true);
-	 * 
-	 * if (current.getLink() != null) { current.getLink().getMainRoad().setUnlocked(true); } } // output error statements
-	 * else if (!current.getMainRoad().isUnlocked()) { System.out.println("That is not unlocked."); } else if
-	 * (current.getMainRoad().isOwned()) { System.out.println("You already own that."); } else {
-	 * System.out.println("You can't afford that."); } break;
-	 * 
-	 * // purchase a side road // unlock the research facility case 2: if (current.getSideRoad().isUnlocked() &&
-	 * !current.getSideRoad().isOwned() && player.getTurn().getSil() > 0 && player.getTurn().getOx() > 0) {
-	 * current.getSideRoad().setOwned(true); player.setScore(player.getScore() + current.getSideRoad().getValue());
-	 * player.getTurn().setSil(player.getTurn().getSil() - 1); player.getTurn().setOx(player.getTurn().getOx() - 1);
-	 * current.getResearch().setUnlocked(true); } // output error statements else if
-	 * (!current.getSideRoad().isUnlocked()) { System.out.println("That is not unlocked."); } else if
-	 * (current.getSideRoad().isOwned()) { System.out.println("You already own that."); } else {
-	 * System.out.println("You can't afford that."); } break;
-	 * 
-	 * // purchase an astronaut // unlock the next astronaut case 3: if (current.getAstronaut().isUnlocked() &&
-	 * !current.getAstronaut().isOwned() && player.getTurn().getWat() > 0 && player.getTurn().getSol() > 0 &&
-	 * player.getTurn().getOre() > 0) { current.getAstronaut().setOwned(true); player.setScore(player.getScore() +
-	 * current.getAstronaut().getValue()); player.getTurn().setWat(player.getTurn().getWat() - 1);
-	 * player.getTurn().setOre(player.getTurn().getOre() - 1); player.getTurn().setSol(player.getTurn().getSol() - 1); if
-	 * (current.getLink() != null) { current.getLink().getAstronaut().setUnlocked(true); } } // output error statements
-	 * else if (!current.getAstronaut().isUnlocked()) { System.out.println("That is not unlocked."); } else if
-	 * (current.getAstronaut().isOwned()) { System.out.println("You already own that."); } else {
-	 * System.out.println("You can't afford that."); } break;
-	 * 
-	 * // purchase a bio-dome case 4: if (current.getBioDome().isUnlocked() && !current.getBioDome().isOwned() &&
-	 * player.getTurn().getSil() > 0 && player.getTurn().getOx() > 0 && player.getTurn().getWat() > 0 &&
-	 * player.getTurn().getSol() > 0) { current.getBioDome().setOwned(true); player.setScore(player.getScore() +
-	 * current.getBioDome().getValue()); player.getTurn().setWat(player.getTurn().getWat() - 1);
-	 * player.getTurn().setOx(player.getTurn().getOx() - 1); player.getTurn().setSol(player.getTurn().getSol() - 1);
-	 * player.getTurn().setSil(player.getTurn().getSil() - 1); } // output error statements else if
-	 * (!current.getBioDome().isUnlocked()) { System.out.println("That is not unlocked."); } else if
-	 * (current.getBioDome().isOwned()) { System.out.println("You already own that."); } else {
-	 * System.out.println("You can't afford that."); } break;
-	 * 
-	 * // purchase a research facility case 5: if (current.getResearch().isUnlocked() && !current.getResearch().isOwned()
-	 * && player.getTurn().getOre() == 3 && player.getTurn().getSol() == 2) { current.getResearch().setOwned(true);
-	 * player.setScore(player.getScore() + current.getResearch().getValue());
-	 * player.getTurn().setWat(player.getTurn().getWat() - 1); player.getTurn().setOx(player.getTurn().getOx() - 1);
-	 * player.getTurn().setSol(player.getTurn().getSol() - 1); player.getTurn().setSil(player.getTurn().getSil() - 1); }
-	 * 
-	 * // output error statements else if (!current.getResearch().isUnlocked()) {
-	 * System.out.println("That is not unlocked."); } else if (current.getResearch().isOwned()) {
-	 * System.out.println("You already own that."); } else { System.out.println("You can't afford that."); } break; } //
-	 * set current back to the head of the list current = head; } System.out.println("No further purchases available.");
-	 * } else { System.out.println("No purchases available.\nBetter luck next turn."); } //reset all of player's dice to
-	 * 0 player.getTurn().setOre(0); player.getTurn().setOx(0); player.getTurn().setSil(0); player.getTurn().setSol(0);
-	 * player.getTurn().setWat(0); }
-	 */
 }

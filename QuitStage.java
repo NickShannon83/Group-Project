@@ -1,3 +1,10 @@
+/*****************************************************
+ * This class creates a pop-up window asking the player if they want to quit before
+ * athe game has ended. It is used to close the game before the end.
+ * @author Jared Crouse
+ * 
+ */
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,8 +29,8 @@ public class QuitStage extends Stage
 	public void start( Stage quitStage )
 	{
 		StackPane root = new StackPane ( );
-		Scene scene = new Scene ( root, 1920, 1080 );
-		Image image = new Image ( "quitScreen.jpg" );
+		Scene scene = new Scene ( root, 1920, 1080 ); // window size
+		Image image = new Image ( "quitScreen.jpg" ); // Background image
 
 		// Confirmation text with dropshadow
 		DropShadow shadow = new DropShadow ( );
@@ -42,7 +49,7 @@ public class QuitStage extends Stage
 		Button no = new Button ( "No, I can science this!" );
 		no.setTranslateX ( -100 );
 		no.setTranslateY ( -300 );
-		no.setOnAction ( new EventHandler<ActionEvent> ( )
+		no.setOnAction ( new EventHandler<ActionEvent> ( ) // Return to game
 		{
 			@Override
 			public void handle( ActionEvent event )
@@ -55,7 +62,7 @@ public class QuitStage extends Stage
 		Button yes = new Button ( "Yes, evacuate in shame!" );
 		yes.setTranslateX ( 100 );
 		yes.setTranslateY ( -300 );
-		yes.setOnAction ( new EventHandler<ActionEvent> ( )
+		yes.setOnAction ( new EventHandler<ActionEvent> ( ) // Close the game without saving score
 		{
 			@Override
 			public void handle( ActionEvent event )

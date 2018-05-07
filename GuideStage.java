@@ -1,3 +1,10 @@
+/*****************************************************
+ * This class creates a pop-up window giving the player all the basic rules for
+ * the game. Once finished the window can be closed by the user to return to the game.
+ * @author Jared Crouse
+ * 
+ */
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

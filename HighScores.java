@@ -7,7 +7,6 @@ public class HighScores
 	//@Override
 	public String toString( int count )
 	{
-		//System.out.println ( "HighScores [playerName=" + playerName + ", score=" + score + "]" );
 		return count + " " + playerName + "\t" + score;
 	}
 
