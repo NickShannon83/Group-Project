@@ -2,6 +2,7 @@
  * A player
  * 
  * @author Luke Johnson
+ * @author Nicks
  *
  *         A class to represent a player in the game
  */

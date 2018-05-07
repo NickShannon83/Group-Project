@@ -206,9 +206,12 @@ public class ColonizeMarsDriver extends Application
 
 	}
 
-	// Highscores output method
-	// Input: The ArrayList leaderBoard
-	// Output: none
+	/**********************************************************
+	 * @author Nicks
+	 * @param leaderBoard
+	 * @throws FileNotFoundException
+	 * Fills the array list this High scores objects
+	 */
 	public static void fillArray(ArrayList<HighScores> leaderBoard) throws FileNotFoundException
 	{
 		java.io.File inFile;
@@ -226,9 +229,15 @@ public class ColonizeMarsDriver extends Application
 
 	}
 
-	// Highscores output method
-	// Input: The ArrayList leaderBoard and integer loc
-	// Output: The high score in the index passed in by loc
+	
+	/*******************************
+	 * @author Nicks
+	 * @param leaderBoard
+	 * @param loc
+	 * @return
+	 * @throws FileNotFoundException
+	 * Fetches high scores at location
+	 */
 	public static String highScores(ArrayList<HighScores> leaderBoard, int loc) throws FileNotFoundException
 	{
 		
@@ -239,6 +248,12 @@ public class ColonizeMarsDriver extends Application
 	}
 }
 
+
+/***********************************
+ * 
+ * @author Nicks
+ *	Overwritten comparator using the highscores
+ */
 class SortByScore implements Comparator<HighScores>
 {
 	public int compare( HighScores a, HighScores b )

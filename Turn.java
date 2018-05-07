@@ -1,7 +1,7 @@
 /****************************************************
  * 
  * @author Nick Shannon
- *
+ *	Class to keep track of each turns resources gained
  */
 public class Turn
 {
@@ -12,13 +12,14 @@ public class Turn
 	int wat;
 
 	@Override
+	//overwritten toString
 	public String toString( )
 	{
 		System.out.println (
 				"Turn [ore = " + ore + ", ox = " + ox + ", sil = " + sil + ", sol = " + sol + ", wat = " + wat + "]" );
 		return "Turn [ore = " + ore + ", ox = " + ox + ", sil = " + sil + ", sol = " + sol + ", wat = " + wat + "]";
 	}
-
+	//Constructor
 	public Turn()
 	{
 		this.ore = 0;
@@ -27,14 +28,7 @@ public class Turn
 		this.sol = 0;
 		this.wat = 0;
 	}
-	// public Turn()
-	// {
-	// this.ore = ore;
-	// this.ox = ox;
-	// this.sil = sil;
-	// this.sol = sol;
-	// this.wat = wat;
-	// }
+
 
 	// setter and getters for resources
 	public int getOre( )
