@@ -3,7 +3,7 @@
  * 
  * @author Luke Johnson
  * 
- * Mark Watney is class that extends Resource and is the greatest space pirate
+ * Mark Watney is class that extends Resource and is the greatest astronaut on the game board.
  */
 public class MarkWatneySpacePirate extends Resource
 {
